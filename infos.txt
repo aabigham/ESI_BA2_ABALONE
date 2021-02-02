@@ -1,0 +1,5 @@
+Participants : 
+	- Amine-Ayoub Bigham 54985
+	- Zakaria Bendaimi 54247
+	
+Structure : Qtcreator (subdirs)
