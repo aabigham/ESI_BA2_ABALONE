@@ -2,9 +2,6 @@
 # Created by https://www.toptal.com/developers/gitignore/api/c++,qt,qtcreator,cmake
 # Edit at https://www.toptal.com/developers/gitignore?templates=c++,qt,qtcreator,cmake
 
-# Dossier html doxygen
-html/
-
 ### C++ ###
 # Prerequisites
 *.d

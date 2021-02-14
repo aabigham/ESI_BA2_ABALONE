@@ -10,6 +10,7 @@
 class Board
 {
 public:
+
     /*!
     * \brief Constructor of Board.
     */
@@ -110,6 +111,7 @@ public:
     inline void addBlackMarbleLost() const;
 
 private:
+
     /*!
      * \brief The cells located on the board.
      */

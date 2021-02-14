@@ -8,6 +8,7 @@
 class Cell
 {
 public:
+
     /*!
     * \brief Constructor of the Cell class.
     * 
