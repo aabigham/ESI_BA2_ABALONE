@@ -19,39 +19,39 @@ public:
     * \brief The move method for inline moves.
     *
     * \param posStart the position of the first marble in row.
-    * \param posEnd the end position of the first marble in row.
+    * \param posArrival the arrival position of the first marble in row.
     */
-    void move(Position posStart, Position posEnd);
+    void move(Position posStart, Position posArrival);
 
     /*!
     * \brief The move method for side moves.
     *
     * \param posStart the position of the first marble in row.
-    * \param posEnd the end position of the first marble in row.
-    * \param futurePos the position in which the marbles will be heading toward to.
+    * \param posEnd the position of the last marble in row.
+    * \param posArrival the arrival position of the first marble in row.
     */
-    void move(Position posStart, Position posEnd, Position futurePos);
+    void move(Position posStart, Position posEnd, Position posArrival);
 
     /*!
     * \brief The can move method for inline moves.
     *
     * \param posStart the position of the first marble in row.
-    * \param posEnd the end position of the first marble in row.
+    * \param posArrival the arrival position of the first marble in row.
     *
     * \return true if the marbles are able to move, false otherwise.
     */
-    bool canMove(Position posStart, Position posEnd);
+    bool canMove(Position posStart, Position posArrival);
 
     /*!
     * \brief The can move method for side moves.
     *
     * \param posStart the position of the first marble in row.
-    * \param posEnd the end position of the first marble in row.
-    * \param futurePos the position in which the marbles will be heading toward to.
+    * \param posEnd the position of the last marble in row.
+    * \param posArrival the arrival position of the first marble in row.
     *
     * \return true if the marbles are able to move, false otherwise.
     */
-    bool canMove(Position posStart, Position posEnd, Position futurePos);
+    bool canMove(Position posStart, Position posEnd, Position posArrival);
 
     /*!
     * \brief Gets the color located at the position in parameter.

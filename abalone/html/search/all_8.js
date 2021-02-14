@@ -12,5 +12,5 @@ var searchData=
   ['messagebuilder_81',['MessageBuilder',['../struct_catch_1_1_message_builder.html',1,'Catch']]],
   ['messageinfo_82',['MessageInfo',['../struct_catch_1_1_message_info.html',1,'Catch']]],
   ['methodtestcase_83',['MethodTestCase',['../class_catch_1_1_method_test_case.html',1,'Catch']]],
-  ['move_84',['move',['../class_board.html#a314023340151fb81d9750adace71185c',1,'Board::move(Position posStart, Position posEnd)'],['../class_board.html#a627cff9f66f1b04bd99dce26b4fead53',1,'Board::move(Position posStart, Position posEnd, Position futurePos)']]]
+  ['move_84',['move',['../class_board.html#a653bb0e5524db46c94f3bd5a88a3807f',1,'Board::move(Position posStart, Position posArrival)'],['../class_board.html#a4bc6db2316dc00b86c673f5f61ece754',1,'Board::move(Position posStart, Position posEnd, Position posArrival)']]]
 ];
