@@ -3,7 +3,7 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=c++,qt,qtcreator,cmake
 
 # Dossier html doxygen
-html/
+/html/
 
 ### C++ ###
 # Prerequisites
