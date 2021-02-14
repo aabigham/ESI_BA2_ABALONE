@@ -41,21 +41,21 @@ Position askAbaPro();
  *
  * \return the board of the game.
  */
-Board getBoard();
+inline Board getBoard() const;
     
 /*!
  * \brief Getter of the current Player.
  *
  * \return the current player, as a Color.
  */
-Color getCurrentPlayer();
+inline Color getCurrentPlayer() const;
     
 /*!
  * \brief Setter of the game board.
  *
  * \param color the color of the future current player.
  */
-void setCurrentPlayer(Color color);
+inline void setCurrentPlayer(Color color);
 
 private: 
 

@@ -23,6 +23,19 @@ Position(int x, int y, int z);
  * \param pos the position that will provide the values.
  */
 Position(Position& pos);
+
+/*!
+* \brief Compute the direction in which the marbles will be moving
+*
+* This method takes a start position and a future positon in arguments,
+* and computes the direction according to the those two arguments.
+*
+* \param posStart the start position.
+* \param posFuture the future position.
+*
+* \return the calculated direction.
+*/
+Direction computeDirection(Position posStart, Position posFuture);
     
 /*!
  * \brief  Comparison of equality between two positions.

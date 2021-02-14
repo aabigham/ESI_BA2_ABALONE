@@ -70,24 +70,11 @@ public:
     bool isInside(Position pos);
 
     /*!
-    * \brief Compute the direction in which the marbles will be moving
-    *
-    * This method takes a start position and a future positon in arguments,
-    * and computes the direction according to the those two arguments.
-    *
-    * \param posStart the start position.
-    * \param posFuture the future position.
-    *
-    * \return the calculated direction.
-    */
-    Direction computeDirection(Position posStart, Position posFuture);
-
-    /*!
     * \brief Getter of the cells of the board.
     *
     * \return the cells of the board.
     */
-    std::array<Cell, 61> getCells();
+    inline std::array<Cell, 61> getCells() const;
 
     /*!
      * \brief Gets the cell at the position in parameter.
@@ -96,31 +83,31 @@ public:
      *
      * \return the cell at the given position.
      */
-    Cell &getCellAt(Position pos);
+    inline Cell &getCellAt(Position pos) const;
 
     /*!
     * \brief Getter of the lost white marbles.
     *
     * \return the number of lost white marble.
     */
-    int getWhiteMarblesLost();
+    inline int getWhiteMarblesLost() const;
 
     /*!
     * \brief Getter of the lost black marbles.
     *
     * \return the number of lost black marble.
     */
-    int getBlackMarblesLost();
+    inline int getBlackMarblesLost() const;
 
     /*!
     * \brief Increments the count of lost white marbles.
     */
-    void addWhiteMarbleLost();
+    inline void addWhiteMarbleLost() const;
 
     /*!
     * \brief Increments the count of lost black marbles.
     */
-    void addBlackMarbleLost();
+    inline void addBlackMarbleLost() const;
 
 private:
     /*!

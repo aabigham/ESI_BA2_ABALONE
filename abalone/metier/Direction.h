@@ -6,10 +6,6 @@
 
 class Direction: public Position {
 public :
-    /*!
-     * \brief The constructor of Direction.
-     */
-    Direction();
 };
 
 #endif //_DIRECTION_H

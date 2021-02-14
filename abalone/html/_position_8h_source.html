@@ -81,29 +81,32 @@ $(function() {
 <div class="line"><a name="l00018"></a><span class="lineno"><a class="line" href="class_position.html#ad9ff5234e7cec7f75d8e22073b754f56">   18</a></span>&#160;<a class="code" href="class_position.html#ad9ff5234e7cec7f75d8e22073b754f56">Position</a>(<span class="keywordtype">int</span> x, <span class="keywordtype">int</span> y, <span class="keywordtype">int</span> z);</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;    </div>
 <div class="line"><a name="l00025"></a><span class="lineno"><a class="line" href="class_position.html#a9eb96ad8c17dca09e6db443012f38fde">   25</a></span>&#160;<a class="code" href="class_position.html#a9eb96ad8c17dca09e6db443012f38fde">Position</a>(<a class="code" href="class_position.html">Position</a>&amp; pos);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    </div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="line" href="class_position.html#aaf5dcd2428d783b754a43859822bde43">   34</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_position.html#aaf5dcd2428d783b754a43859822bde43">operator==</a>(<a class="code" href="class_position.html">Position</a> pos);</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    </div>
-<div class="line"><a name="l00044"></a><span class="lineno"><a class="line" href="class_position.html#a0f976ceaabdc8ac98c7c1ba0d765cf50">   44</a></span>&#160;<a class="code" href="class_position.html">Position</a> <a class="code" href="class_position.html#a0f976ceaabdc8ac98c7c1ba0d765cf50">getNext</a>(<a class="code" href="class_direction.html">Direction</a> dir);</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    </div>
-<div class="line"><a name="l00051"></a><span class="lineno"><a class="line" href="class_position.html#aec07bdc14874f47cd1dc675d864f49a2">   51</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_position.html#aec07bdc14874f47cd1dc675d864f49a2">getX</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
-<div class="line"><a name="l00058"></a><span class="lineno"><a class="line" href="class_position.html#aecedcf0af53e559ccde18432f20d1a37">   58</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_position.html#aecedcf0af53e559ccde18432f20d1a37">getY</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    </div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="class_position.html#a87bd8cd1e19086fffc15a0d94e6cda73">   65</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_position.html#a87bd8cd1e19086fffc15a0d94e6cda73">getZ</a>() <span class="keyword">const</span>;</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160; </div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;<span class="keyword">private</span>: </div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;<span class="keywordtype">int</span> x;</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160; </div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;<span class="keywordtype">int</span> y;</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160; </div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;<span class="keywordtype">int</span> z;</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;};</div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160; </div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//_POSITION_H</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160; </div>
+<div class="line"><a name="l00038"></a><span class="lineno"><a class="line" href="class_position.html#a774570d328dee2ea1cae59623fa60754">   38</a></span>&#160;<a class="code" href="class_direction.html">Direction</a> <a class="code" href="class_position.html#a774570d328dee2ea1cae59623fa60754">computeDirection</a>(<a class="code" href="class_position.html">Position</a> posStart, <a class="code" href="class_position.html">Position</a> posFuture);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    </div>
+<div class="line"><a name="l00047"></a><span class="lineno"><a class="line" href="class_position.html#aaf5dcd2428d783b754a43859822bde43">   47</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">bool</span> <a class="code" href="class_position.html#aaf5dcd2428d783b754a43859822bde43">operator==</a>(<a class="code" href="class_position.html">Position</a> pos);</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    </div>
+<div class="line"><a name="l00057"></a><span class="lineno"><a class="line" href="class_position.html#a0f976ceaabdc8ac98c7c1ba0d765cf50">   57</a></span>&#160;<a class="code" href="class_position.html">Position</a> <a class="code" href="class_position.html#a0f976ceaabdc8ac98c7c1ba0d765cf50">getNext</a>(<a class="code" href="class_direction.html">Direction</a> dir);</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    </div>
+<div class="line"><a name="l00064"></a><span class="lineno"><a class="line" href="class_position.html#aec07bdc14874f47cd1dc675d864f49a2">   64</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_position.html#aec07bdc14874f47cd1dc675d864f49a2">getX</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    </div>
+<div class="line"><a name="l00071"></a><span class="lineno"><a class="line" href="class_position.html#aecedcf0af53e559ccde18432f20d1a37">   71</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_position.html#aecedcf0af53e559ccde18432f20d1a37">getY</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    </div>
+<div class="line"><a name="l00078"></a><span class="lineno"><a class="line" href="class_position.html#a87bd8cd1e19086fffc15a0d94e6cda73">   78</a></span>&#160;<span class="keyword">inline</span> <span class="keywordtype">int</span> <a class="code" href="class_position.html#a87bd8cd1e19086fffc15a0d94e6cda73">getZ</a>() <span class="keyword">const</span>;</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;<span class="keyword">private</span>: </div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;<span class="keywordtype">int</span> x;</div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160; </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;<span class="keywordtype">int</span> y;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160; </div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="keywordtype">int</span> z;</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;};</div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160; </div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;<span class="preprocessor">#endif </span><span class="comment">//_POSITION_H</span></div>
 <div class="ttc" id="aclass_direction_html"><div class="ttname"><a href="class_direction.html">Direction</a></div><div class="ttdef"><b>Definition:</b> Direction.h:7</div></div>
 <div class="ttc" id="aclass_position_html"><div class="ttname"><a href="class_position.html">Position</a></div><div class="ttdef"><b>Definition:</b> Position.h:6</div></div>
 <div class="ttc" id="aclass_position_html_a0f976ceaabdc8ac98c7c1ba0d765cf50"><div class="ttname"><a href="class_position.html#a0f976ceaabdc8ac98c7c1ba0d765cf50">Position::getNext</a></div><div class="ttdeci">Position getNext(Direction dir)</div><div class="ttdoc">Gets the next position given a direction.</div></div>
+<div class="ttc" id="aclass_position_html_a774570d328dee2ea1cae59623fa60754"><div class="ttname"><a href="class_position.html#a774570d328dee2ea1cae59623fa60754">Position::computeDirection</a></div><div class="ttdeci">Direction computeDirection(Position posStart, Position posFuture)</div><div class="ttdoc">Compute the direction in which the marbles will be moving.</div></div>
 <div class="ttc" id="aclass_position_html_a87bd8cd1e19086fffc15a0d94e6cda73"><div class="ttname"><a href="class_position.html#a87bd8cd1e19086fffc15a0d94e6cda73">Position::getZ</a></div><div class="ttdeci">int getZ() const</div><div class="ttdoc">Getter of the y value.</div></div>
 <div class="ttc" id="aclass_position_html_a9eb96ad8c17dca09e6db443012f38fde"><div class="ttname"><a href="class_position.html#a9eb96ad8c17dca09e6db443012f38fde">Position::Position</a></div><div class="ttdeci">Position(Position &amp;pos)</div><div class="ttdoc">Copy constructor of the Position class.</div></div>
 <div class="ttc" id="aclass_position_html_aaf5dcd2428d783b754a43859822bde43"><div class="ttname"><a href="class_position.html#aaf5dcd2428d783b754a43859822bde43">Position::operator==</a></div><div class="ttdeci">bool operator==(Position pos)</div><div class="ttdoc">Comparison of equality between two positions.</div></div>

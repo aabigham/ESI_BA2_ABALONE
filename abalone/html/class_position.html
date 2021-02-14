@@ -87,6 +87,9 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a9eb96ad8c17dca09e6db443012f38fde"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_position.html#a9eb96ad8c17dca09e6db443012f38fde">Position</a> (<a class="el" href="class_position.html">Position</a> &amp;pos)</td></tr>
 <tr class="memdesc:a9eb96ad8c17dca09e6db443012f38fde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor of the <a class="el" href="class_position.html">Position</a> class.  <a href="class_position.html#a9eb96ad8c17dca09e6db443012f38fde">More...</a><br /></td></tr>
 <tr class="separator:a9eb96ad8c17dca09e6db443012f38fde"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a774570d328dee2ea1cae59623fa60754"><td class="memItemLeft" align="right" valign="top"><a class="el" href="class_direction.html">Direction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_position.html#a774570d328dee2ea1cae59623fa60754">computeDirection</a> (<a class="el" href="class_position.html">Position</a> posStart, <a class="el" href="class_position.html">Position</a> posFuture)</td></tr>
+<tr class="memdesc:a774570d328dee2ea1cae59623fa60754"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compute the direction in which the marbles will be moving.  <a href="class_position.html#a774570d328dee2ea1cae59623fa60754">More...</a><br /></td></tr>
+<tr class="separator:a774570d328dee2ea1cae59623fa60754"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aaf5dcd2428d783b754a43859822bde43"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_position.html#aaf5dcd2428d783b754a43859822bde43">operator==</a> (<a class="el" href="class_position.html">Position</a> pos)</td></tr>
 <tr class="memdesc:aaf5dcd2428d783b754a43859822bde43"><td class="mdescLeft">&#160;</td><td class="mdescRight">Comparison of equality between two positions.  <a href="class_position.html#aaf5dcd2428d783b754a43859822bde43">More...</a><br /></td></tr>
 <tr class="separator:aaf5dcd2428d783b754a43859822bde43"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -181,6 +184,45 @@ Public Member Functions</h2></td></tr>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a774570d328dee2ea1cae59623fa60754"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a774570d328dee2ea1cae59623fa60754">&#9670;&nbsp;</a></span>computeDirection()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="class_direction.html">Direction</a> Position::computeDirection </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_position.html">Position</a>&#160;</td>
+          <td class="paramname"><em>posStart</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="class_position.html">Position</a>&#160;</td>
+          <td class="paramname"><em>posFuture</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Compute the direction in which the marbles will be moving. </p>
+<p>This method takes a start position and a future positon in arguments, and computes the direction according to the those two arguments.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">posStart</td><td>the start position. </td></tr>
+    <tr><td class="paramname">posFuture</td><td>the future position.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>the calculated direction. </dd></dl>
+
+</div>
+</div>
 <a id="a0f976ceaabdc8ac98c7c1ba0d765cf50"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0f976ceaabdc8ac98c7c1ba0d765cf50">&#9670;&nbsp;</a></span>getNext()</h2>
 

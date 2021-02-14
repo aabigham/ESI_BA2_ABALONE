@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['addblackmarblelost_0',['addBlackMarbleLost',['../class_board.html#a91542a77a1b29421479af444f89bf9ed',1,'Board']]],
-  ['addwhitemarblelost_1',['addWhiteMarbleLost',['../class_board.html#a538e2d0a30c11fd10191bdf9ab4ce0d1',1,'Board']]],
+  ['addblackmarblelost_0',['addBlackMarbleLost',['../class_board.html#abfd140be79bc5aca2ecf096c8f16ebb5',1,'Board']]],
+  ['addwhitemarblelost_1',['addWhiteMarbleLost',['../class_board.html#a8acf6d5b02bef3c01e433e2f6efd4025',1,'Board']]],
   ['allof_2',['AllOf',['../class_catch_1_1_matchers_1_1_impl_1_1_generic_1_1_all_of.html',1,'Catch::Matchers::Impl::Generic']]],
   ['anyof_3',['AnyOf',['../class_catch_1_1_matchers_1_1_impl_1_1_generic_1_1_any_of.html',1,'Catch::Matchers::Impl::Generic']]],
   ['approx_4',['Approx',['../class_catch_1_1_detail_1_1_approx.html',1,'Catch::Detail']]],

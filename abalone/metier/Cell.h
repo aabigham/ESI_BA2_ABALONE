@@ -39,21 +39,21 @@ public:
     * 
     * \return the color of the cell.
     */
-    Color getColor();
+    inline Color getColor() const;
 
     /*!
     * \brief Setter of the cell class.
     * 
     * \param the color that will be attributed to the cell.
     */
-    void setColor(Color color);
+    inline void setColor(Color color);
 
     /*!
     * \brief Getter of the position of the current cell.
     * 
     * \return the position of the current cell.
     */
-    Position getPosition();
+    inline Position getPosition() const;
 
     /*!
      * \brief The string representation of the object.
