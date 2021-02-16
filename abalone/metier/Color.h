@@ -2,7 +2,9 @@
 #define _COLOR_H
 
 /*!
- * \brief The Color enumeration.
+ * \brief The Color enumeration
+ *
+ * This enumeration allows us to define a marble, or a player.
  */
 enum class Color { NONE, WHITE, BLACK };
 

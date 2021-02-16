@@ -4,6 +4,13 @@
 #include "Position.h"
 #include "Board.h"
 
+/*!
+ * \brief The Game class
+ *
+ * The Game class gathers the necessary elements for the game to present a
+ * facade to the view. The view only interacts with this class to access the
+ * model
+ */
 class Game {
 public: 
     

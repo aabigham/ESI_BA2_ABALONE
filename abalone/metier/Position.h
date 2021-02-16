@@ -1,8 +1,14 @@
 #ifndef _POSITION_H
 #define _POSITION_H
 
+#include <string>
 #include "Direction.h"
 
+/*!
+ * \brief The Position class
+ *
+ * This class allows any cell to have a position and be located somewhere on the board.
+ */
 class Position {
 public: 
 
@@ -31,20 +37,30 @@ public:
     * and computes the direction according to the those two arguments.
     *
     * \param posStart the start position.
-    * \param posFuture the future position.
+    * \param posArrival the future position.
     *
     * \return the calculated direction.
     */
-    Direction computeDirection(Position posStart, Position posFuture);
+    Direction computeDirection(Position posStart, Position posArrival);
 
     /*!
-     * \brief  Comparison of equality between two positions.
+     * \brief Comparison of equality between two positions.
      *
      * \param pos the position to compare.
      *
      * \return true if the position share the same value, false otherwise.
      */
     inline bool operator==(Position pos);
+
+    /*!
+     * \brief Converts a string to a position.
+     *
+     * This method takes an ABA-PRO notation and converts it to a Position object.
+     *
+     * \param abapro the ABA-PRO notation as a String object.
+     * \return the according position.
+     */
+    Position toPosition(std::string abapro);
 
     /*!
      * \brief  Gets the next position given a direction.

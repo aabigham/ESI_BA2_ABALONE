@@ -4,6 +4,11 @@
 #include <array>
 #include "Cell.h"
 
+/*!
+ * \brief The View class
+ *
+ * The view class displays the game in its current state.
+ */
 class View {
 public: 
     

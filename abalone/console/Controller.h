@@ -4,6 +4,11 @@
 #include "Game.h"
 #include "View.h"
 
+/*!
+ * \brief The Controller class
+ *
+ * The controller is responsible for the dynamics of the game and for updating the view as it progresses.
+ */
 class Controller
 {
 public:
