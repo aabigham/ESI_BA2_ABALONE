@@ -10,6 +10,6 @@ HEADERS += \
     Board.h \
     Cell.h \
     Color.h \
-    Direction.h \
+    Directions.h \
     Game.h \
     Position.h

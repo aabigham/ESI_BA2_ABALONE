@@ -2,6 +2,7 @@
 #define _BOARD_H
 
 #include <array>
+#include <unordered_map>
 #include "Position.h"
 #include "Color.h"
 #include "Direction.h"
@@ -118,9 +119,9 @@ public:
 private:
 
     /*!
-     * \brief The cells located on the board.
-     */
-    std::array<Cell, 61> cells;
+    * \brief The cells located on the board.
+    */
+    std::unordered_map<Position, Cell> cells;
 
     /*!
     * \brief Counts the number of lost white marbles.

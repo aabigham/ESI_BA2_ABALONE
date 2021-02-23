@@ -53,6 +53,15 @@ public:
     inline bool operator==(Position pos);
 
     /*!
+     * \brief Comparison of equality between two positions.
+     *
+     * \param pos the position to compare.
+     *
+     * \return true if the position share the same value, false otherwise.
+     */
+    inline bool operator<(Position pos);
+
+    /*!
      * \brief Converts a string to a position.
      *
      * This method takes an ABA-PRO notation and converts it to a Position object.
@@ -98,17 +107,36 @@ private:
     /*!
     * \brief  the value of the x axis.
     */
-    int x;
+    const int x;
 
     /*!
     * \brief  the value of the y axis.
     */
-    int y;
+    const int y;
 
     /*!
     * \brief  the value of the z axis.
     */
-    int z;
+    const int z;
 };
+
+namespace std {
+/*!
+ * Hash function of the unordered map of Cells.
+ */
+template <> struct hash<Position> {
+    /*!
+     * \brief The operator() overload to hash a position.
+     * \param p the position to hash.
+     * \return the hash value of the position in parameter.
+     */
+    size_t operator()(const Position& p) const {
+        hash<int> int_hash;
+        size_t px = int_hash(p.getX());
+        size_t py = int_hash(p.getY());
+        return px ^ (py + 0x9e3779b9 + (px << 6) + (px >> 2));
+    }
+};
+}
 
 #endif //_POSITION_H
