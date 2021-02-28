@@ -2,6 +2,7 @@
 #define _CELL_H
 
 #include <string>
+#include <optional>
 #include "Position.h"
 #include "Color.h"
 
@@ -24,12 +25,11 @@ public:
     /*!
     * \brief Second constructor of the Cell class.
     *
-    * \param marble the color of the marble, NONE if there is no marble on the cell.
-    *
     * \param pos the position of the cell on the board.
     *
+    * \param marble the color of the marble, NONE if there is no marble on the cell.
     */
-    Cell(Color marble, Position pos);
+    Cell(Position pos, Color marble);
 
     /*!
     * \brief Checks if a cell is adjacent to the current cell.
@@ -45,7 +45,7 @@ public:
     *
     * \return the color of the cell.
     */
-    inline Color getColor() const;
+    inline std::optional<Color> getColor() const;
 
     /*!
     * \brief Setter of the cell class.
@@ -80,7 +80,7 @@ private:
     *
     * If there is not any marble on the cell, the value of the cell is NONE.
     */
-    Color marble;
+    std::optional<Color> marble = {};
 };
 
 #endif //_CELL_H
