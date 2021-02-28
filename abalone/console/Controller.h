@@ -2,6 +2,7 @@
 #define _CONTROLLER_H
 
 #include "Game.h"
+#include "Board.h"
 #include "ConsoleView.h"
 
 /*!
@@ -16,6 +17,7 @@ public:
     * \brief Constructor of the Controller.
     *
     * \param game the game.
+    *
     * \param view the view of the game.
     */
     Controller(Game game, View view);
@@ -24,6 +26,18 @@ public:
     * \brief Starts the game.
     */
     void startGame();
+
+private:
+
+    /*!
+     * \brief The board of the game.
+     */
+    Game game;
+
+    /*!
+     * \brief The board of the game.
+     */
+    View view;
 };
 
 #endif //_CONTROLLER_H

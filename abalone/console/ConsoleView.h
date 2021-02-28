@@ -2,7 +2,8 @@
 #define _CONSOLEVIEW_H
 
 #include <array>
-#include <View.h>
+#include "View.h"
+#include "Game.h"
 #include "Cell.h"
 
 /*!
@@ -21,7 +22,7 @@ public:
     /*!
     * \brief This method updates the console view.
     */
-    void updateView();
+    void updateView(Game game);
 };
 
 #endif //_CONSOLEVIEW_H

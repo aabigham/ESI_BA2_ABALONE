@@ -1,6 +1,8 @@
 #ifndef VIEW_H
 #define VIEW_H
 
+#include "Game.h"
+
 /*!
  * \brief The View class
  *
@@ -17,8 +19,7 @@ public:
     /*!
     * \brief This method updates the view (gui or console).
     */
-    virtual void updateView();
-
+    virtual void updateView(Game game);
 };
 
 #endif // VIEW_H
