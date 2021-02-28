@@ -2,7 +2,7 @@
 #define _CONTROLLER_H
 
 #include "Game.h"
-#include "View.h"
+#include "ConsoleView.h"
 
 /*!
  * \brief The Controller class

@@ -2,7 +2,7 @@
 #define _POSITION_H
 
 #include <string>
-#include "Direction.h"
+#include "Directions.h"
 
 /*!
  * \brief The Position class

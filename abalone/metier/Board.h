@@ -5,7 +5,7 @@
 #include <unordered_map>
 #include "Position.h"
 #include "Color.h"
-#include "Direction.h"
+#include "Directions.h"
 #include "Cell.h"
 
 /*!

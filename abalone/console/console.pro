@@ -9,5 +9,6 @@ SOURCES += \
         main.cpp
 
 HEADERS += \
+    ConsoleView.h \
     Controller.h \
     View.h
