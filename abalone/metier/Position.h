@@ -11,7 +11,6 @@
  */
 class Position {
 public: 
-
     /*!
      * \brief Constructor of the Position class.
      * The class has three position but only the x an y axis are required,
@@ -29,7 +28,16 @@ public:
      *
      * \param pos the position that will provide the values.
      */
-    Position(Position& pos);
+    Position(const Position& pos);
+
+    /*!
+     * \brief Checks if the position in parameter is next to the current position.
+     *
+     * \param pos the position to check
+     *
+     * \return true is the checked position is adjacent, false otherwise.
+     */
+    bool isNextTo(Position pos);
 
     /*!
     * \brief Compute the direction in which the marbles will be moving
@@ -88,17 +96,17 @@ public:
 private:
 
     /*!
-    * \brief  the value of the x axis.
+    * \brief the value of the x axis.
     */
     const int x_;
 
     /*!
-    * \brief  the value of the y axis.
+    * \brief the value of the y axis.
     */
     const int y_;
 
     /*!
-    * \brief  the value of the z axis.
+    * \brief the value of the z axis.
     */
     const int z_;
 };
