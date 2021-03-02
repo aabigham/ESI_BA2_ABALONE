@@ -90,7 +90,7 @@ public:
      *
      * \return the cell at the given position.
      */
-    inline Cell &getCellAt(Position pos) const;
+    inline Cell &getCellAt(Position pos) ;
 
     /*!
     * \brief Getter of the lost white marbles.
@@ -109,12 +109,12 @@ public:
     /*!
     * \brief Increments the count of lost white marbles.
     */
-    inline void addWhiteMarbleLost() const;
+    inline void addWhiteMarbleLost() ;
 
     /*!
     * \brief Increments the count of lost black marbles.
     */
-    inline void addBlackMarbleLost() const;
+    inline void addBlackMarbleLost() ;
 
 private:
 
@@ -134,15 +134,24 @@ private:
     int blackMarblesLost;
 };
 
-inline std::unordered_map<Position, Cell> Board::getCells() const{
+std::unordered_map<Position, Cell> Board::getCells() const{
     return cells;
 }
 
-inline Cell & Board::getCellAt( Position pos) const{
-     return cells.at(pos);
+Cell & Board::getCellAt( const Position pos) {
+    return cells.at(pos);
 }
 
-inline int getWhiteMarblesLost() const{
-
+int Board::getWhiteMarblesLost() const{
+    return whiteMarblesLost;
+}
+int Board::getBlackMarblesLost() const{
+    return blackMarblesLost;
+}
+void Board::addWhiteMarbleLost() {
+    whiteMarblesLost++;
+}
+void Board::addBlackMarbleLost() {
+        blackMarblesLost++;
 }
 #endif //_BOARD_H
