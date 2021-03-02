@@ -4,7 +4,8 @@ TEMPLATE = lib
 TARGET = libcore
 DESTDIR = ../lib
 
-SOURCES +=
+SOURCES += \
+    Position.cpp
 
 HEADERS += \
     Board.h \

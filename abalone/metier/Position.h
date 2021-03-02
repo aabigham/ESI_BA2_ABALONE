@@ -14,14 +14,15 @@ public:
 
     /*!
      * \brief Constructor of the Position class.
+     * The class has three position but only the x an y axis are required,
+     * the z axis will be calculated.
      *
      * \param x the value of the x axis.
      * \param y the value of the y axis.
-     * \param z the value of the z axis.
      *
      * \throws std::invalid_argument if the sum of the attributes is different than zero.
      */
-    Position(int x, int y, int z);
+    Position(int x, int y);
 
     /*!
      * \brief Copy constructor of the Position class.
@@ -107,17 +108,17 @@ private:
     /*!
     * \brief  the value of the x axis.
     */
-    const int x;
+    const int x_;
 
     /*!
     * \brief  the value of the y axis.
     */
-    const int y;
+    const int y_;
 
     /*!
     * \brief  the value of the z axis.
     */
-    const int z;
+    const int z_;
 };
 
 namespace std {
