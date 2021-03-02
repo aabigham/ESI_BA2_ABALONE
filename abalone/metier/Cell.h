@@ -82,15 +82,19 @@ private:
     std::optional<Color> marble_ = {};
 };
 
-inline Position Cell::getPosition()const{
+// Inline methods
+Position Cell::getPosition() const
+{
     return position_;
 }
 
-inline void Cell::setColor(Color color){
+void Cell::setColor(Color color)
+{
     this->marble_.emplace(color);
 }
 
-inline std::optional<Color> Cell::getColor()const{
+std::optional<Color> Cell::getColor() const
+{
     return marble_.value();
 
 }

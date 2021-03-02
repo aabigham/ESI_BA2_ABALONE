@@ -8,7 +8,7 @@ Position::Position(int x, int y)
         throw std::invalid_argument("The sum of all the axis does not equal 0.");
 }
 
-Position::Position(Position& pos)
+Position::Position(const Position& pos)
     : x_{ pos.getX() }, y_{ pos.getY() }, z_{ pos.getZ() }
 {
     if(x_ + y_ + z_ != 0)
