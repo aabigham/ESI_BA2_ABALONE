@@ -45,24 +45,6 @@ public:
     Direction computeDirection(Position posStart, Position posArrival);
 
     /*!
-     * \brief Comparison of equality between two positions.
-     *
-     * \param pos the position to compare.
-     *
-     * \return true if the position share the same value, false otherwise.
-     */
-    inline bool operator==(Position pos);
-
-    /*!
-     * \brief Comparison of equality between two positions.
-     *
-     * \param pos the position to compare.
-     *
-     * \return true if the position share the same value, false otherwise.
-     */
-    inline bool operator<(Position pos);
-
-    /*!
      * \brief Converts a string to a position.
      *
      * This method takes an ABA-PRO notation and converts it to a Position object.
@@ -121,10 +103,92 @@ private:
     const int z_;
 };
 
-namespace std {
+// Operators
+/*!
+ * \brief Comparison of equality between two positions.
+ *
+ * \param lhs the first position to compare.
+ * \param rhs the second position to compare.
+ *
+ * \return true if the position share the same value, false otherwise.
+ */
+inline bool operator==(const Position &lhs, const Position &rhs);
+
+/*!
+ * \brief Comparison of inequality between two positions.
+ *
+ * \param lhs the first position to compare.
+ * \param rhs the second position to compare.
+ *
+ * \return true if the positions are not equal, false otherwise.
+ */
+inline bool operator!=(const Position &lhs, const Position &rhs);
+
+/*!
+ * \brief Addition of two positions.
+ *
+ * \param lhs the first position.
+ * \param rhs the second position.
+ *
+ * \return a new Position object, wich is the result
+ * of the addition of both parameters.
+ */
+inline Position operator+(const Position &lhs, const Position &rhs);
+
+/*!
+ * \brief Substraction of two positions.
+ *
+ * \param lhs the first position.
+ * \param rhs the second position.
+ *
+ * \return a new Position object, wich is the result
+ * of the substraction of both parameters.
+ */
+inline Position operator-(const Position &lhs, const Position &rhs);
+
+bool operator==(const Position &lhs, const Position &rhs)
+{
+    return lhs.getX() == rhs.getX()
+            && lhs.getY() == rhs.getY()
+            && lhs.getZ() == rhs.getZ();
+}
+
+bool operator!=(const Position &lhs, const Position &rhs)
+{
+    return !(lhs == rhs);
+}
+
+Position operator+(const Position &lhs, const Position &rhs)
+{
+    return Position(lhs.getX() + rhs.getX(), lhs.getY() + rhs.getY());
+}
+
+Position operator-(const Position &lhs, const Position &rhs)
+{
+    return Position(lhs.getX() - rhs.getX(), lhs.getY() - rhs.getY());
+}
+
+// Inline implementation
+int Position::getX() const
+{
+    return x_;
+}
+
+int Position::getY() const
+{
+    return y_;
+}
+
+int Position::getZ() const
+{
+    return z_;
+}
+
+
 /*!
  * Hash function of the unordered map of Cells.
  */
+namespace std {
 template <> struct hash<Position> {
     /*!
      * \brief The operator() overload to hash a position.
