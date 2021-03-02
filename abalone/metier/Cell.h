@@ -72,14 +72,26 @@ private:
     /*!
      * \brief The position of the cell.
      */
-    Position position;
+    Position position_;
 
     /*!
     * \brief The marble that the cell contains.
     *
     * If there is not any marble on the cell, the value of the cell is NONE.
     */
-    std::optional<Color> marble = {};
+    std::optional<Color> marble_ = {};
 };
 
+inline Position Cell::getPosition()const{
+    return position_;
+}
+
+inline void Cell::setColor(Color color){
+    this->marble_.emplace(color);
+}
+
+inline std::optional<Color> Cell::getColor()const{
+    return marble_.value();
+
+}
 #endif //_CELL_H

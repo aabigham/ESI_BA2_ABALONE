@@ -5,6 +5,7 @@ TARGET = libcore
 DESTDIR = ../lib
 
 SOURCES += \
+    Cell.cpp \
     Position.cpp
 
 HEADERS += \

@@ -134,4 +134,15 @@ private:
     int blackMarblesLost;
 };
 
+inline std::unordered_map<Position, Cell> Board::getCells() const{
+    return cells;
+}
+
+inline Cell & Board::getCellAt( Position pos) const{
+     return cells.at(pos);
+}
+
+inline int getWhiteMarblesLost() const{
+
+}
 #endif //_BOARD_H
