@@ -13,7 +13,7 @@
 */
 class ConsoleView: public View {
 public: 
-    
+
     /*!
     * \brief Constructor of the ConsoleView class.
     */
@@ -22,7 +22,8 @@ public:
     /*!
     * \brief This method updates the console view.
     */
-    void updateView(Game game);
+    void updateView(int whiteMarblesLost, int blackMarblesLost,
+                    std::unordered_map<Position, Cell> cells);
 };
 
 #endif //_CONSOLEVIEW_H

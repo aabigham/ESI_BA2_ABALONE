@@ -81,7 +81,7 @@ public:
     *
     * \return the cells of the board.
     */
-    inline std::array<Cell, 61> getCells() const;
+    inline std::unordered_map<Position, Cell> getCells() const;
 
     /*!
      * \brief Gets the cell at the position in parameter.

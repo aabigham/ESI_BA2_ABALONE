@@ -19,7 +19,8 @@ public:
     /*!
     * \brief This method updates the view (gui or console).
     */
-    virtual void updateView(Game game);
+    virtual void updateView(int whiteMarblesLost, int blackMarblesLost,
+                            std::unordered_map<Position, Cell> cells);
 };
 
 #endif // VIEW_H

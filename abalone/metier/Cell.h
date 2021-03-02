@@ -26,7 +26,6 @@ public:
     * \brief Second constructor of the Cell class.
     *
     * \param pos the position of the cell on the board.
-    *
     * \param marble the color of the marble, NONE if there is no marble on the cell.
     */
     Cell(Position pos, Color marble);

@@ -127,7 +127,9 @@ namespace std {
 template <> struct hash<Position> {
     /*!
      * \brief The operator() overload to hash a position.
+     *
      * \param p the position to hash.
+     *
      * \return the hash value of the position in parameter.
      */
     size_t operator()(const Position& p) const {
