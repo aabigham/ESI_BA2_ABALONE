@@ -31,6 +31,15 @@ public:
     Position(const Position& pos);
 
     /*!
+     * \brief Checks if the position in parameter is next to the current position.
+     *
+     * \param pos the position to check
+     *
+     * \return true is the checked position is adjacent, false otherwise.
+     */
+    bool isNextTo(Position pos);
+
+    /*!
     * \brief Compute the direction in which the marbles will be moving
     *
     * This method takes a start position and a future positon in arguments,
