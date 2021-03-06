@@ -1,4 +1,4 @@
-    #ifndef _DIRECTIONS_H
+#ifndef _DIRECTIONS_H
 #define _DIRECTIONS_H
 
 #include <tuple>
@@ -31,7 +31,7 @@ public:
     /*!
     * \brief The DOWN direction.
     */
-    constexpr static const Direction RIGHT{1, -1};
+    constexpr static const Direction RIGHT{1, 0};
 
     /*!
     * \brief The DOWN_LEFT direction.

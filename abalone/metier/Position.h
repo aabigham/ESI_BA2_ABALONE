@@ -50,7 +50,7 @@ public:
     *
     * \return the calculated direction.
     */
-    Direction computeDirection(Position posStart, Position posArrival);
+    const Direction computeDirection(Position posStart, Position posArrival);
 
     /*!
      * \brief Converts a string to a position.
@@ -63,7 +63,7 @@ public:
     Position toPosition(std::string abapro);
 
     /*!
-     * \brief  Gets the next position given a direction.
+     * \brief Gets the next position given a direction.
      *
      * \param dir the direction that will be used to determine the next case.
      *
@@ -73,21 +73,21 @@ public:
     Position getNext(Direction dir);
 
     /*!
-     * \brief  Getter of the x value.
+     * \brief Getter of the x value.
      *
      * \return the x value.
      */
     inline int getX() const;
 
     /*!
-     * \brief  Getter of the xyvalue.
+     * \brief Getter of the xyvalue.
      *
      * \return the y value.
      */
     inline int getY() const;
 
     /*!
-     * \brief  Getter of the y value.
+     * \brief Getter of the y value.
      *
      * \return the y value.
      */
@@ -96,19 +96,29 @@ public:
 private:
 
     /*!
-    * \brief the value of the x axis.
+    * \brief The value of the x axis.
     */
     const int x_;
 
     /*!
-    * \brief the value of the y axis.
+    * \brief The value of the y axis.
     */
     const int y_;
 
     /*!
-    * \brief the value of the z axis.
+    * \brief The value of the z axis.
     */
     const int z_;
+
+    /*!
+    * \brief The ABAPRO letters.
+    */
+    constexpr static char letters_ [9]{'A','B','C','D','E','F','G','H','I'};
+
+    /*!
+    * \brief The ABAPRO numbers.
+    */
+    constexpr static char numbers_ [9]{'1','2','3','4','5','6','7','8','9'};
 };
 
 // Operators

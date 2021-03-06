@@ -2,7 +2,7 @@ INCLUDEPATH += $$PWD/metier
 
 SRC_DIR = $$PWD
 
-QMAKE_CXXFLAGS += -Wpedantic et -Werror
+QMAKE_CXXFLAGS += -Wpedantic -Werror
 
 CONFIG -= app_bundle
 CONFIG -= qt
