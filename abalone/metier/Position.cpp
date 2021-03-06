@@ -91,8 +91,6 @@ Position Position::toPosition(std::string abapro)
             throw std::invalid_argument("Invalid ABAPRO, wrong letter/number pair.");
     }
 
-
-
     // TODO : Convert the abapro to a Position
 
     return Position(0,0);

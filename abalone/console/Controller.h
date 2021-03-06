@@ -32,12 +32,12 @@ private:
     /*!
      * \brief The board of the game.
      */
-    Game game;
+    Game game_;
 
     /*!
      * \brief The board of the game.
      */
-    View view;
+    View view_;
 };
 
 #endif //_CONTROLLER_H

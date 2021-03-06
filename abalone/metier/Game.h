@@ -69,14 +69,14 @@ private:
     /*!
      * \brief The board of the game.
      */
-    Board board;
+    Board board_;
 
     /*!
      * \brief The current player of the game.
      *
      * \return the board of the game.
      */
-    Color currentPlayer;
+    Color currentPlayer_;
 };
 
 #endif //_GAME_H

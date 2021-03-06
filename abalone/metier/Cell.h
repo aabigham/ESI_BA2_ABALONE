@@ -96,18 +96,22 @@ void Cell::setColor(Color color)
 std::optional<Color> Cell::getColor() const
 {
     return marble_.value();
-
 }
 
 std::string Cell::to_string()const{
     Color color={};
     std::string cell;
-    if(marble_.has_value()){
-        color=marble_.value();
+
+    if(marble_.has_value())
+    {
+        color = marble_.value();
     }
-    if(color==Color::BLACK){
+    else if(color==Color::BLACK)
+    {
         cell.append(BLACKCOLOR);
-    }else if (color==Color::WHITE){
+    }
+    else if (color==Color::WHITE)
+    {
         cell.append(WHITECOLOR);
     }
 
@@ -115,7 +119,8 @@ std::string Cell::to_string()const{
     cell.append("\n/    \\");
     cell.append("\n----");
     cell.append(RESET);
-    return cell;
 
+    return cell;
 }
+
 #endif //_CELL_H

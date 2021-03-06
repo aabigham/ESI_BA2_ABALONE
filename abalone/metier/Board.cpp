@@ -6,11 +6,11 @@ Board::Board()
       whiteMarblesLost_{ 0 },
       blackMarblesLost_{ 0 }
 {
-    for (int x = -4; x <= 4; x++)
+    for (int x = -4; x <= 4; ++x)
     {
-        int row1 = std::max(-4, -x -4);
+        int row1 = std::max(-4, -x - 4);
         int row2 = std::min(4, -x + 4);
-        for (int y = row1; y <= row2; y++)
+        for (int y = row1; y <= row2; ++y)
         {
             cells_.insert(std::make_pair(Position(x, y),Cell(Position(x,y))));
         }

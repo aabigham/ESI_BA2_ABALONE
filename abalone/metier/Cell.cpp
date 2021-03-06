@@ -6,7 +6,7 @@ Cell::Cell(Position position)
       marble_{ std::nullopt }
 {}
 
-Cell::Cell(Position position,Color marble)
+Cell::Cell(Position position, Color marble)
     : position_{ position },
       marble_{ marble }
 {}
