@@ -39,6 +39,7 @@ Direction Position::computeDirection(Position posStart, Position posArrival)
         throw std::invalid_argument("Either the positions are not adjacent or they are the same.");
 
     // TODO
+
 }
 
 Position Position::toPosition(std::string abapro)

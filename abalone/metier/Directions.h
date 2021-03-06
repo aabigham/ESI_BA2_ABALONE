@@ -1,10 +1,10 @@
-#ifndef _DIRECTIONS_H
+    #ifndef _DIRECTIONS_H
 #define _DIRECTIONS_H
 
 #include <tuple>
 #include "Position.h"
 
-using Direction = std::tuple<int, int, int>;
+using Direction = std::pair<int, int>;
 
 /*!
  * \brief The Direction class
@@ -16,32 +16,32 @@ public:
     /*!
     * \brief The UP_RIGHT direction.
     */
-    constexpr static const Direction UP_RIGHT{0, 1, -1};
+    constexpr static const Direction UP_RIGHT{0, 1};
 
     /*!
     * \brief The UP_LEFT direction.
     */
-    constexpr static const Direction UP_LEFT{-1, 1, 0};
+    constexpr static const Direction UP_LEFT{-1, 1};
 
     /*!
     * \brief The UP direction.
     */
-    constexpr static const Direction LEFT{-1, 0, 1};
+    constexpr static const Direction LEFT{-1, 0};
 
     /*!
     * \brief The DOWN direction.
     */
-    constexpr static const Direction RIGHT{1, -1, 0};
+    constexpr static const Direction RIGHT{1, -1};
 
     /*!
     * \brief The DOWN_LEFT direction.
     */
-    constexpr static const Direction DOWN_LEFT{0, -1, 1};
+    constexpr static const Direction DOWN_LEFT{0, -1};
 
     /*!
     * \brief The DOWN_RIGHT direction.
     */
-    constexpr static const Direction DOWN_RIGHT{1, -1, 0};
+    constexpr static const Direction DOWN_RIGHT{1, -1};
 };
 
 #endif //_DIRECTIONS_H

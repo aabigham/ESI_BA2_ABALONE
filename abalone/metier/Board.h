@@ -121,37 +121,37 @@ private:
     /*!
     * \brief The cells located on the board.
     */
-    std::unordered_map<Position, Cell> cells;
+    std::unordered_map<Position, Cell> cells_;
 
     /*!
     * \brief Counts the number of lost white marbles.
     */
-    int whiteMarblesLost;
+    int whiteMarblesLost_;
 
     /*!
     * \brief Counts the number of black marbles.
     */
-    int blackMarblesLost;
+    int blackMarblesLost_;
 };
 
 std::unordered_map<Position, Cell> Board::getCells() const{
-    return cells;
+    return cells_;
 }
 
 Cell & Board::getCellAt( const Position pos) {
-    return cells.at(pos);
+    return cells_.at(pos);
 }
 
 int Board::getWhiteMarblesLost() const{
-    return whiteMarblesLost;
+    return whiteMarblesLost_;
 }
 int Board::getBlackMarblesLost() const{
-    return blackMarblesLost;
+    return blackMarblesLost_;
 }
 void Board::addWhiteMarbleLost() {
-    whiteMarblesLost++;
+    ++whiteMarblesLost_;
 }
 void Board::addBlackMarbleLost() {
-        blackMarblesLost++;
+    ++blackMarblesLost_;
 }
 #endif //_BOARD_H
