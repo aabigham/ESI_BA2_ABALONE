@@ -3,7 +3,12 @@
 
 
 bool Board::isInside(Position pos){
-    return pos.getX()>=-4&&pos.getX()<=4&& pos.getY()>=-4&&pos.getY()<=4&& pos.getZ()>=-4&&pos.getZ()<=4;
+    return pos.getX() >= -4
+            && pos.getX() <= 4
+            && pos.getY() >= -4
+            && pos.getY() <= 4
+            && pos.getZ() >= -4
+            && pos.getZ() <= 4;
 }
 
 

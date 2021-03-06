@@ -3,14 +3,18 @@
 #include <assert.h>
 
 Position::Position(int x, int y)
-    : x_{ x }, y_{ y }, z_{ -x - y }
+    : x_{ x },
+      y_{ y },
+      z_{ -x - y }
 {
     if(x_ + y_ + z_ != 0)
         throw std::invalid_argument("The sum of all the axis does not equal 0.");
 }
 
 Position::Position(const Position& pos)
-    : x_{ pos.getX() }, y_{ pos.getY() }, z_{ pos.getZ() }
+    : x_{ pos.getX() },
+      y_{ pos.getY() },
+      z_{ pos.getZ() }
 {
     if(x_ + y_ + z_ != 0)
         throw std::invalid_argument("The sum of all the axis does not equal 0.");
