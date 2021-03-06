@@ -82,10 +82,25 @@ private:
     std::optional<Color> marble_;
 };
 
-// Inline methods
-Position Cell::getPosition() const
+/*!
+ * \brief The output stream operator overloading.
+ *
+ * \param os the output stream.
+ * \param cell the cell to output.
+ *
+ * \return the output stream containing the string representation of the cell.
+ */
+inline std::ostream& operator<<(std::ostream& os, const Cell& cell);
+
+std::ostream& operator<<(std::ostream& os, const Cell& cell)
 {
-    return position_;
+    return os << cell.to_string();
+}
+
+// Inline methods
+std::optional<Color> Cell::getColor() const
+{
+    return marble_.value();
 }
 
 void Cell::setColor(Color color)
@@ -93,34 +108,46 @@ void Cell::setColor(Color color)
     this->marble_.emplace(color);
 }
 
-std::optional<Color> Cell::getColor() const
+Position Cell::getPosition() const
 {
-    return marble_.value();
+    return position_;
 }
 
-std::string Cell::to_string()const{
-    Color color={};
-    std::string cell;
+std::string Cell::to_string()const
+{
+    //Color color{};
+    std::string str;
 
-    if(marble_.has_value())
+    /*if(marble_.has_value())
     {
         color = marble_.value();
     }
     else if(color==Color::BLACK)
     {
-        cell.append(BLACKCOLOR);
+        str.append(BLACKCOLOR);
     }
     else if (color==Color::WHITE)
     {
-        cell.append(WHITECOLOR);
+        str.append(WHITECOLOR);
+    }*/
+
+    str.append(" ___ ");
+    str.append("\n/ ");
+    if(marble_.has_value())
+    {
+        Color color = marble_.value();
+        str.append(color == Color::WHITE ? "W" : "B");
     }
+    else
+    {
+        str.append(" ");
+    }
+    str.append(" \\");
+    str.append("\n\\___/");
 
-    cell.append(" ____ ");
-    cell.append("\n/    \\");
-    cell.append("\n----");
-    cell.append(RESET);
+    //cell.append(RESET);
 
-    return cell;
+    return str;
 }
 
 #endif //_CELL_H

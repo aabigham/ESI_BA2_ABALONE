@@ -4,11 +4,10 @@
 
 int main()
 {
-    std::string str;
-    str.append(" ____ ");
-    str.append("\n/    \\");
-    str.append("\n\\____/");
-    std::cout << str << std::endl;
+
+    Cell cell{Position(0, 0), Color::BLACK};
+
+    std::cout << cell << std::endl;
 
     return 0;
 }
