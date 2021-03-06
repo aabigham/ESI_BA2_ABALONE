@@ -1,12 +1,16 @@
 #include "Board.h"
-
+#include <algorithm>
 Board::Board()
     : cells_ {  },
       whiteMarblesLost_{ 0 },
       blackMarblesLost_{ 0 }
 {
-    for (unsigned i = 0; i < 61 ; ++i) {
-        // TODO : insert to map
+    for (int x = -4; x <= 4; x++) {
+        int row1 = std::max(-4, -x -4);
+        int row2 = std::min(4, -x + 4);
+        for (int y = row1; y <= row2; y++) {
+            cells_.insert(std::make_pair(Position(x, y),Cell(Position(x,y))));
+        }
     }
 }
 
@@ -22,6 +26,25 @@ Color Board::colorAt(Position pos){
     return color.has_value()? color.value()
                             : throw std::invalid_argument("There is no marble on the cell.");
 }
+
+/*bool Board::canMove(Position posStart, Position posArrival){
+    // TO DO
+}
+bool Board::canMove(Position posStart, Position posEnd, Position posArrival){
+    //TO DO
+}
+void Board::move(Position posStart, Position posEnd, Position posArrival){
+    //TO DO
+}
+
+void Board::move(Position posStart, Position posArrival){
+   // TO DO
+}
+*/
+
+
+
+
 
 
 

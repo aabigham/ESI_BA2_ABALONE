@@ -5,7 +5,7 @@
 #include <optional>
 #include "Position.h"
 #include "Color.h"
-
+#include <stdlib.h>
 /*!
  * \brief The Cell class
  *
@@ -20,7 +20,7 @@ public:
     *
     * \param pos the position of the cell on the board.
     */
-    Cell(Position pos);
+    Cell(Position pos);//done
 
     /*!
     * \brief Second constructor of the Cell class.
@@ -28,7 +28,7 @@ public:
     * \param pos the position of the cell on the board.
     * \param marble the color of the marble, NONE if there is no marble on the cell.
     */
-    Cell(Position pos, Color marble);
+    Cell(Position pos, Color marble);//done
 
     /*!
     * \brief Checks if a cell is adjacent to the current cell.
@@ -37,28 +37,28 @@ public:
     *
     * \return true if the cell is adjacent to the current cell, false otherwise.
     */
-    bool isAdjacentTo(Cell &cell);
+    bool isAdjacentTo(Cell &cell);//done
 
     /*!
     * \brief Getter of the color of the cell.
     *
     * \return the color of the cell.
     */
-    inline std::optional<Color> getColor() const;
+    inline std::optional<Color> getColor() const;//done
 
     /*!
     * \brief Setter of the cell class.
     *
     * \param the color that will be attributed to the cell.
     */
-    inline void setColor(Color color);
+    inline void setColor(Color color);//done
 
     /*!
     * \brief Getter of the position of the current cell.
     *
     * \return the position of the current cell.
     */
-    inline Position getPosition() const;
+    inline Position getPosition() const;//done
 
     /*!
      * \brief The string representation of the object.
@@ -79,7 +79,7 @@ private:
     *
     * If there is not any marble on the cell, the value of the cell is NONE.
     */
-    std::optional<Color> marble_ = {};
+    std::optional<Color> marble_;
 };
 
 // Inline methods
@@ -96,6 +96,26 @@ void Cell::setColor(Color color)
 std::optional<Color> Cell::getColor() const
 {
     return marble_.value();
+
+}
+
+std::string Cell::to_string()const{
+    Color color={};
+    std::string cell;
+    if(marble_.has_value()){
+        color=marble_.value();
+    }
+    if(color==Color::BLACK){
+        cell.append(BLACKCOLOR);
+    }else if (color==Color::WHITE){
+        cell.append(WHITECOLOR);
+    }
+
+    cell.append(" ____ ");
+    cell.append("\n/    \\");
+    cell.append("\n----");
+    cell.append(RESET);
+    return cell;
 
 }
 #endif //_CELL_H

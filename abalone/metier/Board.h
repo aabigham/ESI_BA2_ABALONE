@@ -66,7 +66,7 @@ public:
     * \param pos the position at which we want to find its color
     * \return the color located at the position in parameter.
     */
-    Color colorAt(Position pos);
+    Color colorAt(Position pos);//done
 
     /*!
     * \brief Checks if a position is inside the board.
@@ -74,14 +74,14 @@ public:
     *
     * \return true if the position is inside, false otherwise.
     */
-    bool isInside(Position pos);
+    bool isInside(Position pos);//Done
 
     /*!
     * \brief Getter of the cells of the board.
     *
     * \return the cells of the board.
     */
-    inline std::unordered_map<Position, Cell> getCells() const;
+    inline std::unordered_map<Position, Cell> getCells() const;//done
 
     /*!
      * \brief Gets the cell at the position in parameter.
@@ -90,31 +90,31 @@ public:
      *
      * \return the cell at the given position.
      */
-    inline Cell &getCellAt(Position pos) ;
+    inline Cell &getCellAt(Position pos) ;//done
 
     /*!
     * \brief Getter of the lost white marbles.
     *
     * \return the number of lost white marble.
     */
-    inline int getWhiteMarblesLost() const;
+    inline int getWhiteMarblesLost() const;//done
 
     /*!
     * \brief Getter of the lost black marbles.
     *
     * \return the number of lost black marble.
     */
-    inline int getBlackMarblesLost() const;
+    inline int getBlackMarblesLost() const; //done
 
     /*!
     * \brief Increments the count of lost white marbles.
     */
-    inline void addWhiteMarbleLost() ;
+    inline void addWhiteMarbleLost() ; //done
 
     /*!
     * \brief Increments the count of lost black marbles.
     */
-    inline void addBlackMarbleLost() ;
+    inline void addBlackMarbleLost() ; //done
 
 private:
 
