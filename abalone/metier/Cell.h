@@ -37,7 +37,7 @@ public:
     *
     * \return true if the cell is adjacent to the current cell, false otherwise.
     */
-    bool isAdjacentTo(Cell cell);
+    bool isAdjacentTo(Cell &cell);
 
     /*!
     * \brief Getter of the color of the cell.
