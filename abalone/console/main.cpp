@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Color.h"
 #include "Cell.h"
+#include "Position.h"
 
 int main()
 {
@@ -14,6 +15,17 @@ int main()
     for (const char &c : str) {
         std::cout << c << std::endl;
     }
+
+    Position pos1{0,0};
+    Position pos2{-3, 1};
+    try {
+        Direction dir = computeDirection(pos1, pos1);
+        std::cout << "{" << dir.first << "," << dir.second << "}" << std::endl;
+    }  catch (const std::exception &e) {
+        std::cout << e.what()<< std::endl;
+    }
+
+
 
     return 0;
 }

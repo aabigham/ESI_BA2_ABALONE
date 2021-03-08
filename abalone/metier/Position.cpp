@@ -33,9 +33,9 @@ bool Position::isNextTo(const Position pos) const
         return false;
 }
 
-const Direction Position::computeDirection(Position posStart, Position posArrival) const
+const Direction computeDirection(Position posStart, Position posArrival)
 {
-    if(posStart == posArrival || !posStart.isNextTo(posArrival))
+    if(posStart == posArrival)
         throw std::invalid_argument("The positions are invalid.");
 
     int x_st = posStart.getX();
@@ -49,7 +49,7 @@ const Direction Position::computeDirection(Position posStart, Position posArriva
     return Direction{x_res, y_res};
 }
 
-Position Position::toPosition(const std::string abapro) const // THROWS !!!!!!!!!!
+Position toPosition(const std::string abapro) // THROWS !!!!!!!!!!
 {
     validateABAPRO(abapro);
     // TODO : Convert the abapro to a Position

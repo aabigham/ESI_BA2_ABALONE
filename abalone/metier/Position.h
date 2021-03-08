@@ -41,56 +41,6 @@ public:
     bool isNextTo(const Position pos) const;
 
     /*!
-     * \brief Validates an ABAPRO letter.
-     *
-     * \param letter the letter to validate.
-     *
-     * \throws std::invalid_argument if the letter is not valid.
-     */
-    inline void validateLetter(const char letter) const;
-
-    /*!
-     * \brief Validates an ABAPRO number.
-     *
-     * \param letter the number to validate.
-     *
-     * \throws std::invalid_argument if the number is not valid.
-     */
-    inline void validateNumber(const char number) const;
-
-    /*!
-     * \brief Validates an ABAPRO input.
-     *
-     * \param letter the input to validate.
-     *
-     * \throws std::invalid_argument if the input is not valid.
-     */
-    inline void validateABAPRO(const std::string abapro) const;
-
-    /*!
-    * \brief Compute the direction in which the marbles will be moving
-    *
-    * This method takes a start position and a future positon in arguments,
-    * and computes the direction according to the those two arguments.
-    *
-    * \param posStart the start position.
-    * \param posArrival the future position.
-    *
-    * \return the calculated direction.
-    */
-    const Direction computeDirection(Position posStart, Position posArrival) const;
-
-    /*!
-     * \brief Converts a string to a position.
-     *
-     * This method takes an ABA-PRO notation and converts it to a Position object.
-     *
-     * \param abapro the ABA-PRO notation as a String object.
-     * \return the according position.
-     */
-    Position toPosition(const std::string abapro) const;
-
-    /*!
      * \brief Gets the next position given a direction.
      *
      * \param dir the direction that will be used to determine the next case.
@@ -121,6 +71,16 @@ public:
      */
     inline int getZ() const;
 
+    /*!
+    * \brief The ABAPRO letters.
+    */
+    constexpr static char letters_ [9]{'A','B','C','D','E','F','G','H','I'};
+
+    /*!
+    * \brief The ABAPRO numbers.
+    */
+    constexpr static char numbers_ [9]{'1','2','3','4','5','6','7','8','9'};
+
 private:
 
     /*!
@@ -137,17 +97,58 @@ private:
     * \brief The value of the z axis.
     */
     const int z_;
-
-    /*!
-    * \brief The ABAPRO letters.
-    */
-    constexpr static char letters_ [9]{'A','B','C','D','E','F','G','H','I'};
-
-    /*!
-    * \brief The ABAPRO numbers.
-    */
-    constexpr static char numbers_ [9]{'1','2','3','4','5','6','7','8','9'};
 };
+
+
+/*!
+ * \brief Validates an ABAPRO letter.
+ *
+ * \param letter the letter to validate.
+ *
+ * \throws std::invalid_argument if the letter is not valid.
+ */
+inline void validateLetter(const char letter);
+
+/*!
+ * \brief Validates an ABAPRO number.
+ *
+ * \param letter the number to validate.
+ *
+ * \throws std::invalid_argument if the number is not valid.
+ */
+inline void validateNumber(const char number);
+
+/*!
+ * \brief Validates an ABAPRO input.
+ *
+ * \param letter the input to validate.
+ *
+ * \throws std::invalid_argument if the input is not valid.
+ */
+inline void validateABAPRO(const std::string abapro);
+
+/*!
+* \brief Compute the direction in which the marbles will be moving
+*
+* This method takes a start position and a future positon in arguments,
+* and computes the direction according to the those two arguments.
+*
+* \param posStart the start position.
+* \param posArrival the future position.
+*
+* \return the calculated direction.
+*/
+const Direction computeDirection(Position posStart, Position posArrival);
+
+/*!
+ * \brief Converts a string to a position.
+ *
+ * This method takes an ABA-PRO notation and converts it to a Position object.
+ *
+ * \param abapro the ABA-PRO notation as a String object.
+ * \return the according position.
+ */
+Position toPosition(const std::string abapro);
 
 // Operator functions
 /*!
@@ -215,21 +216,21 @@ Position operator-(const Position &lhs, const Position &rhs)
     return Position(lhs.getX() - rhs.getX(), lhs.getY() - rhs.getY());
 }
 
-void Position::validateLetter(const char letter) const
+void validateLetter(const char letter)
 {
-    bool valid = std::find(std::begin(letters_), std::end(letters_), letter)!= std::end(letters_);
+    bool valid = std::find(std::begin(Position::letters_), std::end(Position::letters_), letter)!= std::end(Position::letters_);
     if(!valid)
          throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
 }
 
-void Position::validateNumber(const char number) const
+void validateNumber(const char number)
 {
-    bool valid = std::find(std::begin(numbers_), std::end(numbers_), number)!= std::end(numbers_);
+    bool valid = std::find(std::begin(Position::numbers_), std::end(Position::numbers_), number)!= std::end(Position::numbers_);
     if(!valid)
          throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
 }
 
-void Position::validateABAPRO(const std::string abapro) const
+void validateABAPRO(const std::string abapro)
 {
     int size = abapro.size();
     if(size != 4 && size != 6)
