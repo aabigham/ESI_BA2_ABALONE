@@ -40,10 +40,31 @@ public:
      */
     bool isNextTo(const Position pos) const;
 
+    /*!
+     * \brief Validates an ABAPRO letter.
+     *
+     * \param letter the letter to validate.
+     *
+     * \throws std::invalid_argument if the letter is not valid.
+     */
     inline void validateLetter(const char letter) const;
 
+    /*!
+     * \brief Validates an ABAPRO number.
+     *
+     * \param letter the number to validate.
+     *
+     * \throws std::invalid_argument if the number is not valid.
+     */
     inline void validateNumber(const char number) const;
 
+    /*!
+     * \brief Validates an ABAPRO input.
+     *
+     * \param letter the input to validate.
+     *
+     * \throws std::invalid_argument if the input is not valid.
+     */
     inline void validateABAPRO(const std::string abapro) const;
 
     /*!
@@ -128,7 +149,7 @@ private:
     constexpr static char numbers_ [9]{'1','2','3','4','5','6','7','8','9'};
 };
 
-// Operators
+// Operator functions
 /*!
  * \brief Comparison of equality between two positions.
  *
@@ -171,6 +192,7 @@ inline Position operator+(const Position &lhs, const Position &rhs);
  */
 inline Position operator-(const Position &lhs, const Position &rhs);
 
+// Inline implementations
 bool operator==(const Position &lhs, const Position &rhs)
 {
     return lhs.getX() == rhs.getX()
@@ -193,7 +215,6 @@ Position operator-(const Position &lhs, const Position &rhs)
     return Position(lhs.getX() - rhs.getX(), lhs.getY() - rhs.getY());
 }
 
-// Inline implementation
 void Position::validateLetter(const char letter) const
 {
     bool valid = std::find(std::begin(letters_), std::end(letters_), letter)!= std::end(letters_);
