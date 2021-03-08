@@ -20,7 +20,7 @@ Position::Position(const Position& pos)
         throw std::invalid_argument("The sum of all the axis does not equal 0.");
 }
 
-bool Position::isNextTo(const Position pos)
+bool Position::isNextTo(const Position pos) const
 {
     if(this->getNext(Directions::LEFT) == pos
             || this->getNext(Directions::DOWN_LEFT) == pos
@@ -33,7 +33,7 @@ bool Position::isNextTo(const Position pos)
         return false;
 }
 
-const Direction Position::computeDirection(Position posStart, Position posArrival)
+const Direction Position::computeDirection(Position posStart, Position posArrival) const
 {
     if(posStart == posArrival || !posStart.isNextTo(posArrival))
         throw std::invalid_argument("The positions are invalid.");
@@ -49,14 +49,14 @@ const Direction Position::computeDirection(Position posStart, Position posArriva
     return Direction{x_res, y_res};
 }
 
-Position Position::toPosition(const std::string abapro) // THROWS !!!!!!!!!!
+Position Position::toPosition(const std::string abapro) const // THROWS !!!!!!!!!!
 {
     validateABAPRO(abapro);
     // TODO : Convert the abapro to a Position
     return Position(0,0);
 }
 
-Position Position::getNext(const Direction dir)
+Position Position::getNext(const Direction dir) const
 {
     return Position(x_ + std::get<0>(dir), y_ + std::get<1>(dir));
 }

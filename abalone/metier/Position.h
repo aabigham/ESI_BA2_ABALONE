@@ -38,13 +38,13 @@ public:
      *
      * \return true is the checked position is adjacent, false otherwise.
      */
-    bool isNextTo(const Position pos);
+    bool isNextTo(const Position pos) const;
 
-    inline void validateLetter(const char letter);
+    inline void validateLetter(const char letter) const;
 
-    inline void validateNumber(const char number);
+    inline void validateNumber(const char number) const;
 
-    inline void validateABAPRO(const std::string abapro);
+    inline void validateABAPRO(const std::string abapro) const;
 
     /*!
     * \brief Compute the direction in which the marbles will be moving
@@ -57,7 +57,7 @@ public:
     *
     * \return the calculated direction.
     */
-    const Direction computeDirection(Position posStart, Position posArrival);
+    const Direction computeDirection(Position posStart, Position posArrival) const;
 
     /*!
      * \brief Converts a string to a position.
@@ -67,7 +67,7 @@ public:
      * \param abapro the ABA-PRO notation as a String object.
      * \return the according position.
      */
-    Position toPosition(const std::string abapro);
+    Position toPosition(const std::string abapro) const;
 
     /*!
      * \brief Gets the next position given a direction.
@@ -77,7 +77,7 @@ public:
      * \return the position next to the current case, based on the  given direction.
      *
      */
-    Position getNext(const Direction dir);
+    Position getNext(const Direction dir) const;
 
     /*!
      * \brief Getter of the x value.
@@ -194,21 +194,21 @@ Position operator-(const Position &lhs, const Position &rhs)
 }
 
 // Inline implementation
-void Position::validateLetter(const char letter)
+void Position::validateLetter(const char letter) const
 {
     bool valid = std::find(std::begin(letters_), std::end(letters_), letter)!= std::end(letters_);
     if(!valid)
          throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
 }
 
-void Position::validateNumber(const char number)
+void Position::validateNumber(const char number) const
 {
     bool valid = std::find(std::begin(numbers_), std::end(numbers_), number)!= std::end(numbers_);
     if(!valid)
          throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
 }
 
-void Position::validateABAPRO(const std::string abapro)
+void Position::validateABAPRO(const std::string abapro) const
 {
     int size = abapro.size();
     if(size != 4 && size != 6)
