@@ -9,5 +9,11 @@ int main()
 
     std::cout << cell << std::endl;
 
+
+    std::string str = "Bonjour";
+    for (const char &c : str) {
+        std::cout << c << std::endl;
+    }
+
     return 0;
 }

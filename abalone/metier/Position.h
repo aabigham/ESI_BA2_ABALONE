@@ -2,6 +2,7 @@
 #define _POSITION_H
 
 #include <string>
+#include <algorithm>
 #include "Directions.h"
 
 /*!
@@ -37,7 +38,13 @@ public:
      *
      * \return true is the checked position is adjacent, false otherwise.
      */
-    bool isNextTo(Position pos);
+    bool isNextTo(const Position pos);
+
+    inline void validateLetter(const char letter);
+
+    inline void validateNumber(const char number);
+
+    inline void validateABAPRO(const std::string abapro);
 
     /*!
     * \brief Compute the direction in which the marbles will be moving
@@ -60,7 +67,7 @@ public:
      * \param abapro the ABA-PRO notation as a String object.
      * \return the according position.
      */
-    Position toPosition(std::string abapro);
+    Position toPosition(const std::string abapro);
 
     /*!
      * \brief Gets the next position given a direction.
@@ -70,7 +77,7 @@ public:
      * \return the position next to the current case, based on the  given direction.
      *
      */
-    Position getNext(Direction dir);
+    Position getNext(const Direction dir);
 
     /*!
      * \brief Getter of the x value.
@@ -187,6 +194,37 @@ Position operator-(const Position &lhs, const Position &rhs)
 }
 
 // Inline implementation
+void Position::validateLetter(const char letter)
+{
+    bool valid = std::find(std::begin(letters_), std::end(letters_), letter)!= std::end(letters_);
+    if(!valid)
+         throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
+}
+
+void Position::validateNumber(const char number)
+{
+    bool valid = std::find(std::begin(numbers_), std::end(numbers_), number)!= std::end(numbers_);
+    if(!valid)
+         throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
+}
+
+void Position::validateABAPRO(const std::string abapro)
+{
+    int size = abapro.size();
+    if(size != 4 && size != 6)
+        throw std::invalid_argument("Invalid ABAPRO, must be 4 or 6 characters long.");
+
+    // Validation of the abapro input Example : A1B2 or A1B2C3
+    for(int i = 0; i < size; ++i)
+    {
+        char c = abapro.at(i);
+        if(i % 2 == 0) // The char is a letter
+            validateLetter(c);
+        else if(i % 2 != 0) // The char is a number
+            validateNumber(c);
+    }
+}
+
 int Position::getX() const
 {
     return x_;
