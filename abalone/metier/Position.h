@@ -149,7 +149,7 @@ const Direction computeDirection(Position posStart, Position posArrival);
  * \param abapro the ABA-PRO notation as a String object.
  * \return the according position.
  */
-Position toPosition(const std::string abapro);
+Position abaproToPosition(const std::string abapro);
 
 // Operator functions
 /*!
@@ -181,7 +181,7 @@ inline bool operator!=(const Position &lhs, const Position &rhs);
  * \return a new Position object, wich is the result
  * of the addition of both parameters.
  */
-inline Position operator+(const Position &lhs, const Position &rhs);
+//inline Position operator+(const Position &lhs, const Position &rhs);
 
 /*!
  * \brief Substraction of two positions.
@@ -207,31 +207,31 @@ bool operator!=(const Position &lhs, const Position &rhs)
     return !(lhs == rhs);
 }
 
-Position operator+(const Position &lhs, const Position &rhs)
+/*Position operator+(const Position &lhs, const Position &rhs)
 {
     return Position(lhs.getX() + rhs.getX(), lhs.getY() + rhs.getY());
-}
+}*/
 
 Position operator-(const Position &lhs, const Position &rhs)
 {
     return Position(lhs.getX() - rhs.getX(), lhs.getY() - rhs.getY());
 }
 
-void validateLetter(const char letter)
+void validateLetter(const char letter) // throws
 {
     bool valid = std::find(std::begin(Position::letters_), std::end(Position::letters_), letter)!= std::end(Position::letters_);
     if(!valid)
          throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
 }
 
-void validateNumber(const char number)
+void validateNumber(const char number) // throws
 {
     bool valid = std::find(std::begin(Position::numbers_), std::end(Position::numbers_), number)!= std::end(Position::numbers_);
     if(!valid)
          throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
 }
 
-void validateABAPRO(const std::string abapro)
+void validateABAPRO(const std::string abapro) // throws
 {
     int size = abapro.size();
     if(size != 4 && size != 6)

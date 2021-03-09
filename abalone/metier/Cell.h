@@ -115,22 +115,7 @@ Position Cell::getPosition() const
 
 std::string Cell::to_string()const
 {
-    //Color color{};
     std::string str;
-
-    /*if(marble_.has_value())
-    {
-        color = marble_.value();
-    }
-    else if(color==Color::BLACK)
-    {
-        str.append(BLACKCOLOR);
-    }
-    else if (color==Color::WHITE)
-    {
-        str.append(WHITECOLOR);
-    }*/
-
     str.append(" ___ ");
     str.append("\n/ ");
     if(marble_.has_value())
@@ -144,9 +129,6 @@ std::string Cell::to_string()const
     }
     str.append(" \\");
     str.append("\n\\___/");
-
-    //cell.append(RESET);
-
     return str;
 }
 
