@@ -38,5 +38,14 @@ TEST_CASE("Testing methods of the Cell class"){
         Cell cell2=Cell(Position(0,-1));
         REQUIRE_FALSE(hasSameColor(cell,cell2));
     }
-
+    SECTION("Test of method setColor"){
+        Cell cell=Cell(Position(0,0),Color::BLACK);
+        cell.setColor(Color::WHITE);
+        REQUIRE(cell.getColor()==Color::WHITE);
+    }
+    SECTION("Test of method setColor"){
+        Cell cell=Cell(Position(0,0),Color::BLACK);
+        cell.setColor();
+        REQUIRE(cell.getColor()==std::nullopt);
+}
 }

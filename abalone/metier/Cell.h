@@ -52,7 +52,10 @@ public:
     * \param the color that will be attributed to the cell.
     */
     inline void setColor(Color color);//done
-
+    /*!
+     * \brief setColor sets the color value at std::nullopt
+     */
+    inline void setColor();
     /*!
     * \brief Getter of the position of the current cell.
     *
@@ -113,15 +116,23 @@ std::ostream& operator<<(std::ostream& os, const Cell& cell)
 std::optional<Color> Cell::getColor() const
 {
     if(marble_.has_value())
-    return marble_.value();
+        return marble_.value();
 
     return std::nullopt;
 }
 
 void Cell::setColor(Color color)
 {
+
     this->marble_.emplace(color);
 }
+
+void Cell::setColor()
+{
+
+    this->marble_.reset();
+}
+
 
 Position Cell::getPosition() const
 {
