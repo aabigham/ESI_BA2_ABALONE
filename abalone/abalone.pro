@@ -2,7 +2,7 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     console \
-    gui \
+    #gui \
     metier \
     tests
 
