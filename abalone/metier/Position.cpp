@@ -45,7 +45,7 @@ const Direction computeDirection(Position posStart, Position posArrival)
 
     int x_res = x_st == y_ar ? 0 : x_st < x_ar ? 1 : -1;
     int y_res = y_st == y_ar ? 0 : y_st < y_ar ? 1 : -1;
-
+    // TODO
     return Direction{x_res, y_res};
 }
 
