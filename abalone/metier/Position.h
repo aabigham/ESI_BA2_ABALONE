@@ -15,7 +15,7 @@ using Direction = std::pair<int, int>;
 class Position {
 public: 
     /*!
-     * \brief Constructor of the Position class.
+     * \brief Constructor of the Position class with 2 parameters.
      * The class has three position but only the x an y axis are required,
      * the z axis will be calculated.
      *
@@ -25,6 +25,19 @@ public:
      * \throws std::invalid_argument if the sum of the attributes is different than zero.
      */
     Position(int x, int y);
+
+    /*!
+     * \brief Constructor of the Position class with 3 parameters.
+     * The class has three position but only the x an y axis are required,
+     * the z axis will be calculated.
+     *
+     * \param x the value of the x axis.
+     * \param y the value of the y axis.
+     * \param z the value of the z axis.
+     *
+     * \throws std::invalid_argument if the sum of the attributes is different than zero.
+     */
+    Position(int x, int y, int z);
 
     /*!
      * \brief Copy constructor of the Position class.
