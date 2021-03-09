@@ -92,6 +92,18 @@ private:
  */
 inline std::ostream& operator<<(std::ostream& os, const Cell& cell);
 
+/*!
+ * \brief hasSameColor Checks if two cells have the same color.
+ * \param cell1 the first cell to compare
+ * \param cell2 the second cell to compare
+ * \return true if the cells have the same color, false otherwise.
+ */
+inline bool hasSameColor(Cell cell1,Cell cell2);
+
+inline bool hasSameColor(Cell cell1,Cell cell2){
+    return cell1.getColor()==cell2.getColor();
+}
+
 std::ostream& operator<<(std::ostream& os, const Cell& cell)
 {
     return os << cell.to_string();
@@ -100,7 +112,10 @@ std::ostream& operator<<(std::ostream& os, const Cell& cell)
 // Inline methods
 std::optional<Color> Cell::getColor() const
 {
+    if(marble_.has_value())
     return marble_.value();
+
+    return std::nullopt;
 }
 
 void Cell::setColor(Color color)
