@@ -5,6 +5,8 @@
 #include <algorithm>
 #include "Directions.h"
 
+using Direction = std::pair<int, int>;
+
 /*!
  * \brief The Position class
  *
@@ -32,15 +34,6 @@ public:
     Position(const Position& pos);
 
     /*!
-     * \brief Checks if the position in parameter is next to the current position.
-     *
-     * \param pos the position to check
-     *
-     * \return true is the checked position is adjacent, false otherwise.
-     */
-    bool isNextTo(const Position pos) const;
-
-    /*!
      * \brief Gets the next position given a direction.
      *
      * \param dir the direction that will be used to determine the next case.
@@ -49,6 +42,15 @@ public:
      *
      */
     Position getNext(const Direction dir) const;
+
+    /*!
+     * \brief Checks if the position in parameter is next to the current position.
+     *
+     * \param pos the position to check
+     *
+     * \return true is the checked position is adjacent, false otherwise.
+     */
+    bool isNextTo(const Position pos) const;
 
     /*!
      * \brief Getter of the x value.
@@ -98,7 +100,6 @@ private:
     */
     const int z_;
 };
-
 
 /*!
  * \brief Validates an ABAPRO letter.

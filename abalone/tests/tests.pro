@@ -6,6 +6,8 @@ CONFIG += console
 LIBS += -L../lib -llibcore
 
 SOURCES += \
+    DirectionsTest.cpp \
+    PositionTest.cpp \
     main.cpp
 
 HEADERS += \

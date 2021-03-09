@@ -16,11 +16,11 @@ int main()
         std::cout << c << std::endl;
     }
 
-    Position pos1{0,0};
-    Position pos2{-3, 1};
+    Position pos1{0, 0};
+    Position pos2{0, -1};
     try {
-        Direction dir = computeDirection(pos1, pos1);
-        std::cout << "{" << dir.first << "," << dir.second << "}" << std::endl;
+        Direction dir = computeDirection(pos1, pos2);
+        std::cout << dir << std::endl;
     }  catch (const std::exception &e) {
         std::cout << e.what()<< std::endl;
     }
