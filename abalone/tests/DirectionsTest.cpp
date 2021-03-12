@@ -10,6 +10,7 @@ TEST_CASE("Testing methods the Directions class")
         Direction dir = getDirection(x, y);
         REQUIRE(Directions::UP_RIGHT == dir);
     }
+
     SECTION("Testing getDirection UP_LEFT")
     {
         int x = -1;
@@ -17,6 +18,7 @@ TEST_CASE("Testing methods the Directions class")
         Direction dir = getDirection(x, y);
         REQUIRE(Directions::UP_LEFT == dir);
     }
+
     SECTION("Testing getDirection LEFT")
     {
         int x = -1;
@@ -24,6 +26,7 @@ TEST_CASE("Testing methods the Directions class")
         Direction dir = getDirection(x, y);
         REQUIRE(Directions::LEFT == dir);
     }
+
     SECTION("Testing getDirection RIGHT")
     {
         int x = 1;
@@ -31,6 +34,7 @@ TEST_CASE("Testing methods the Directions class")
         Direction dir = getDirection(x, y);
         REQUIRE(Directions::RIGHT == dir);
     }
+
     SECTION("Testing getDirection DOWN_LEFT")
     {
         int x = 0;
@@ -38,6 +42,7 @@ TEST_CASE("Testing methods the Directions class")
         Direction dir = getDirection(x, y);
         REQUIRE(Directions::DOWN_LEFT == dir);
     }
+
     SECTION("Testing getDirection DOWN_RIGHT")
     {
         int x = 1;

@@ -56,5 +56,5 @@ TEST_CASE("Testing methods of the Cell class")
         Cell cell = Cell(Position(0,0),Color::BLACK);
         cell.setColor();
         REQUIRE(cell.getColor() == std::nullopt);
-}
+    }
 }
