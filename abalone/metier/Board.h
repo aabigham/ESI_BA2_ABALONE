@@ -7,7 +7,9 @@
 #include "Color.h"
 #include "Directions.h"
 #include "Cell.h"
-
+//Il nous faut une méthode pr set la couleur des billes au début (initialise?)
+// getColorAt devrait pas retourner un StdOptional?
+//canMove et move encore a faire
 /*!
  * \brief The Board class
  *

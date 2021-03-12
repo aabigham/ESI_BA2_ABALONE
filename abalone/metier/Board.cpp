@@ -29,7 +29,7 @@ Color Board::colorAt(Position pos)
     auto color = cells_.at(pos).getColor();
 
     return color.has_value()? color.value()
-                            : throw std::invalid_argument("There is no marble on the cell.");
+                            : throw std::invalid_argument("There is no marble on the cell.");//
 }
 /*
 bool Board::canMove(Position posStart, Position posArrival){
@@ -61,14 +61,24 @@ bool Board::canMove(Position posStart, Position posArrival){
 bool Board::canMove(Position posStart, Position posEnd, Position posArrival){
     //TO DO
 }
-void Board::move(Position posStart, Position posEnd, Position posArrival){
+
+void Board::move(Position posStart, Position posEnd, Position posArrival)
+{
     //TO DO
 }
 
-void Board::move(Position posStart, Position posArrival){
-   // TO DO
+void Board::move(Position posStart, Position posArrival)
+
+{
+    Direction direction = computeDirection(posStart,posArrival);
+    while(posArrival.getNext())
+
+    getCellAt(posArrival).setColor(getCellAt(posStart).getColor().value());
+    getCellAt(posStart).setColor();
+
 }
 */
+
 
 
 
