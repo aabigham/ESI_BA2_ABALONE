@@ -1,6 +1,7 @@
 #include "Position.h"
 #include "Directions.h"
 #include <assert.h>
+#include <iostream>
 
 Position::Position(int x, int y)
     : x_{ x },
@@ -94,7 +95,7 @@ std::vector<Position> abaproToPosition(const std::string abapro) // throws
     char n2{abapro.at(3)};
     int y2 = getLetterYAxis(l2);
     int z2 = getNumberZAxis(n2);
-    int x2 = 0 - (y1 + z1);
+    int x2 = 0 - (y2 + z2);
     Position p2{x2, y2, z2};
     ret.push_back(p2);
     // p3
@@ -103,7 +104,7 @@ std::vector<Position> abaproToPosition(const std::string abapro) // throws
         char n3{abapro.at(5)};
         int y3 = getLetterYAxis(l3);
         int z3 = getNumberZAxis(n3);
-        int x3 = 0 - (y1 + z1);
+        int x3 = 0 - (y3 + z3);
         Position p3{x3, y3, z3};
         ret.push_back(p3);
         return ret;

@@ -48,6 +48,44 @@ TEST_CASE("Testing methods the Position class")
         REQUIRE_THROWS(validateABAPRO("AXB1CX"));
     }
 
+    SECTION("Testing getLetterYAxis No Throw")
+    {
+        int y = getLetterYAxis('A');
+        REQUIRE(y == -4);
+    }
+
+    SECTION("Testing getLetterYAxis Throw")
+    {
+        REQUIRE_THROWS(getLetterYAxis('X'));
+    }
+
+    SECTION("Testing getNumberZAxis No Throw")
+    {
+        int z = getNumberZAxis('1');
+        REQUIRE(z == 4);
+    }
+
+    SECTION("Testing getNumberZAxis Throw")
+    {
+        REQUIRE_THROWS(getNumberZAxis('X'));
+    }
+
+    SECTION("Testing abaproToPosition size 4")
+    {
+        std::string abapro("I8H7");
+        std::vector<Position> vExpected{Position(-1, 4), Position(-1, 3)};
+        auto result = abaproToPosition(abapro);
+        REQUIRE(vExpected == result);
+    }
+
+    SECTION("Testing abaproToPosition size 6")
+    {
+        std::string abapro("C3C5D3");
+        std::vector<Position> vExpected{Position(0, -2), Position(2, -2), Position(-1, -1)};
+        auto result = abaproToPosition(abapro);
+        REQUIRE(vExpected == result);
+    }
+
     SECTION("Testing getNext Sucess")
     {
         Position mid(0,0);
