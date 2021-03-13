@@ -82,7 +82,9 @@ int getNumberZAxis(int number)
 
 std::vector<Position> abaproToPosition(const std::string abapro) // throws
 {
-    validateABAPRO(abapro);
+    if(!isAbaproValid(abapro))
+        throw std::invalid_argument("The abapro input is not valid.");
+
     std::vector<Position> ret;
     // p1
     char l1{abapro.at(0)};

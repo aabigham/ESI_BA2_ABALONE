@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Game.h"
 
 Game::Game()
@@ -6,7 +7,15 @@ Game::Game()
 {
 }
 
-bool Game::isGameOver()
+std::vector<Position> Game::askAbaPro()
 {
-    return board_.getBlackMarblesLost() == 6 || board_.getWhiteMarblesLost() == 6;
+    std::string abapro;
+    std::cout << "Please enter an ABAPRO notation :\n";
+    std::cin >> abapro;
+    while (!isAbaproValid(abapro))
+    {
+        std::cout << "Input is not valid, please enter an valid notation :\n";
+        std::cin >> abapro;
+    }
+    return abaproToPosition(abapro);
 }

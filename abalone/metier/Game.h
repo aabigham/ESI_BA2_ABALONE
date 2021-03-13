@@ -3,6 +3,7 @@
 
 #include "Position.h"
 #include "Board.h"
+#include <iostream>
 
 /*!
  * \brief The Game class
@@ -25,23 +26,23 @@ public:
     void start();
 
     /*!
-     * \brief Checks if the game is over.
-     *
-     * \return true if the game is over, false otherwise.
-     */
-    bool isGameOver(); //done
-
-    /*!
      * \brief This method plays a round of abalone.
      */
     void play();
 
     /*!
+     * \brief Checks if the game is over.
+     *
+     * \return true if the game is over, false otherwise.
+     */
+    inline bool isGameOver() const; //done
+
+    /*!
      * \brief Asks an ABA-PRO notation to the player.
      *
-     * \return a case position according to the ABA-PRO notation.
+     * \return the vector of positions according to the ABA-PRO notation.
      */
-    Position askAbaPro();
+    std::vector<Position> askAbaPro();
 
     /*!
      * \brief Getter of the game board.
@@ -77,6 +78,11 @@ private:
      */
     Color currentPlayer_;
 };
+
+bool Game::isGameOver() const
+{
+    return board_.getBlackMarblesLost() == 6 || board_.getWhiteMarblesLost() == 6;
+}
 
 Board &Game::getBoard()
 {

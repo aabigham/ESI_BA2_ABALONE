@@ -2,6 +2,7 @@
 #include "Color.h"
 #include "Cell.h"
 #include "Position.h"
+#include "Game.h"
 
 int main()
 {
@@ -27,6 +28,13 @@ int main()
     catch (const std::exception &e)
     {
         std::cout << e.what() << std::endl;
+    }
+
+    Game game;
+    auto positions{game.askAbaPro()};
+    for (const auto &currPos : positions)
+    {
+        std::cout << currPos << std::endl;
     }
 
     return 0;

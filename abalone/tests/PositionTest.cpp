@@ -3,49 +3,49 @@
 
 TEST_CASE("Testing methods the Position class")
 {
-    SECTION("Testing validateLetter No Throw")
+    SECTION("Testing isLetterValid True")
     {
-        REQUIRE_NOTHROW(validateLetter('A'));
+        REQUIRE(isLetterValid('A'));
     }
 
-    SECTION("Testing validateLetter Throw invalid letter")
+    SECTION("Testing isLetterValid False invalid letter")
     {
-        REQUIRE_THROWS(validateLetter('a'));
+        REQUIRE_FALSE(isLetterValid('a'));
     }
 
-    SECTION("Testing validateNumber No Throw")
+    SECTION("Testing isNumberValid True")
     {
-        REQUIRE_NOTHROW(validateNumber('1'));
+        REQUIRE(isNumberValid('1'));
     }
 
-    SECTION("Testing validateNumber Throw invalid number")
+    SECTION("Testing isNumberValid False invalid number")
     {
-        REQUIRE_THROWS(validateLetter('0'));
+        REQUIRE_FALSE(isLetterValid('0'));
     }
 
-    SECTION("Testing validateABAPRO Throw string Too long")
+    SECTION("Testing isAbaproValid False string Too long")
     {
-        REQUIRE_THROWS(validateABAPRO("A1B1BAEAZESZAZE"));
+        REQUIRE_FALSE(isAbaproValid("A1B1BAEAZESZAZE"));
     }
 
-    SECTION("Testing validateABAPRO 4 Char No Throw")
+    SECTION("Testing isAbaproValid 4 Char True")
     {
-        REQUIRE_NOTHROW(validateABAPRO("A1B1"));
+        REQUIRE(isAbaproValid("A1B1"));
     }
 
-    SECTION("Testing validateABAPRO 4 Char Throw")
+    SECTION("Testing isAbaproValid 4 Char False")
     {
-        REQUIRE_THROWS(validateABAPRO("AXB1"));
+        REQUIRE_FALSE(isAbaproValid("AXB1"));
     }
 
-    SECTION("Testing validateABAPRO 6 Char No Throw")
+    SECTION("Testing isAbaproValid 6 Char True")
     {
-        REQUIRE_NOTHROW(validateABAPRO("A1B1C1"));
+        REQUIRE(isAbaproValid("A1B1C1"));
     }
 
-    SECTION("Testing validateABAPRO 6 Char Throw")
+    SECTION("Testing isAbaproValid 6 Char False")
     {
-        REQUIRE_THROWS(validateABAPRO("AXB1CX"));
+        REQUIRE_FALSE(isAbaproValid("AXB1CX"));
     }
 
     SECTION("Testing getLetterYAxis No Throw")

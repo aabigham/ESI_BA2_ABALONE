@@ -69,6 +69,13 @@ public:
     bool isNextTo(const Position pos) const;
 
     /*!
+     * \brief The string representation of the object.
+     *
+     * \return a string representation of the object.
+     */
+    inline std::string to_string() const;
+
+    /*!
      * \brief Getter of the x value.
      *
      * \return the x value.
@@ -154,7 +161,7 @@ const Direction computeDirection(Position posStart, Position posArrival);
  *
  * \throws std::invalid_argument if the letter is not valid.
  */
-inline void validateLetter(const char letter);
+inline bool isLetterValid(const char letter);
 
 /*!
  * \brief Validates an ABAPRO number.
@@ -163,7 +170,7 @@ inline void validateLetter(const char letter);
  *
  * \throws std::invalid_argument if the number is not valid.
  */
-inline void validateNumber(const char number);
+inline bool isNumberValid(const char number);
 
 /*!
  * \brief Validates an ABAPRO input.
@@ -172,7 +179,7 @@ inline void validateNumber(const char number);
  *
  * \throws std::invalid_argument if the input is not valid.
  */
-inline void validateABAPRO(const std::string abapro);
+inline bool isAbaproValid(const std::string abapro);
 
 /*!
  * \brief Gets the according Y axis to the letter in parameter.
@@ -244,6 +251,16 @@ inline bool operator!=(const Position &lhs, const Position &rhs);
  */
 inline Position operator-(const Position &lhs, const Position &rhs);
 
+/*!
+ * \brief The output stream operator overloading.
+ *
+ * \param os the output stream.
+ * \param position the position to output.
+ *
+ * \return the output stream containing the string representation of the position.
+ */
+inline std::ostream &operator<<(std::ostream &os, const Position &position);
+
 // Inline implementations
 bool operator==(const Position &lhs, const Position &rhs)
 {
@@ -265,51 +282,54 @@ Position operator-(const Position &lhs, const Position &rhs)
     return Position(lhs.getX() - rhs.getX(), lhs.getY() - rhs.getY());
 }
 
-void validateLetter(const char letter) // throws
+std::ostream &operator<<(std::ostream &os, const Position &position)
 {
-    bool valid = false;
+    return os << position.to_string();
+}
+
+bool isLetterValid(const char letter) // throws
+{
     for (const auto &[c, i] : Position::letters_y)
-    {
         if (c == letter)
-        {
-            valid = true;
-            break;
-        }
-    }
-    if (!valid)
-        throw std::invalid_argument("Invalid ABAPRO, wrong letter input.");
+            return true;
+    return false;
 }
 
-void validateNumber(const char number) // throws
+bool isNumberValid(const char number) // throws
 {
-    bool valid = false;
     for (const auto &[c, i] : Position::numbers_z)
-    {
         if (c == number)
-        {
-            valid = true;
-            break;
-        }
-    }
-    if (!valid)
-        throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
+            return true;
+    return false;
 }
 
-void validateABAPRO(const std::string abapro) // throws
+bool isAbaproValid(const std::string abapro) // throws
 {
     int size = abapro.size();
     if (size != 4 && size != 6)
-        throw std::invalid_argument("Invalid ABAPRO, must be 4 or 6 characters long.");
+        return false;
 
     // Validation of the abapro input. Example : A1B2 or A1B2C3
     for (int i = 0; i < size; ++i)
     {
         char currChar = abapro.at(i);
         if (i % 2 == 0) // The char is a letter
-            validateLetter(currChar);
+        {
+            if (!isLetterValid(currChar))
+                return false;
+        }
         else if (i % 2 != 0) // The char is a number
-            validateNumber(currChar);
+        {
+            if (!isNumberValid(currChar))
+                return false;
+        }
     }
+    return true;
+}
+
+std::string Position::to_string() const
+{
+    return "{" + std::to_string(x_) + "," + std::to_string(y_) + "," + std::to_string(z_) + "}";
 }
 
 int Position::getX() const
@@ -335,7 +355,7 @@ namespace std
     template <>
     struct hash<Position>
     {
-    /*!
+        /*!
      * \brief The operator() overload to hash a position.
      *
      * \param p the position to hash.
