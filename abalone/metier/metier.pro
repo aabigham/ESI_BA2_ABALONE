@@ -7,6 +7,7 @@ DESTDIR = ../lib
 SOURCES += \
     Board.cpp \
     Cell.cpp \
+    Game.cpp \
     Position.cpp
 
 HEADERS += \

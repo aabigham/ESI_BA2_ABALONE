@@ -9,6 +9,7 @@ SOURCES += \
     BoardTest.cpp \
     CellTest.cpp \
     DirectionsTest.cpp \
+    GameTest.cpp \
     PositionTest.cpp \
     main.cpp
 

@@ -12,7 +12,15 @@ Board::Board()
         int row2 = std::min(4, -x + 4);
         for (int y = row1; y <= row2; ++y)
         {
-            cells_.insert(std::make_pair(Position(x, y),Cell(Position(x,y))));
+            Position position=Position(x, y);
+            if(y==4||y==3||(y==2&&x==0)||(y==2&&x==-1)||(y==2&&x==-2)){
+                 cells_.insert(std::make_pair(position,Cell(position,Color::BLACK)));
+            }else if(y==-4||y==-3||(y==-2&&x==0)||(y==2&&x==1)||(y==2&&x==2)){
+                cells_.insert(std::make_pair(position,Cell(position,Color::WHITE)));
+            }else{
+                  cells_.insert(std::make_pair(position,Cell(position)));
+            }
+
         }
     }
 }
@@ -24,12 +32,9 @@ bool Board::isInside(Position pos)
             && pos.getZ() >= -4 && pos.getZ() <= 4;
 }
 
-Color Board::colorAt(Position pos)
+std::optional<Color> Board::colorAt(Position pos)
 {
-    auto color = cells_.at(pos).getColor();
-
-    return color.has_value()? color.value()
-                            : throw std::invalid_argument("There is no marble on the cell.");//
+    return cells_.at(pos).getColor();
 }
 /*
 bool Board::canMove(Position posStart, Position posArrival){

@@ -23,14 +23,38 @@ TEST_CASE("Testing methods of the Board class")
         Position p1(1,0);
         Board board = Board();
         board.getCellAt(p1).setColor(Color::BLACK);
-        Color result = board.colorAt(p1);
-        REQUIRE(result==Color::BLACK);
+        std::optional<Color> result = board.colorAt(p1);
+        REQUIRE(result.value()==Color::BLACK);
     }
 
     SECTION("Test of the getColorAt method with no color")
     {
         Position p1(1,0);
         Board board = Board();
-        REQUIRE_THROWS(board.colorAt(p1));
+        REQUIRE(board.colorAt(p1)==std::nullopt);
     }
+
+    SECTION("Test of the right color initialisation in the Constructor of board ")
+    {
+        Board board = Board();
+        bool colorAtRightPlace=true;
+        for (auto cell : board.getCells()) {
+
+
+            Position position =cell.first;
+            int y=position.getY();
+            int x=position.getX();
+
+            if(y==4||y==3||(y==2&&x==0)||(y==2&&x==-1)||(y==2&&x==-2)){
+                colorAtRightPlace=(board.colorAt(position).value()==Color::BLACK);
+            }else if(y==-4||y==-3||(y==-2&&x==0)||(y==2&&x==1)||(y==2&&x==2)){
+                colorAtRightPlace=(board.colorAt(position).value()==Color::WHITE);
+            }else{
+                colorAtRightPlace=(!board.colorAt(position).has_value());
+            }
+        }
+        REQUIRE(colorAtRightPlace);
+    }
+
 }
+

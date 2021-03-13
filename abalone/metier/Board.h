@@ -7,8 +7,6 @@
 #include "Color.h"
 #include "Directions.h"
 #include "Cell.h"
-//Il nous faut une méthode pr set la couleur des billes au début (initialise?)
-// getColorAt devrait pas retourner un StdOptional?
 //canMove et move encore a faire
 /*!
  * \brief The Board class
@@ -68,7 +66,7 @@ public:
     * \param pos the position at which we want to find its color
     * \return the color located at the position in parameter.
     */
-    Color colorAt(Position pos);//done
+    std::optional<Color> colorAt(Position pos);//done
 
     /*!
     * \brief Checks if a position is inside the board.

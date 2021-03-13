@@ -29,7 +29,7 @@ public:
      *
      * \return true if the game is over, false otherwise.
      */
-    bool isGameOver();
+    bool isGameOver();//done
 
     /*!
      * \brief This method plays a round of abalone.
@@ -48,21 +48,21 @@ public:
      *
      * \return the board of the game.
      */
-    inline Board getBoard() const;
+    inline Board& getBoard() ;//done
 
     /*!
      * \brief Getter of the current Player.
      *
      * \return the current player, as a Color.
      */
-    inline Color getCurrentPlayer() const;
+    inline Color getCurrentPlayer() const;//done
 
     /*!
      * \brief Setter of the game board.
      *
      * \param color the color of the future current player.
      */
-    inline void setCurrentPlayer(Color color);
+    inline void setCurrentPlayer(Color color);//done
 
 private:
 
@@ -79,4 +79,18 @@ private:
     Color currentPlayer_;
 };
 
+Board& Game::getBoard()
+{
+    return board_;
+}
+
+Color Game::getCurrentPlayer() const
+{
+    return currentPlayer_;
+}
+
+void Game::setCurrentPlayer(Color color)
+{
+    currentPlayer_=color;
+}
 #endif //_GAME_H
