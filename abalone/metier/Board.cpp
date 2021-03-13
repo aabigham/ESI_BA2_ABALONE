@@ -12,15 +12,19 @@ Board::Board()
         int row2 = std::min(4, -x + 4);
         for (int y = row1; y <= row2; ++y)
         {
-            Position position=Position(x, y);
-            if(y==4||y==3||(y==2&&x==0)||(y==2&&x==-1)||(y==2&&x==-2)){
-                 cells_.insert(std::make_pair(position,Cell(position,Color::BLACK)));
-            }else if(y==-4||y==-3||(y==-2&&x==0)||(y==2&&x==1)||(y==2&&x==2)){
-                cells_.insert(std::make_pair(position,Cell(position,Color::WHITE)));
-            }else{
-                  cells_.insert(std::make_pair(position,Cell(position)));
+            Position position = Position(x, y);
+            if(y == 4 || y == 3 || (y == 2 && x == -2) || (y == 2 && x == -1) || (y == 2 && x == 0))
+            {
+                 cells_.insert(std::make_pair(position, Cell(position,Color::BLACK)));
             }
-
+            else if(y == -4 || y == -3 || (y == -2 && x == 0)|| (y == -2 && x == 1) || ( y == -2 && x == 2))
+            {
+                cells_.insert(std::make_pair(position, Cell(position,Color::WHITE)));
+            }
+            else
+            {
+                  cells_.insert(std::make_pair(position, Cell(position)));
+            }
         }
     }
 }
