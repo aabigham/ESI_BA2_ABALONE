@@ -11,7 +11,8 @@ using Direction = std::pair<int, int>;
  *
  * It allows us to define a guidance for the marbles that will be moving.
  */
-class Directions {
+class Directions
+{
 public:
     /*!
     * \brief The UP_RIGHT direction.
@@ -42,7 +43,6 @@ public:
     * \brief The DOWN_RIGHT direction.
     */
     constexpr static const Direction DOWN_RIGHT{1, -1};
-
 };
 
 /*!
@@ -53,7 +53,7 @@ public:
  *
  * \return the output stream containing the string representation of the direction.
  */
-inline std::ostream& operator<<(std::ostream& os, const Direction& dir);
+inline std::ostream &operator<<(std::ostream &os, const Direction &dir);
 
 /*!
  * \brief Comparison of equality between two direction.
@@ -76,12 +76,14 @@ inline bool operator==(const Direction &lhs, const Direction &rhs);
  */
 inline Direction getDirection(const int x, const int y);
 
-std::ostream& operator<<(std::ostream& os, const Direction& dir)
+std::ostream &operator<<(std::ostream &os, const Direction &dir)
 {
     std::string ret;
-    switch (dir.first) {
+    switch (dir.first)
+    {
     case 0:
-        switch (dir.second) {
+        switch (dir.second)
+        {
         case 1:
             ret = "UP_RIGHT";
             break;
@@ -91,7 +93,8 @@ std::ostream& operator<<(std::ostream& os, const Direction& dir)
         }
         break;
     case 1:
-        switch (dir.second) {
+        switch (dir.second)
+        {
         case 0:
             ret = "RIGHT";
             break;
@@ -101,7 +104,8 @@ std::ostream& operator<<(std::ostream& os, const Direction& dir)
         }
         break;
     case -1:
-        switch (dir.second) {
+        switch (dir.second)
+        {
         case 0:
             ret = "LEFT";
             break;
@@ -124,29 +128,33 @@ bool operator==(const Direction &lhs, const Direction &rhs)
 Direction getDirection(const int x, const int y)
 {
     Direction ret;
-    switch (x) {
+    switch (x)
+    {
     case 0:
-        switch (y) {
+        switch (y)
+        {
         case 1:
-            ret =  Directions::UP_RIGHT;
+            ret = Directions::UP_RIGHT;
             break;
         case -1:
-            ret =  Directions::DOWN_LEFT;
+            ret = Directions::DOWN_LEFT;
             break;
         }
         break;
     case 1:
-        switch (y) {
+        switch (y)
+        {
         case 0:
-            ret =  Directions::RIGHT;
+            ret = Directions::RIGHT;
             break;
         case -1:
-            ret =  Directions::DOWN_RIGHT;
+            ret = Directions::DOWN_RIGHT;
             break;
         }
         break;
     case -1:
-        switch (y) {
+        switch (y)
+        {
         case 0:
             ret = Directions::LEFT;
             break;

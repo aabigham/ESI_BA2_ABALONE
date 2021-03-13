@@ -11,9 +11,9 @@
 *
 * The ConsoleView class displays the game in the console version.
 */
-class ConsoleView: public View {
-public: 
-
+class ConsoleView : public View
+{
+public:
     /*!
     * \brief Constructor of the ConsoleView class.
     */

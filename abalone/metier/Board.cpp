@@ -2,9 +2,9 @@
 #include <algorithm>
 
 Board::Board()
-    : cells_ {  },
-      whiteMarblesLost_{ 0 },
-      blackMarblesLost_{ 0 }
+    : cells_{},
+      whiteMarblesLost_{0},
+      blackMarblesLost_{0}
 {
     for (int x = -4; x <= 4; ++x)
     {
@@ -13,17 +13,17 @@ Board::Board()
         for (int y = row1; y <= row2; ++y)
         {
             Position position = Position(x, y);
-            if(y == 4 || y == 3 || (y == 2 && x == -2) || (y == 2 && x == -1) || (y == 2 && x == 0))
+            if (y == 4 || y == 3 || (y == 2 && x == -2) || (y == 2 && x == -1) || (y == 2 && x == 0))
             {
-                 cells_.insert(std::make_pair(position, Cell(position,Color::BLACK)));
+                cells_.insert(std::make_pair(position, Cell(position, Color::BLACK)));
             }
-            else if(y == -4 || y == -3 || (y == -2 && x == 0)|| (y == -2 && x == 1) || ( y == -2 && x == 2))
+            else if (y == -4 || y == -3 || (y == -2 && x == 0) || (y == -2 && x == 1) || (y == -2 && x == 2))
             {
-                cells_.insert(std::make_pair(position, Cell(position,Color::WHITE)));
+                cells_.insert(std::make_pair(position, Cell(position, Color::WHITE)));
             }
             else
             {
-                  cells_.insert(std::make_pair(position, Cell(position)));
+                cells_.insert(std::make_pair(position, Cell(position)));
             }
         }
     }
@@ -31,9 +31,7 @@ Board::Board()
 
 bool Board::isInside(Position pos)
 {
-    return pos.getX() >= -4 && pos.getX() <= 4
-            && pos.getY() >= -4 && pos.getY() <= 4
-            && pos.getZ() >= -4 && pos.getZ() <= 4;
+    return pos.getX() >= -4 && pos.getX() <= 4 && pos.getY() >= -4 && pos.getY() <= 4 && pos.getZ() >= -4 && pos.getZ() <= 4;
 }
 
 std::optional<Color> Board::colorAt(Position pos)
@@ -87,18 +85,3 @@ void Board::move(Position posStart, Position posArrival)
 
 }
 */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

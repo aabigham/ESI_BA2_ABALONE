@@ -10,7 +10,10 @@
  *
  * This enumeration allows us to define a marble, or a player.
  */
-enum class Color { WHITE, BLACK };
+enum class Color
+{
+    WHITE,
+    BLACK
+};
 
 #endif //_COLOR_H
-

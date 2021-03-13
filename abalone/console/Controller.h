@@ -28,7 +28,6 @@ public:
     void startGame();
 
 private:
-
     /*!
      * \brief The board of the game.
      */

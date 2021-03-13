@@ -6,6 +6,7 @@
 #include "Position.h"
 #include "Color.h"
 #include <stdlib.h>
+
 /*!
  * \brief The Cell class
  *
@@ -14,13 +15,12 @@
 class Cell
 {
 public:
-
     /*!
     * \brief Constructor of the Cell class.
     *
     * \param pos the position of the cell on the board.
     */
-    Cell(Position pos);//done
+    Cell(Position pos); //done
 
     /*!
     * \brief Second constructor of the Cell class.
@@ -28,7 +28,7 @@ public:
     * \param pos the position of the cell on the board.
     * \param marble the color of the marble, NONE if there is no marble on the cell.
     */
-    Cell(Position pos, Color marble);//done
+    Cell(Position pos, Color marble); //done
 
     /*!
     * \brief Checks if a cell is adjacent to the current cell.
@@ -37,21 +37,21 @@ public:
     *
     * \return true if the cell is adjacent to the current cell, false otherwise.
     */
-    bool isAdjacentTo(Cell &cell);//done
+    bool isAdjacentTo(Cell &cell); //done
 
     /*!
     * \brief Getter of the color of the cell.
     *
     * \return the color of the cell.
     */
-    inline std::optional<Color> getColor() const;//done
+    inline std::optional<Color> getColor() const; //done
 
     /*!
     * \brief Setter of the cell class.
     *
     * \param the color that will be attributed to the cell.
     */
-    inline void setColor(Color color);//done
+    inline void setColor(Color color); //done
     /*!
      * \brief setColor sets the color value at std::nullopt
      */
@@ -61,7 +61,7 @@ public:
     *
     * \return the position of the current cell.
     */
-    inline Position getPosition() const;//done
+    inline Position getPosition() const; //done
 
     /*!
      * \brief The string representation of the object.
@@ -71,7 +71,6 @@ public:
     inline std::string to_string() const;
 
 private:
-
     /*!
      * \brief The position of the cell.
      */
@@ -93,7 +92,7 @@ private:
  *
  * \return the output stream containing the string representation of the cell.
  */
-inline std::ostream& operator<<(std::ostream& os, const Cell& cell);
+inline std::ostream &operator<<(std::ostream &os, const Cell &cell);
 
 /*!
  * \brief hasSameColor Checks if two cells have the same color.
@@ -101,13 +100,14 @@ inline std::ostream& operator<<(std::ostream& os, const Cell& cell);
  * \param cell2 the second cell to compare
  * \return true if the cells have the same color, false otherwise.
  */
-inline bool hasSameColor(Cell cell1,Cell cell2);
+inline bool hasSameColor(Cell cell1, Cell cell2);
 
-inline bool hasSameColor(Cell cell1,Cell cell2){
-    return cell1.getColor()==cell2.getColor();
+inline bool hasSameColor(Cell cell1, Cell cell2)
+{
+    return cell1.getColor() == cell2.getColor();
 }
 
-std::ostream& operator<<(std::ostream& os, const Cell& cell)
+std::ostream &operator<<(std::ostream &os, const Cell &cell)
 {
     return os << cell.to_string();
 }
@@ -115,7 +115,7 @@ std::ostream& operator<<(std::ostream& os, const Cell& cell)
 // Inline methods
 std::optional<Color> Cell::getColor() const
 {
-    if(marble_.has_value())
+    if (marble_.has_value())
         return marble_.value();
 
     return std::nullopt;
@@ -133,18 +133,17 @@ void Cell::setColor()
     this->marble_.reset();
 }
 
-
 Position Cell::getPosition() const
 {
     return position_;
 }
 
-std::string Cell::to_string()const
+std::string Cell::to_string() const
 {
     std::string str;
     str.append(" ___ ");
     str.append("\n/ ");
-    if(marble_.has_value())
+    if (marble_.has_value())
     {
         Color color = marble_.value();
         str.append(color == Color::WHITE ? "W" : "B");

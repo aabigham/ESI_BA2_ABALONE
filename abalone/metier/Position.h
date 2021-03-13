@@ -14,8 +14,9 @@ using Direction = std::pair<int, int>;
  *
  * This class allows any cell to have a position and be located somewhere on the board.
  */
-class Position {
-public: 
+class Position
+{
+public:
     /*!
      * \brief Constructor of the Position class with 2 parameters.
      * The class has three position but only the x an y axis are required,
@@ -46,7 +47,7 @@ public:
      *
      * \param pos the position that will provide the values.
      */
-    Position(const Position& pos);
+    Position(const Position &pos);
 
     /*!
      * \brief Gets the next position given a direction.
@@ -92,32 +93,31 @@ public:
     * \brief The ABAPRO letters and their corresponding Y Axis value.
     */
     constexpr static std::array<std::pair<char, int>, 9>
-    letters_y {std::make_pair('A', -4),
-                std::make_pair('B', -3),
-                std::make_pair('C', -2),
-                std::make_pair('D', -1),
-                std::make_pair('E', 0),
-                std::make_pair('F', 1),
-                std::make_pair('G', 2),
-                std::make_pair('H', 3),
-                std::make_pair('I', 4)};
+        letters_y{std::make_pair('A', -4),
+                  std::make_pair('B', -3),
+                  std::make_pair('C', -2),
+                  std::make_pair('D', -1),
+                  std::make_pair('E', 0),
+                  std::make_pair('F', 1),
+                  std::make_pair('G', 2),
+                  std::make_pair('H', 3),
+                  std::make_pair('I', 4)};
 
     /*!
     * \brief The ABAPRO numbers and their corresponding Z Axis value.
     */
     constexpr static std::array<std::pair<char, int>, 9>
-    numbers_z {std::make_pair('1', 4),
-                std::make_pair('2', 3),
-                std::make_pair('3', 2),
-                std::make_pair('4', 1),
-                std::make_pair('5', 0),
-                std::make_pair('6', -1),
-                std::make_pair('7', -2),
-                std::make_pair('8', -3),
-                std::make_pair('9', -4)};
+        numbers_z{std::make_pair('1', 4),
+                  std::make_pair('2', 3),
+                  std::make_pair('3', 2),
+                  std::make_pair('4', 1),
+                  std::make_pair('5', 0),
+                  std::make_pair('6', -1),
+                  std::make_pair('7', -2),
+                  std::make_pair('8', -3),
+                  std::make_pair('9', -4)};
 
 private:
-
     /*!
     * \brief The value of the x axis.
     */
@@ -247,9 +247,7 @@ inline Position operator-(const Position &lhs, const Position &rhs);
 // Inline implementations
 bool operator==(const Position &lhs, const Position &rhs)
 {
-    return lhs.getX() == rhs.getX()
-            && lhs.getY() == rhs.getY()
-            && lhs.getZ() == rhs.getZ();
+    return lhs.getX() == rhs.getX() && lhs.getY() == rhs.getY() && lhs.getZ() == rhs.getZ();
 }
 
 bool operator!=(const Position &lhs, const Position &rhs)
@@ -270,46 +268,46 @@ Position operator-(const Position &lhs, const Position &rhs)
 void validateLetter(const char letter) // throws
 {
     bool valid = false;
-    for (const auto& [c, i] : Position::letters_y)
+    for (const auto &[c, i] : Position::letters_y)
     {
-        if(c == letter)
+        if (c == letter)
         {
             valid = true;
             break;
         }
     }
-    if(!valid)
+    if (!valid)
         throw std::invalid_argument("Invalid ABAPRO, wrong letter input.");
 }
 
 void validateNumber(const char number) // throws
 {
     bool valid = false;
-    for (const auto& [c, i] : Position::numbers_z)
+    for (const auto &[c, i] : Position::numbers_z)
     {
-        if(c == number)
+        if (c == number)
         {
             valid = true;
             break;
         }
     }
-    if(!valid)
+    if (!valid)
         throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
 }
 
 void validateABAPRO(const std::string abapro) // throws
 {
     int size = abapro.size();
-    if(size != 4 && size != 6)
+    if (size != 4 && size != 6)
         throw std::invalid_argument("Invalid ABAPRO, must be 4 or 6 characters long.");
 
     // Validation of the abapro input. Example : A1B2 or A1B2C3
-    for(int i = 0; i < size; ++i)
+    for (int i = 0; i < size; ++i)
     {
         char currChar = abapro.at(i);
-        if(i % 2 == 0) // The char is a letter
+        if (i % 2 == 0) // The char is a letter
             validateLetter(currChar);
-        else if(i % 2 != 0) // The char is a number
+        else if (i % 2 != 0) // The char is a number
             validateNumber(currChar);
     }
 }
@@ -329,12 +327,14 @@ int Position::getZ() const
     return z_;
 }
 
-
 /*!
  * Hash function of the unordered map of Cells.
  */
-namespace std {
-template <> struct hash<Position> {
+namespace std
+{
+    template <>
+    struct hash<Position>
+    {
     /*!
      * \brief The operator() overload to hash a position.
      *
@@ -342,13 +342,14 @@ template <> struct hash<Position> {
      *
      * \return the hash value of the position in parameter.
      */
-    size_t operator()(const Position& p) const {
-        hash<int> int_hash;
-        size_t px = int_hash(p.getX());
-        size_t py = int_hash(p.getY());
-        return px ^ (py + 0x9e3779b9 + (px << 6) + (px >> 2));
-    }
-};
+        size_t operator()(const Position &p) const
+        {
+            hash<int> int_hash;
+            size_t px = int_hash(p.getX());
+            size_t py = int_hash(p.getY());
+            return px ^ (py + 0x9e3779b9 + (px << 6) + (px >> 2));
+        }
+    };
 }
 
 #endif //_POSITION_H

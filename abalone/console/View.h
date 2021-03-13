@@ -8,9 +8,9 @@
  *
  * The View class is being implemented by the GuiView and the ConsoleView.
  */
-class View {
+class View
+{
 public:
-
     /*!
     * \brief Constructor of the View class.
     */

@@ -88,13 +88,13 @@ TEST_CASE("Testing methods the Position class")
 
     SECTION("Testing getNext Sucess")
     {
-        Position mid(0,0);
-        Position up_left(-1,1);
-        Position up_right(0,1);
-        Position left(-1,0);
-        Position right(1,0);
-        Position down_left(0,-1);
-        Position down_right(1,-1);
+        Position mid(0, 0);
+        Position up_left(-1, 1);
+        Position up_right(0, 1);
+        Position left(-1, 0);
+        Position right(1, 0);
+        Position down_left(0, -1);
+        Position down_right(1, -1);
         bool up_left_b = (up_left == mid.getNext(Directions::UP_LEFT));
         bool up_right_b = (up_right == mid.getNext(Directions::UP_RIGHT));
         bool left_b = (left == mid.getNext(Directions::LEFT));
@@ -106,13 +106,13 @@ TEST_CASE("Testing methods the Position class")
 
     SECTION("Testing isNextTo Success")
     {
-        Position mid(0,0);
-        Position up_left(-1,1);
-        Position up_right(0,1);
-        Position left(-1,0);
-        Position right(1,0);
-        Position down_left(0,-1);
-        Position down_right(1,-1);
+        Position mid(0, 0);
+        Position up_left(-1, 1);
+        Position up_right(0, 1);
+        Position left(-1, 0);
+        Position right(1, 0);
+        Position down_left(0, -1);
+        Position down_right(1, -1);
         bool up_left_b = mid.isNextTo(up_left);
         bool up_right_b = mid.isNextTo(up_right);
         bool left_b = mid.isNextTo(left);
@@ -124,13 +124,13 @@ TEST_CASE("Testing methods the Position class")
 
     SECTION("Testing ComputeDirection No Throw")
     {
-        Position mid(0,0);
-        Position up_left(-1,1);
-        Position up_right(0,1);
-        Position left(-1,0);
-        Position right(1,0);
-        Position down_left(0,-1);
-        Position down_right(1,-1);
+        Position mid(0, 0);
+        Position up_left(-1, 1);
+        Position up_right(0, 1);
+        Position left(-1, 0);
+        Position right(1, 0);
+        Position down_left(0, -1);
+        Position down_right(1, -1);
         bool up_left_b = (Directions::UP_LEFT == computeDirection(mid, up_left));
         bool up_right_b = (Directions::UP_RIGHT == computeDirection(mid, up_right));
         bool left_b = (Directions::LEFT == computeDirection(mid, left));
@@ -142,15 +142,15 @@ TEST_CASE("Testing methods the Position class")
 
     SECTION("Testing ComputeDirection Throw Same Positions")
     {
-        Position mid(0,0);
-        Position mid2(0,0);
+        Position mid(0, 0);
+        Position mid2(0, 0);
         REQUIRE_THROWS(computeDirection(mid, mid2));
     }
 
     SECTION("Testing ComputeDirection Throw Not Adjacent")
     {
-        Position mid(0,0);
-        Position other(-2,0);
+        Position mid(0, 0);
+        Position other(-2, 0);
         REQUIRE_THROWS(computeDirection(mid, other));
     }
 }

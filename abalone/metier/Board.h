@@ -7,7 +7,7 @@
 #include "Color.h"
 #include "Directions.h"
 #include "Cell.h"
-//canMove et move encore a faire
+
 /*!
  * \brief The Board class
  *
@@ -16,7 +16,6 @@
 class Board
 {
 public:
-
     /*!
     * \brief Constructor of Board.
     */
@@ -66,7 +65,7 @@ public:
     * \param pos the position at which we want to find its color
     * \return the color located at the position in parameter.
     */
-    std::optional<Color> colorAt(Position pos);//done
+    std::optional<Color> colorAt(Position pos); //done
 
     /*!
     * \brief Checks if a position is inside the board.
@@ -74,14 +73,14 @@ public:
     *
     * \return true if the position is inside, false otherwise.
     */
-    bool isInside(Position pos);//Done
+    bool isInside(Position pos); //Done
 
     /*!
     * \brief Getter of the cells of the board.
     *
     * \return the cells of the board.
     */
-    inline std::unordered_map<Position, Cell> getCells() const;//done
+    inline std::unordered_map<Position, Cell> getCells() const; //done
 
     /*!
      * \brief Gets the cell at the position in parameter.
@@ -90,14 +89,14 @@ public:
      *
      * \return the cell at the given position.
      */
-    inline Cell &getCellAt(Position pos);//done
+    inline Cell &getCellAt(Position pos); //done
 
     /*!
     * \brief Getter of the lost white marbles.
     *
     * \return the number of lost white marble.
     */
-    inline int getWhiteMarblesLost() const;//done
+    inline int getWhiteMarblesLost() const; //done
 
     /*!
     * \brief Getter of the lost black marbles.
@@ -117,7 +116,6 @@ public:
     inline void addBlackMarbleLost(); //done
 
 private:
-
     /*!
     * \brief The cells located on the board.
     */
@@ -141,7 +139,7 @@ std::unordered_map<Position, Cell> Board::getCells() const
     return cells_;
 }
 
-Cell & Board::getCellAt( const Position pos)
+Cell &Board::getCellAt(const Position pos)
 {
     return cells_.at(pos);
 }

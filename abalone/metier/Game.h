@@ -11,9 +11,9 @@
  * facade to the view. The view only interacts with this class to access the
  * model
  */
-class Game {
-public: 
-    
+class Game
+{
+public:
     /*!
      * \brief Constructor of Game.
      */
@@ -29,7 +29,7 @@ public:
      *
      * \return true if the game is over, false otherwise.
      */
-    bool isGameOver();//done
+    bool isGameOver(); //done
 
     /*!
      * \brief This method plays a round of abalone.
@@ -48,24 +48,23 @@ public:
      *
      * \return the board of the game.
      */
-    inline Board& getBoard() ;//done
+    inline Board &getBoard(); //done
 
     /*!
      * \brief Getter of the current Player.
      *
      * \return the current player, as a Color.
      */
-    inline Color getCurrentPlayer() const;//done
+    inline Color getCurrentPlayer() const; //done
 
     /*!
      * \brief Setter of the game board.
      *
      * \param color the color of the future current player.
      */
-    inline void setCurrentPlayer(Color color);//done
+    inline void setCurrentPlayer(Color color); //done
 
 private:
-
     /*!
      * \brief The board of the game.
      */
@@ -79,7 +78,7 @@ private:
     Color currentPlayer_;
 };
 
-Board& Game::getBoard()
+Board &Game::getBoard()
 {
     return board_;
 }
@@ -91,6 +90,6 @@ Color Game::getCurrentPlayer() const
 
 void Game::setCurrentPlayer(Color color)
 {
-    currentPlayer_=color;
+    currentPlayer_ = color;
 }
 #endif //_GAME_H
