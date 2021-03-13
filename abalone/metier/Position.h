@@ -3,6 +3,8 @@
 
 #include <string>
 #include <algorithm>
+#include <utility>
+#include <vector>
 #include "Directions.h"
 
 using Direction = std::pair<int, int>;
@@ -87,14 +89,32 @@ public:
     inline int getZ() const;
 
     /*!
-    * \brief The ABAPRO letters.
+    * \brief The ABAPRO letters and their corresponding Y Axis value.
     */
-    constexpr static char letters_ [9]{'A','B','C','D','E','F','G','H','I'};
+    constexpr static std::array<std::pair<char, int>, 9>
+    letters_y {std::make_pair('A', -4),
+                std::make_pair('B', -3),
+                std::make_pair('C', -2),
+                std::make_pair('D', -1),
+                std::make_pair('E', 0),
+                std::make_pair('F', 1),
+                std::make_pair('G', 2),
+                std::make_pair('H', 3),
+                std::make_pair('I', 4)};
 
     /*!
-    * \brief The ABAPRO numbers.
+    * \brief The ABAPRO numbers and their corresponding Z Axis value.
     */
-    constexpr static char numbers_ [9]{'1','2','3','4','5','6','7','8','9'};
+    constexpr static std::array<std::pair<char, int>, 9>
+    numbers_z {std::make_pair('1', 4),
+                std::make_pair('2', 3),
+                std::make_pair('3', 2),
+                std::make_pair('4', 1),
+                std::make_pair('5', 0),
+                std::make_pair('6', -1),
+                std::make_pair('7', -2),
+                std::make_pair('8', -3),
+                std::make_pair('9', -4)};
 
 private:
 
@@ -113,6 +133,19 @@ private:
     */
     const int z_;
 };
+
+/*!
+* \brief Compute the direction in which the marbles will be moving
+*
+* This method takes a start position and a future positon in arguments,
+* and computes the direction according to the those two arguments.
+*
+* \param posStart the start position.
+* \param posArrival the future position.
+*
+* \return the calculated direction.
+*/
+const Direction computeDirection(Position posStart, Position posArrival);
 
 /*!
  * \brief Validates an ABAPRO letter.
@@ -142,27 +175,31 @@ inline void validateNumber(const char number);
 inline void validateABAPRO(const std::string abapro);
 
 /*!
-* \brief Compute the direction in which the marbles will be moving
-*
-* This method takes a start position and a future positon in arguments,
-* and computes the direction according to the those two arguments.
-*
-* \param posStart the start position.
-* \param posArrival the future position.
-*
-* \return the calculated direction.
-*/
-const Direction computeDirection(Position posStart, Position posArrival);
+ * \brief Gets the according Y axis to the letter in parameter.
+ * Useful to convert an abapro character chain into a position.
+ *
+ * \param letter the letter we want the axis from.
+ */
+int getLetterYAxis(char letter);
 
 /*!
- * \brief Converts a string to a position.
+ * \brief Gets the according Z axis to the number in parameter.
+ * Useful to convert an abapro character chain into a position.
  *
- * This method takes an ABA-PRO notation and converts it to a Position object.
- *
- * \param abapro the ABA-PRO notation as a String object.
- * \return the according position.
+ * \param number the number we want the axis from.
  */
-Position abaproToPosition(const std::string abapro);
+int getNumberZAxis(int number);
+
+/*!
+ * \brief Converts an abapro string into a vector of positions.
+ *
+ * This method takes an ABA-PRO notation and converts it to vector of positions objects.
+ *
+ * \param abapro the ABA-PRO notation as a vector of positions.
+ *
+ * \return the newly created vector of positions.
+ */
+std::vector<Position> abaproToPosition(const std::string abapro);
 
 // Operator functions
 /*!
@@ -232,16 +269,32 @@ Position operator-(const Position &lhs, const Position &rhs)
 
 void validateLetter(const char letter) // throws
 {
-    bool valid = std::find(std::begin(Position::letters_), std::end(Position::letters_), letter)!= std::end(Position::letters_);
+    bool valid = false;
+    for (const auto& [c, i] : Position::letters_y)
+    {
+        if(c == letter)
+        {
+            valid = true;
+            break;
+        }
+    }
     if(!valid)
-         throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
+        throw std::invalid_argument("Invalid ABAPRO, wrong letter input.");
 }
 
 void validateNumber(const char number) // throws
 {
-    bool valid = std::find(std::begin(Position::numbers_), std::end(Position::numbers_), number)!= std::end(Position::numbers_);
+    bool valid = false;
+    for (const auto& [c, i] : Position::numbers_z)
+    {
+        if(c == number)
+        {
+            valid = true;
+            break;
+        }
+    }
     if(!valid)
-         throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
+        throw std::invalid_argument("Invalid ABAPRO, wrong number input.");
 }
 
 void validateABAPRO(const std::string abapro) // throws
@@ -250,14 +303,14 @@ void validateABAPRO(const std::string abapro) // throws
     if(size != 4 && size != 6)
         throw std::invalid_argument("Invalid ABAPRO, must be 4 or 6 characters long.");
 
-    // Validation of the abapro input Example : A1B2 or A1B2C3
+    // Validation of the abapro input. Example : A1B2 or A1B2C3
     for(int i = 0; i < size; ++i)
     {
-        char c = abapro.at(i);
+        char currChar = abapro.at(i);
         if(i % 2 == 0) // The char is a letter
-            validateLetter(c);
+            validateLetter(currChar);
         else if(i % 2 != 0) // The char is a number
-            validateNumber(c);
+            validateNumber(currChar);
     }
 }
 
