@@ -29,42 +29,47 @@ Board::Board()
     }
 }
 
-bool Board::isInside(Position pos)
+bool Board::isInside(Position pos) const
 {
     return pos.getX() >= -4 && pos.getX() <= 4 && pos.getY() >= -4 && pos.getY() <= 4 && pos.getZ() >= -4 && pos.getZ() <= 4;
 }
 
-std::optional<Color> Board::colorAt(Position pos)
+std::optional<Color> Board::colorAt(Position pos) const
 {
     return cells_.at(pos).getColor();
 }
-/*
-bool Board::canMove(Position posStart, Position posArrival){
 
-    if((isInside(posStart)&&isInside(posArrival))&&posStart.isNextTo(posArrival)){//vérifie si les positions sont inside et adjacentes
-        Direction direction =computeDirection(posStart,posArrival);
-        Cell cellToCheck=getCellAt(posArrival.getNext(direction));
-        Cell startCell=getCellAt(posStart);
-        Cell arrivalCell=getCellAt(posArrival);
-        if(hasSameColor(startCell,arrivalCell)){//si les deux cells ont la meme couleurs
-            if(cellToCheck.getColor()==std::nullopt&&isInside(cellToCheck.getPosition())){//si la case vers laquelle on avance est vide et inside,on peut avancer
-                return true;
-            }else if(cellToCheck.getColor()==startCell.getColor()&&
-                     getCellAt(cellToCheck.getPosition().getNext(direction)).getColor()!=startCell.getColor()){//si on retrouve une bille de la meme couleur sur le chemin,et que la bille >3 est différente ou vide
+int Board::countMarbles(Position position, Direction direction,int cpt,Color color) const
+{
+    if(colorAt(position).value()!=color)
+        return cpt;
 
-            }else{
-
-            }
-        }else if(arrivalCell.getColor()==std::nullopt){//si la case 'arrival' est vide, on avance
-            return true;
-        }else{//si on arrive ici, cela veut dire qu'on a un face a face de deux cells opposée. on peut donc pas bouger(1vs1)
-            return false;
-        }
-    }else{
-        return false;
-    }
+    return countMarbles(Position(position.getNext(direction)),direction,cpt+1,color);
 }
 
+bool Board::canMove(Position posStart, Position posArrival)
+{
+    if(!colorAt(posArrival).has_value())
+        return true;
+
+    Color colorStart = colorAt(posStart).value();
+    Direction direction = computeDirection(posStart, posArrival);
+    int nbMarbles = countMarbles(posStart, direction, 1, colorStart);
+
+    if(nbMarbles > 3)
+        return false;
+
+    Color opposite = colorStart == Color::BLACK ? Color::WHITE : Color::BLACK;
+    Position from(nbMarbles == 2 ? posArrival.getNext(direction)
+                                 : posArrival.getNext(direction).getNext(direction));
+
+    if(!colorAt(from).has_value())
+        return true;
+
+    return countMarbles(from, direction, 1, opposite) < nbMarbles;
+}
+
+/*
 bool Board::canMove(Position posStart, Position posEnd, Position posArrival){
     //TO DO
 }

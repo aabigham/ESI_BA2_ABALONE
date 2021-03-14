@@ -65,7 +65,7 @@ public:
     * \param pos the position at which we want to find its color
     * \return the color located at the position in parameter.
     */
-    std::optional<Color> colorAt(Position pos); //done
+    std::optional<Color> colorAt(Position pos) const; //done
 
     /*!
     * \brief Checks if a position is inside the board.
@@ -73,7 +73,7 @@ public:
     *
     * \return true if the position is inside, false otherwise.
     */
-    bool isInside(Position pos); //Done
+    bool isInside(Position pos) const ; //Done
 
     /*!
     * \brief Getter of the cells of the board.
@@ -114,6 +114,18 @@ public:
     * \brief Increments the count of lost black marbles.
     */
     inline void addBlackMarbleLost(); //done
+
+    /*!
+    * \brief countMarbles counts the number of marbles in a given direction, beginning from the given position.
+    *
+    * \param position the position of the first marble.
+    * \param direction the direction in which the counting is heading towards to.
+    * \param cpt the number of the counted marbles.
+    * \param the color that the counted marbles must have.
+    *
+    * \return the number of the counted marbles.
+    */
+    int countMarbles(Position position, Direction direction,int cpt,Color color) const;
 
 private:
     /*!
