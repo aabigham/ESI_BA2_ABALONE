@@ -43,17 +43,11 @@ TEST_CASE("Testing methods of the Board class")
             int y = position.getY();
             int x = position.getX();
             if (y == 4 || y == 3 || (y == 2 && x == -2) || (y == 2 && x == -1) || (y == 2 && x == 0))
-            {
                 colorAtRightPlace = (board.colorAt(position).value() == Color::BLACK);
-            }
             else if (y == -4 || y == -3 || (y == -2 && x == 0) || (y == -2 && x == 1) || (y == -2 && x == 2))
-            {
                 colorAtRightPlace = (board.colorAt(position).value() == Color::WHITE);
-            }
             else
-            {
                 colorAtRightPlace = (!board.colorAt(position).has_value());
-            }
         }
         REQUIRE(colorAtRightPlace);
     }

@@ -14,24 +14,20 @@ Board::Board()
         {
             Position position = Position(x, y);
             if (y == 4 || y == 3 || (y == 2 && x == -2) || (y == 2 && x == -1) || (y == 2 && x == 0))
-            {
                 cells_.insert(std::make_pair(position, Cell(position, Color::BLACK)));
-            }
             else if (y == -4 || y == -3 || (y == -2 && x == 0) || (y == -2 && x == 1) || (y == -2 && x == 2))
-            {
                 cells_.insert(std::make_pair(position, Cell(position, Color::WHITE)));
-            }
             else
-            {
                 cells_.insert(std::make_pair(position, Cell(position)));
-            }
         }
     }
 }
 
 bool Board::isInside(Position pos) const
 {
-    return pos.getX() >= -4 && pos.getX() <= 4 && pos.getY() >= -4 && pos.getY() <= 4 && pos.getZ() >= -4 && pos.getZ() <= 4;
+    return pos.getX() >= -4 && pos.getX() <= 4
+            && pos.getY() >= -4 && pos.getY() <= 4
+            && pos.getZ() >= -4 && pos.getZ() <= 4;
 }
 
 std::optional<Color> Board::colorAt(Position pos) const
@@ -39,12 +35,12 @@ std::optional<Color> Board::colorAt(Position pos) const
     return cells_.at(pos).getColor();
 }
 
-int Board::countMarbles(Position position, Direction direction,int cpt,Color color) const
+int Board::countMarbles(Position position, Direction direction, int cpt, Color color) const
 {
     if(colorAt(position).value()!=color)
         return cpt;
 
-    return countMarbles(Position(position.getNext(direction)),direction,cpt+1,color);
+    return countMarbles(Position(position.getNext(direction)), direction, cpt++, color);
 }
 
 bool Board::canMove(Position posStart, Position posArrival)
