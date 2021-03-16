@@ -44,9 +44,9 @@ public:
     * \param posStart the position of the first marble in row.
     * \param posArrival the arrival position of the first marble in row.
     *
-    * \return true if the marbles are able to move, false otherwise.
+    * \return the number of encountered marbles that indicate where to move our marbles, -1 if the move is not possible.
     */
-    bool canMove(Position posStart, Position posArrival);
+    std::vector<Position>canMove(Position posStart, Position posArrival);
 
     /*!
     * \brief The can move method for side moves.

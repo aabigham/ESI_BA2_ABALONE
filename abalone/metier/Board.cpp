@@ -47,26 +47,48 @@ int Board::countMarbles(Position position, Direction direction,int cpt,Color col
     return countMarbles(Position(position.getNext(direction)),direction,cpt+1,color);
 }
 
-bool Board::canMove(Position posStart, Position posArrival)
+std::vector<Position> Board::canMove(Position posStart, Position posArrival)
 {
-    if(!colorAt(posArrival).has_value())
-        return true;
+    std::vector<Position> positions;
 
-    Color colorStart = colorAt(posStart).value();
+     Color colorStart = colorAt(posStart).value();
+      Color opposite = colorStart == Color::BLACK ? Color::WHITE : Color::BLACK;
+    if(!isInside(posArrival)||isInside(posStart)||)
+    {
+        return positions;
+    }
+    else if(!colorAt(posArrival).has_value())
+    {
+        positions.push_back(posArrival);
+        return positions;
+    }
+
     Direction direction = computeDirection(posStart, posArrival);
     int nbMarbles = countMarbles(posStart, direction, 1, colorStart);
 
     if(nbMarbles > 3)
-        return false;
+        return positions;
 
-    Color opposite = colorStart == Color::BLACK ? Color::WHITE : Color::BLACK;
+
     Position from(nbMarbles == 2 ? posArrival.getNext(direction)
                                  : posArrival.getNext(direction).getNext(direction));
 
-    if(!colorAt(from).has_value())
-        return true;
-
-    return countMarbles(from, direction, 1, opposite) < nbMarbles;
+    if(!colorAt(from).has_value()){
+        positions.push_back(from);
+        return positions;
+    }
+    int oppositeMarbleCounter=countMarbles(from, direction, 1, opposite);
+    if(oppositeMarbleCounter < nbMarbles)
+    {
+        positions.push_back(from);
+        positions.push_back(oppositeMarbleCounter==1?from.getNext(direction)
+                                                   :from.getNext(direction).getNext(direction));
+    }
+    else
+    {
+        return positions;
+    }
+    return positions;
 }
 
 /*
