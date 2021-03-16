@@ -47,9 +47,11 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival)
 {
     std::vector<Position> positions;
 
-     Color colorStart = colorAt(posStart).value();
-      Color opposite = colorStart == Color::BLACK ? Color::WHITE : Color::BLACK;
-    if(!isInside(posArrival)||isInside(posStart)||)
+    Color colorStart = colorAt(posStart).value();
+    Color opposite = colorStart == Color::BLACK ? Color::WHITE : Color::BLACK;
+    Direction direction = computeDirection(posStart, posArrival);
+
+    if(!isInside(posArrival) || !isInside(posStart) || colorAt(posArrival) == opposite)
     {
         return positions;
     }
@@ -59,31 +61,28 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival)
         return positions;
     }
 
-    Direction direction = computeDirection(posStart, posArrival);
     int nbMarbles = countMarbles(posStart, direction, 1, colorStart);
 
-    if(nbMarbles > 3)
-        return positions;
-
-
-    Position from(nbMarbles == 2 ? posArrival.getNext(direction)
-                                 : posArrival.getNext(direction).getNext(direction));
-
-    if(!colorAt(from).has_value()){
-        positions.push_back(from);
-        return positions;
-    }
-    int oppositeMarbleCounter=countMarbles(from, direction, 1, opposite);
-    if(oppositeMarbleCounter < nbMarbles)
+    if(nbMarbles <= 3)
     {
-        positions.push_back(from);
-        positions.push_back(oppositeMarbleCounter==1?from.getNext(direction)
-                                                   :from.getNext(direction).getNext(direction));
+        Position from(nbMarbles == 2 ? posArrival.getNext(direction)
+                                     : posArrival.getNext(direction).getNext(direction));
+        if(!colorAt(from).has_value())
+        {
+            positions.push_back(from);
+        }
+        else
+        {
+            int oppositeMarbleCounter = countMarbles(from, direction, 1, opposite);
+            if(oppositeMarbleCounter < nbMarbles)
+            {
+                positions.push_back(from);
+                positions.push_back(oppositeMarbleCounter == 1 ? from.getNext(direction)
+                                                               : from.getNext(direction).getNext(direction));
+            }
+        }
     }
-    else
-    {
-        return positions;
-    }
+
     return positions;
 }
 
