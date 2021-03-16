@@ -87,6 +87,23 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival)
     return positions;
 }
 
+
+bool Board::move(Position posStart, Position posArrival,Color playerColor)
+{
+    auto positionVector = canMove(posStart,posArrival);
+
+    if(colorAt(posStart) != playerColor || positionVector.size() == 0 )
+        return false;
+
+    getCellAt(posStart).removeColor();
+    getCellAt(positionVector.at(0)).setColor(playerColor);
+
+    if(positionVector.size() == 2)
+        getCellAt(positionVector.at(1)).setColor(playerColor == Color::BLACK ? Color::WHITE : Color::BLACK);
+
+    return true;
+}
+
 /*
 bool Board::canMove(Position posStart, Position posEnd, Position posArrival){
     //TO DO
@@ -97,14 +114,4 @@ void Board::move(Position posStart, Position posEnd, Position posArrival)
     //TO DO
 }
 
-void Board::move(Position posStart, Position posArrival)
-
-{
-    Direction direction = computeDirection(posStart,posArrival);
-    while(posArrival.getNext())
-
-    getCellAt(posArrival).setColor(getCellAt(posStart).getColor().value());
-    getCellAt(posStart).setColor();
-
-}
 */

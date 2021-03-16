@@ -26,8 +26,11 @@ public:
     *
     * \param posStart the position of the first marble in row.
     * \param posArrival the arrival position of the first marble in row.
+    * \param playerColor the color of the current player.
+    *
+    * \return true if the move was succesful, false otherwise.
     */
-    void move(Position posStart, Position posArrival);
+    bool move(Position posStart, Position posArrival, Color playerColor);
 
     /*!
     * \brief The move method for side moves.
@@ -35,8 +38,11 @@ public:
     * \param posStart the position of the first marble in row.
     * \param posEnd the position of the last marble in row.
     * \param posArrival the arrival position of the first marble in row.
+    * \param playerColor the color of the current player.
+    *
+    * \return true if the move was succesful, false otherwise.
     */
-    void move(Position posStart, Position posEnd, Position posArrival);
+    bool move(Position posStart, Position posEnd, Position posArrival, Color playerColor);
 
     /*!
     * \brief The can move method for inline moves.

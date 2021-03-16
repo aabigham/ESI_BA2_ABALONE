@@ -70,7 +70,7 @@ public:
     /*!
      * \brief setColor sets the color value at std::nullopt
      */
-    inline void setColor();
+    inline void removeColor();
 
 private:
     /*!
@@ -154,7 +154,7 @@ void Cell::setColor(Color color)
     marble_.emplace(color);
 }
 
-void Cell::setColor()
+void Cell::removeColor()
 {
     marble_.reset();
 }

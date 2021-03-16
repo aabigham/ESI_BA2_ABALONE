@@ -55,7 +55,7 @@ TEST_CASE("Testing methods of the Cell class")
     SECTION("Test of method setColor")
     {
         Cell cell = Cell(Position(0, 0), Color::BLACK);
-        cell.setColor();
+        cell.removeColor();
         REQUIRE(cell.getColor() == std::nullopt);
     }
 }
