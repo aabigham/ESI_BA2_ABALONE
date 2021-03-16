@@ -44,7 +44,11 @@ public:
     * \param posStart the position of the first marble in row.
     * \param posArrival the arrival position of the first marble in row.
     *
-    * \return the number of encountered marbles that indicate where to move our marbles, -1 if the move is not possible.
+    * \return A vector of positions. If the vector is empty, the move is not
+    * possible. If the vector has one position, it means that the contained position
+    * is empty. If the vector has 2 positions, the first one is the position where
+    * marble of the player will move, and the second one is the position where the
+    * pushed marble of the oppisite player will arrive.
     */
     std::vector<Position>canMove(Position posStart, Position posArrival);
 

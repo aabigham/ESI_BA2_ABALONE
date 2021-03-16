@@ -52,27 +52,28 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival)
     Direction direction = computeDirection(posStart, posArrival);
 
     if(!isInside(posArrival) || !isInside(posStart) || colorAt(posArrival) == opposite)
-    {
+    { /* Start or Arrival position are outside the board,
+        or the arrival color does not belong to the player.*/
         return positions;
     }
     else if(!colorAt(posArrival).has_value())
-    {
+    { // The arrival pos is empty
         positions.push_back(posArrival);
         return positions;
     }
-
+    // Counting the current player's marble
     int nbMarbles = countMarbles(posStart, direction, 1, colorStart);
-
-    if(nbMarbles <= 3)
+    if(nbMarbles <= 3) // Max 3 marbles
     {
+        // First ennemy marble
         Position from(nbMarbles == 2 ? posArrival.getNext(direction)
                                      : posArrival.getNext(direction).getNext(direction));
         if(!colorAt(from).has_value())
-        {
+        { // If it has no color
             positions.push_back(from);
         }
         else
-        {
+        { // If it's belonging to the ennemy
             int oppositeMarbleCounter = countMarbles(from, direction, 1, opposite);
             if(oppositeMarbleCounter < nbMarbles)
             {
