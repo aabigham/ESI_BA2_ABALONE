@@ -45,6 +45,20 @@ public:
     bool move(Position posStart, Position posEnd, Position posArrival, Color playerColor);
 
     /*!
+    * \brief countMarbles counts the number of marbles in a given direction, beginning from the given position.
+    *
+    * \param position the position of the first marble.
+    * \param direction the direction in which the counting is heading towards to.
+    * \param cpt the number of the counted marbles.
+    * \param the color that the counted marbles must have.
+    *
+    * \return the number of the counted marbles.
+    */
+    int countMarbles(Position position, Direction direction,int cpt,Color color) const;
+
+    int countMarblesUntil(Position posStart, Position posEnd, Direction dirCount, Direction dirMove, int cpt, Color color) const;
+
+    /*!
     * \brief The can move method for inline moves.
     *
     * \param posStart the position of the first marble in row.
@@ -67,7 +81,7 @@ public:
     *
     * \return true if the marbles are able to move, false otherwise.
     */
-    bool canMove(Position posStart, Position posEnd, Position posArrival);
+    std::vector<Position> canMove(Position posStart, Position posEnd, Position posArrival);
 
     /*!
     * \brief Gets the color located at the position in parameter.
@@ -124,18 +138,6 @@ public:
     * \brief Increments the count of lost black marbles.
     */
     inline void addBlackMarbleLost(); //done
-
-    /*!
-    * \brief countMarbles counts the number of marbles in a given direction, beginning from the given position.
-    *
-    * \param position the position of the first marble.
-    * \param direction the direction in which the counting is heading towards to.
-    * \param cpt the number of the counted marbles.
-    * \param the color that the counted marbles must have.
-    *
-    * \return the number of the counted marbles.
-    */
-    int countMarbles(Position position, Direction direction,int cpt,Color color) const;
 
 private:
     /*!
