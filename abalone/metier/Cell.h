@@ -40,22 +40,19 @@ public:
     bool isAdjacentTo(Cell &cell); //done
 
     /*!
+     * \brief The string representation of the object.
+     *
+     * \return a string representation of the object.
+     */
+    inline std::string to_string() const;
+
+    /*!
     * \brief Getter of the color of the cell.
     *
     * \return the color of the cell.
     */
     inline std::optional<Color> getColor() const; //done
 
-    /*!
-    * \brief Setter of the cell class.
-    *
-    * \param the color that will be attributed to the cell.
-    */
-    inline void setColor(Color color); //done
-    /*!
-     * \brief setColor sets the color value at std::nullopt
-     */
-    inline void setColor();
     /*!
     * \brief Getter of the position of the current cell.
     *
@@ -64,11 +61,16 @@ public:
     inline Position getPosition() const; //done
 
     /*!
-     * \brief The string representation of the object.
-     *
-     * \return a string representation of the object.
+    * \brief Setter of the cell class.
+    *
+    * \param the color that will be attributed to the cell.
+    */
+    inline void setColor(Color color); //done
+
+    /*!
+     * \brief setColor sets the color value at std::nullopt
      */
-    inline std::string to_string() const;
+    inline void setColor();
 
 private:
     /*!
@@ -85,6 +87,16 @@ private:
 };
 
 /*!
+ * \brief hasSameColor Checks if two cells have the same color.
+ *
+ * \param cell1 the first cell to compare
+ * \param cell2 the second cell to compare
+ *
+ * \return true if the cells have the same color, false otherwise.
+ */
+inline bool hasSameColor(Cell cell1, Cell cell2);
+
+/*!
  * \brief The output stream operator overloading.
  *
  * \param os the output stream.
@@ -94,50 +106,17 @@ private:
  */
 inline std::ostream &operator<<(std::ostream &os, const Cell &cell);
 
-/*!
- * \brief hasSameColor Checks if two cells have the same color.
- * \param cell1 the first cell to compare
- * \param cell2 the second cell to compare
- * \return true if the cells have the same color, false otherwise.
- */
-inline bool hasSameColor(Cell cell1, Cell cell2);
-
 inline bool hasSameColor(Cell cell1, Cell cell2)
 {
     return cell1.getColor() == cell2.getColor();
 }
 
-std::ostream &operator<<(std::ostream &os, const Cell &cell)
+inline std::ostream &operator<<(std::ostream &os, const Cell &cell)
 {
     return os << cell.to_string();
 }
 
 // Inline methods
-std::optional<Color> Cell::getColor() const
-{
-    if (marble_.has_value())
-        return marble_.value();
-
-    return std::nullopt;
-}
-
-void Cell::setColor(Color color)
-{
-
-    this->marble_.emplace(color);
-}
-
-void Cell::setColor()
-{
-
-    this->marble_.reset();
-}
-
-Position Cell::getPosition() const
-{
-    return position_;
-}
-
 std::string Cell::to_string() const
 {
     std::string str;
@@ -155,6 +134,29 @@ std::string Cell::to_string() const
     str.append(" \\");
     str.append("\n\\___/");
     return str;
+}
+
+std::optional<Color> Cell::getColor() const
+{
+    if (marble_.has_value())
+        return marble_.value();
+
+    return std::nullopt;
+}
+
+Position Cell::getPosition() const
+{
+    return position_;
+}
+
+void Cell::setColor(Color color)
+{
+    marble_.emplace(color);
+}
+
+void Cell::setColor()
+{
+    marble_.reset();
 }
 
 #endif //_CELL_H

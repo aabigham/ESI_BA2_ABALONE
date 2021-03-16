@@ -100,29 +100,29 @@ public:
     * \brief The ABAPRO letters and their corresponding Y Axis value.
     */
     constexpr static std::array<std::pair<char, int>, 9>
-        letters_y{std::make_pair('A', -4),
-                  std::make_pair('B', -3),
-                  std::make_pair('C', -2),
-                  std::make_pair('D', -1),
-                  std::make_pair('E', 0),
-                  std::make_pair('F', 1),
-                  std::make_pair('G', 2),
-                  std::make_pair('H', 3),
-                  std::make_pair('I', 4)};
+    letters_y{std::make_pair('A', -4),
+                std::make_pair('B', -3),
+                std::make_pair('C', -2),
+                std::make_pair('D', -1),
+                std::make_pair('E', 0),
+                std::make_pair('F', 1),
+                std::make_pair('G', 2),
+                std::make_pair('H', 3),
+                std::make_pair('I', 4)};
 
     /*!
     * \brief The ABAPRO numbers and their corresponding Z Axis value.
     */
     constexpr static std::array<std::pair<char, int>, 9>
-        numbers_z{std::make_pair('1', 4),
-                  std::make_pair('2', 3),
-                  std::make_pair('3', 2),
-                  std::make_pair('4', 1),
-                  std::make_pair('5', 0),
-                  std::make_pair('6', -1),
-                  std::make_pair('7', -2),
-                  std::make_pair('8', -3),
-                  std::make_pair('9', -4)};
+    numbers_z{std::make_pair('1', 4),
+                std::make_pair('2', 3),
+                std::make_pair('3', 2),
+                std::make_pair('4', 1),
+                std::make_pair('5', 0),
+                std::make_pair('6', -1),
+                std::make_pair('7', -2),
+                std::make_pair('8', -3),
+                std::make_pair('9', -4)};
 
 private:
     /*!
@@ -230,17 +230,6 @@ inline bool operator==(const Position &lhs, const Position &rhs);
 inline bool operator!=(const Position &lhs, const Position &rhs);
 
 /*!
- * \brief Addition of two positions.
- *
- * \param lhs the first position.
- * \param rhs the second position.
- *
- * \return a new Position object, wich is the result
- * of the addition of both parameters.
- */
-//inline Position operator+(const Position &lhs, const Position &rhs);
-
-/*!
  * \brief Substraction of two positions.
  *
  * \param lhs the first position.
@@ -271,11 +260,6 @@ bool operator!=(const Position &lhs, const Position &rhs)
 {
     return !(lhs == rhs);
 }
-
-/*Position operator+(const Position &lhs, const Position &rhs)
-{
-    return Position(lhs.getX() + rhs.getX(), lhs.getY() + rhs.getY());
-}*/
 
 Position operator-(const Position &lhs, const Position &rhs)
 {
@@ -352,24 +336,24 @@ int Position::getZ() const
  */
 namespace std
 {
-    template <>
-    struct hash<Position>
+template <>
+struct hash<Position>
+{
+    /*!
+    * \brief The operator() overload to hash a position.
+    *
+    * \param p the position to hash.
+    *
+    * \return the hash value of the position in parameter.
+    */
+    size_t operator()(const Position &p) const
     {
-        /*!
-     * \brief The operator() overload to hash a position.
-     *
-     * \param p the position to hash.
-     *
-     * \return the hash value of the position in parameter.
-     */
-        size_t operator()(const Position &p) const
-        {
-            hash<int> int_hash;
-            size_t px = int_hash(p.getX());
-            size_t py = int_hash(p.getY());
-            return px ^ (py + 0x9e3779b9 + (px << 6) + (px >> 2));
-        }
-    };
+        hash<int> int_hash;
+        size_t px = int_hash(p.getX());
+        size_t py = int_hash(p.getY());
+        return px ^ (py + 0x9e3779b9 + (px << 6) + (px >> 2));
+    }
+};
 }
 
 #endif //_POSITION_H
