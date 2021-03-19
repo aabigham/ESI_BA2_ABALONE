@@ -115,7 +115,7 @@ int Board::countMarblesUntil(Position posStart, Position posEnd, Direction dirCo
     return countMarblesUntil(Position(posStart.getNext(dirCount)), posEnd, dirCount, dirMove, cpt++, color);
 }
 
-std::vector<Position> Board::canMove(Position posStart, Position posEnd, Position posArrival){
+/*std::vector<Position> Board::canMove(Position posStart, Position posEnd, Position posArrival){
     std::vector<Position> positions;
     Color colorStart = colorAt(posStart).value();
     Color oppositeColor = (colorStart == Color::BLACK ? Color::WHITE : Color::BLACK);
@@ -124,8 +124,8 @@ std::vector<Position> Board::canMove(Position posStart, Position posEnd, Positio
 
     if(!isInside(posStart) || !isInside(posEnd) || !isInside(posArrival)
             || colorAt(posArrival).has_value())
-    { /* Start, End or Arrival positions are outside the board,
-        or the arrival position is occupied.*/
+    { //Start, End or Arrival positions are outside the board,
+       // or the arrival position is occupied.
         return positions;
     }
 
@@ -140,31 +140,7 @@ std::vector<Position> Board::canMove(Position posStart, Position posEnd, Positio
     // If nb == 2
     // If nb == 3
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+}*/
 
 /*bool Board::move(Position posStart, Position posEnd, Position posArrival)
 {
