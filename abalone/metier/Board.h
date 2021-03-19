@@ -9,10 +9,10 @@
 #include "Cell.h"
 
 /*!
- * \brief The Board class
- *
- * The game board. It is filled with tiles and counts the number of lost marbles for each player (color)
- */
+* \brief The Board class
+*
+* The game board. It is filled with tiles and counts the number of lost marbles for each player (color)
+*/
 class Board
 {
 public:
