@@ -47,16 +47,32 @@ public:
     /*!
     * \brief countMarbles counts the number of marbles in a given direction, beginning from the given position.
     *
-    * \param position the position of the first marble.
-    * \param direction the direction in which the counting is heading towards to.
+    * \param posStart the position of the first marble.
+    * \param dirCount the direction in which the counting is heading towards to.
     * \param cpt the number of the counted marbles.
-    * \param the color that the counted marbles must have.
+    * \param color the color that the counted marbles must have.
     *
-    * \return the number of the counted marbles.
+    * \return the number of counted marbles.
     */
-    int countMarbles(Position position, Direction direction,int cpt,Color color) const;
+    int countMarbles(Position posStart, Direction dirCount, int cpt, Color color) const;
 
-    int countMarblesUntil(Position posStart, Position posEnd, Direction dirCount, Direction dirMove, int cpt, Color color) const;
+    /*!
+    * \brief countMarblesUntil counts the number of marbles in a given direction,
+    * beginning from the given position and stops at the given end position.
+    * Since this method is used in the parallel move context, it also counts
+    * the marble above or below the line, according the the dirMove in parameter.
+    *
+    * \param posStart the position of the first marble.
+    * \param posEnd the position where to stop counting.
+    * \param dirCount the direction in which the counting is heading towards to.
+    * \param dirMove the direction in which we want to move parallely.
+    * \param cpt the number of the counted marbles.
+    * \param color the color that the counted marbles must have.
+    *
+    * \return the number of counted marbles.
+    */
+    int countMarblesUntil(Position posStart, Position posEnd, Direction dirCount,
+                          Direction dirMove, int cpt, Color color) const;
 
     /*!
     * \brief The can move method for inline moves.
@@ -107,12 +123,12 @@ public:
     inline std::unordered_map<Position, Cell> getCells() const; //done
 
     /*!
-     * \brief Gets the cell at the position in parameter.
-     *
-     * \param pos the position of the cell we want to get.
-     *
-     * \return the cell at the given position.
-     */
+    * \brief Gets the cell at the position in parameter.
+    *
+    * \param pos the position of the cell we want to get.
+    *
+    * \return the cell at the given position.
+    */
     inline Cell &getCellAt(Position pos); //done
 
     /*!

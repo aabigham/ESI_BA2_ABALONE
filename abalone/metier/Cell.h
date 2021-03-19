@@ -40,10 +40,10 @@ public:
     bool isAdjacentTo(Cell &cell); //done
 
     /*!
-     * \brief The string representation of the object.
-     *
-     * \return a string representation of the object.
-     */
+    * \brief The string representation of the object.
+    *
+    * \return a string representation of the object.
+    */
     inline std::string to_string() const;
 
     /*!
@@ -68,14 +68,14 @@ public:
     inline void setColor(Color color); //done
 
     /*!
-     * \brief setColor sets the color value at std::nullopt
-     */
+    * \brief setColor sets the color value at std::nullopt
+    */
     inline void removeColor();
 
 private:
     /*!
-     * \brief The position of the cell.
-     */
+    * \brief The position of the cell.
+    */
     Position position_;
 
     /*!

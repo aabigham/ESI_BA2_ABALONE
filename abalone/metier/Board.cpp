@@ -12,13 +12,13 @@ Board::Board()
         int row2 = std::min(4, -x + 4);
         for (int y = row1; y <= row2; ++y)
         {
-            Position position = Position(x, y);
+            Position pos(x, y);
             if (y == 4 || y == 3 || (y == 2 && x == -2) || (y == 2 && x == -1) || (y == 2 && x == 0))
-                cells_.insert(std::make_pair(position, Cell(position, Color::BLACK)));
+                cells_.insert(std::make_pair(pos, Cell(pos, Color::BLACK)));
             else if (y == -4 || y == -3 || (y == -2 && x == 0) || (y == -2 && x == 1) || (y == -2 && x == 2))
-                cells_.insert(std::make_pair(position, Cell(position, Color::WHITE)));
+                cells_.insert(std::make_pair(pos, Cell(pos, Color::WHITE)));
             else
-                cells_.insert(std::make_pair(position, Cell(position)));
+                cells_.insert(std::make_pair(pos, Cell(pos)));
         }
     }
 }
@@ -35,12 +35,12 @@ std::optional<Color> Board::colorAt(Position pos) const
     return cells_.at(pos).getColor();
 }
 
-int Board::countMarbles(Position position, Direction direction, int cpt, Color color) const
+int Board::countMarbles(Position posStart, Direction dirCount, int cpt, Color color) const
 {
-    if(colorAt(position).value()!=color)
+    if(colorAt(posStart).value()!=color)
         return cpt;
 
-    return countMarbles(Position(position.getNext(direction)), direction, cpt++, color);
+    return countMarbles(Position(posStart.getNext(dirCount)), dirCount, cpt++, color);
 }
 
 std::vector<Position> Board::canMove(Position posStart, Position posArrival)
