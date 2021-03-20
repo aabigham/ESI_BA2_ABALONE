@@ -40,18 +40,20 @@ int Board::countMarbles(Position posStart, Direction dirCount, int cpt, Color co
     if(colorAt(posStart).value()!=color)
         return cpt;
 
-    return countMarbles(Position(posStart.getNext(dirCount)), dirCount, cpt++, color);
+    return countMarbles(Position(posStart.getNext(dirCount)), dirCount, ++cpt, color);
 }
 
-std::vector<Position> Board::canMove(Position posStart, Position posArrival)
+std::vector<Position> Board::canMove(Position posStart, Position posArrival, Color playerColor)
 {
     std::vector<Position> positions;
 
-    Color colorStart = colorAt(posStart).value();
-    Color oppositeColor = (colorStart == Color::BLACK ? Color::WHITE : Color::BLACK);
+    if(colorAt(posStart) != playerColor)
+        return positions;
+
+    Color oppositeColor = (playerColor == Color::BLACK ? Color::WHITE : Color::BLACK);
     Direction dirMove = computeDirection(posStart, posArrival);
 
-    if( !isInside(posStart) || !isInside(posArrival) || colorAt(posArrival) == oppositeColor)
+    if(!isInside(posStart) || !isInside(posArrival) || colorAt(posArrival) == oppositeColor)
     { /* Start or Arrival position are outside the board,
         or the arrival color does not belong to the player.*/
         return positions;
@@ -62,7 +64,7 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival)
         return positions;
     }
     // Counting the current player's marble
-    int nbMarbles = countMarbles(posStart, dirMove, 1, colorStart);
+    int nbMarbles = countMarbles(posStart, dirMove, 1, playerColor);
     if(nbMarbles <= 3) // Max 3 marbles
     {
         // First ennemy marble
@@ -90,59 +92,97 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival)
 
 bool Board::move(Position posStart, Position posArrival, Color playerColor)
 {
-    auto positionVector = canMove(posStart,posArrival);
+    auto positionVector = canMove(posStart, posArrival, playerColor);
 
-    if(colorAt(posStart) != playerColor || positionVector.size() == 0 )
+    if(positionVector.size() == 0 )
         return false;
 
     getCellAt(posStart).removeColor();
     getCellAt(positionVector.at(0)).setColor(playerColor);
 
     if(positionVector.size() == 2)
-        getCellAt(positionVector.at(1)).setColor(playerColor == Color::BLACK ? Color::WHITE : Color::BLACK);
+    {
+        if(!isInside(positionVector.at(1)))
+            playerColor == Color::BLACK ? addBlackMarbleLost() : addWhiteMarbleLost();
+        else
+            getCellAt(positionVector.at(1)).setColor(playerColor == Color::BLACK ? Color::WHITE : Color::BLACK);
+    }
 
     return true;
 }
 
-int Board::countMarblesUntil(Position posStart, Position posEnd, Direction dirCount, Direction dirMove, int cpt, Color color) const
+int Board::countMarblesUntil(Position posStart, Position posEnd, Direction dirCount,
+                             Direction dirMove, int cpt, Color color) const
 {
     if(colorAt(posStart.getNext(dirMove)).has_value() || cpt > 3)
-       return -5;
+        return -5;
 
     if(colorAt(posStart).value() != color || posStart == posEnd)
         return cpt;
 
-    return countMarblesUntil(Position(posStart.getNext(dirCount)), posEnd, dirCount, dirMove, cpt++, color);
+    return countMarblesUntil(Position(posStart.getNext(dirCount)), posEnd, dirCount, dirMove, ++cpt, color);
 }
 
-/*std::vector<Position> Board::canMove(Position posStart, Position posEnd, Position posArrival){
+int Board::canMove(Position posStart, Position posEnd, Position posArrival, Color playerColor){
     std::vector<Position> positions;
-    Color colorStart = colorAt(posStart).value();
-    Color oppositeColor = (colorStart == Color::BLACK ? Color::WHITE : Color::BLACK);
+
+    if(colorAt(posStart) != playerColor)
+        return -1;
+
     Direction dirMove = computeDirection(posStart, posArrival);
     Direction dirCount = computeDirection(posStart, posEnd);
 
     if(!isInside(posStart) || !isInside(posEnd) || !isInside(posArrival)
             || colorAt(posArrival).has_value())
     { //Start, End or Arrival positions are outside the board,
-       // or the arrival position is occupied.
-        return positions;
+        // or the arrival position is occupied.
+        return -1;
     }
 
-    // Count line
-    int nbMarblesLine = countMarblesUntil(posStart, posEnd, dirCount, dirMove, 1, colorStart);
+    // Count lines
+    int nbMarblesLine = countMarblesUntil(posStart, posEnd, dirCount, dirMove, 1, playerColor);
+    if(nbMarblesLine < 0)
+        return -1;
+    else
+        return nbMarblesLine;
+}
 
-    // If nb < 0 --> return false;
-
-
-    // Peut bouger
-    // If nb == 1
-    // If nb == 2
-    // If nb == 3
-
-}*/
-
-/*bool Board::move(Position posStart, Position posEnd, Position posArrival)
+bool Board::move(Position posStart, Position posEnd, Position posArrival, Color playerColor)
 {
-    //TO DO
-}*/
+    int nbMarbles = canMove(posStart, posEnd, posArrival, playerColor);
+    if(nbMarbles < 0)
+        return false;
+
+    //Direction dirMove = computeDirection(posStart, posArrival);
+    Direction dirCount = computeDirection(posStart, posEnd);
+
+    switch (nbMarbles) {
+    case 1:
+    {
+        getCellAt(posStart).removeColor();
+        getCellAt(posArrival).setColor(playerColor);
+        break;
+    }
+    case 2:
+    {
+        getCellAt(posStart).removeColor();
+        getCellAt(posStart.getNext(dirCount)).removeColor();
+        getCellAt(posArrival).setColor(playerColor);
+        getCellAt(posArrival.getNext(dirCount)).setColor(playerColor);
+        break;
+    }
+    case 3:
+    {
+        getCellAt(posStart).removeColor();
+        getCellAt(posStart.getNext(dirCount)).removeColor();
+        getCellAt(posStart.getNext(dirCount).getNext(dirCount)).removeColor();
+        getCellAt(posArrival).setColor(playerColor);
+        getCellAt(posArrival.getNext(dirCount)).setColor(playerColor);
+        getCellAt(posArrival.getNext(dirCount).getNext(dirCount)).setColor(playerColor);
+        break;
+    }
+    default:
+        return false;
+    }
+    return true;
+}
