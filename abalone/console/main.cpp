@@ -3,39 +3,29 @@
 #include "Cell.h"
 #include "Position.h"
 #include "Game.h"
+#include "View.h"
+#include "ConsoleView.h"
 
 int main()
 {
     /* These are "on the fly" tests */
 
-    Cell cell{Position(0, 0), Color::BLACK};
+    Board b;
+    ConsoleView cv;
+    cv.updateView(b);
 
-    std::cout << cell << std::endl;
+    //Display in Multiline using escape character /n
+    /*const char *example2 = "Line1\n"
+                           "Line2\n"
+                           "Line3\n"
+                           "Line4\n";
+    std::cout << example2 << std::endl;
+    std::cout << "===================================" << std::endl;
+    // display in multiline using Raw
+    const char *example = R"(Line1 Line2 Line3 Line4)"; //no need to use escape character  /n
+    std::cout << example << std::endl;
 
-    std::string str = "Bonjour";
-    for (const char &c : str)
-    {
-        std::cout << c << std::endl;
-    }
-
-    Position pos1{0, 0};
-    Position pos2{0, -1};
-    try
-    {
-        Direction dir = computeDirection(pos1, pos2);
-        std::cout << dir << std::endl;
-    }
-    catch (const std::exception &e)
-    {
-        std::cout << e.what() << std::endl;
-    }
-
-    Game game;
-    auto positions{game.askAbaPro()};
-    for (const auto &currPos : positions)
-    {
-        std::cout << currPos << std::endl;
-    }
+    std::cin.get();*/
 
     return 0;
 }

@@ -120,8 +120,8 @@ inline std::ostream &operator<<(std::ostream &os, const Cell &cell)
 std::string Cell::to_string() const
 {
     std::string str;
-    str.append(" ___ ");
-    str.append("\n/ ");
+    /*str.append("\n ___ ");
+    str.append("\n/ ");*/
     if (marble_.has_value())
     {
         Color color = marble_.value();
@@ -129,10 +129,10 @@ std::string Cell::to_string() const
     }
     else
     {
-        str.append(" ");
+        str.append(".");
     }
-    str.append(" \\");
-    str.append("\n\\___/");
+    /*str.append(" \\");
+    str.append("\n\\___/");*/
     return str;
 }
 

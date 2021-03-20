@@ -6,10 +6,10 @@
 #include "ConsoleView.h"
 
 /*!
- * \brief The Controller class
- *
- * The controller is responsible for the dynamics of the game and for updating the view as it progresses.
- */
+* \brief The Controller class
+*
+* The controller is responsible for the dynamics of the game and for updating the view as it progresses.
+*/
 class Controller
 {
 public:
@@ -17,7 +17,6 @@ public:
     * \brief Constructor of the Controller.
     *
     * \param game the game.
-    *
     * \param view the view of the game.
     */
     Controller(Game game, View view);
@@ -29,13 +28,13 @@ public:
 
 private:
     /*!
-     * \brief The board of the game.
-     */
+    * \brief The board of the game.
+    */
     Game game_;
 
     /*!
-     * \brief The board of the game.
-     */
+    * \brief The board of the game.
+    */
     View view_;
 };
 

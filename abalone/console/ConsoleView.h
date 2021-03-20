@@ -2,6 +2,7 @@
 #define _CONSOLEVIEW_H
 
 #include <array>
+#include <iomanip>
 #include "View.h"
 #include "Game.h"
 #include "Cell.h"
@@ -19,11 +20,12 @@ public:
     */
     ConsoleView();
 
+    ~ConsoleView();
+
     /*!
     * \brief This method updates the console view.
     */
-    void updateView(int whiteMarblesLost, int blackMarblesLost,
-                    std::unordered_map<Position, Cell> cells);
+    void updateView(Board board);
 };
 
 #endif //_CONSOLEVIEW_H
