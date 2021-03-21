@@ -21,11 +21,6 @@ public:
     Game();
 
     /*!
-     * \brief Starts the game.
-     */
-    void start();
-
-    /*!
      * \brief This method plays a round of abalone.
      */
     bool play(std::vector<Position> positions);
