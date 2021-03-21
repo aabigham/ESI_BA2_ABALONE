@@ -14,9 +14,9 @@ Board::Board()
         {
             Position pos(x, y);
             if (y == 4 || y == 3 || (y == 2 && x == -2) || (y == 2 && x == -1) || (y == 2 && x == 0))
-                cells_.insert(std::make_pair(pos, Cell(pos, Color::BLACK)));
-            else if (y == -4 || y == -3 || (y == -2 && x == 0) || (y == -2 && x == 1) || (y == -2 && x == 2))
                 cells_.insert(std::make_pair(pos, Cell(pos, Color::WHITE)));
+            else if (y == -4 || y == -3 || (y == -2 && x == 0) || (y == -2 && x == 1) || (y == -2 && x == 2))
+                cells_.insert(std::make_pair(pos, Cell(pos, Color::BLACK)));
             else
                 cells_.insert(std::make_pair(pos, Cell(pos)));
         }
