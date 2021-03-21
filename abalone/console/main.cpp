@@ -11,9 +11,7 @@ int main()
 {
     /* These are "on the fly" tests */
 
-    Game game;
-    ConsoleView cv;
-    Controller controller(game, cv);
+    Controller controller;
     controller.startGame();
 
     return 0;

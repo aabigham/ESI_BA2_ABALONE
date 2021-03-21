@@ -2,7 +2,7 @@
 #include <algorithm>
 
 Board::Board()
-    : cells_{},
+    : cells_{std::unordered_map<Position, Cell>()},
       whiteMarblesLost_{0},
       blackMarblesLost_{0}
 {

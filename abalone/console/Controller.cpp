@@ -1,9 +1,9 @@
 #include "Controller.h"
 #include "ConsoleView.h"
 
-Controller::Controller(Game game, ConsoleView cv)
-    : game_{game},
-      view_{cv}
+Controller::Controller()
+    : game_{Game()},
+      view_{ConsoleView()}
 {
 }
 
