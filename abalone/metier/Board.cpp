@@ -103,7 +103,7 @@ bool Board::move(Position posStart, Position posArrival, Color playerColor)
     if(positionVector.size() == 2)
     {
         if(!isInside(positionVector.at(1)))
-            playerColor == Color::BLACK ? addBlackMarbleLost() : addWhiteMarbleLost();
+            playerColor == Color::BLACK ? addWhiteMarbleLost() : addBlackMarbleLost();
         else
             getCellAt(positionVector.at(1)).setColor(playerColor == Color::BLACK ? Color::WHITE : Color::BLACK);
     }
