@@ -37,7 +37,7 @@ std::optional<Color> Board::colorAt(Position pos) const
 
 int Board::countMarbles(Position posStart, Direction dirCount, int cpt, Color color) const
 {
-    if(colorAt(posStart).value()!=color)
+    if(!isInside(posStart)||(colorAt(posStart).has_value()&&colorAt(posStart).value()!=color))
         return cpt;
 
     return countMarbles(Position(posStart.getNext(dirCount)), dirCount, ++cpt, color);

@@ -51,4 +51,28 @@ TEST_CASE("Testing methods of the Board class")
         }
         REQUIRE(colorAtRightPlace);
     }
+    SECTION("Test of the canMove method")
+    {
+        Board board=Board();
+        Position posStart=Position(-2,2);
+        Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
+        REQUIRE(board.canMove(posStart,posArrival,Color::BLACK).size()>0);
+    }
+/*
+    SECTION("Test of the canMove method")
+    {
+        Board board=Board();
+        Position posStart=Position(-2,2);
+        Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
+        REQUIRE(board.canMove(posStart,posArrival,Color::BLACK).size()>0);
+    }
+*/
+    SECTION("Test of the canMove method wrong scenario")
+    {
+        Board board=Board();
+        Position posStart=Position(-2,3);
+        Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
+        REQUIRE(board.canMove(posStart,posArrival,Color::BLACK).size()>0);
+    }
+
 }
