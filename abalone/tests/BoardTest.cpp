@@ -52,9 +52,35 @@ TEST_CASE("Testing methods of the Board class")
         REQUIRE(colorAtRightPlace);
     }
 
+    SECTION("Test count marbles valid, equals 0")
+    {
+        Board board=Board();
+        Position posStart=Position(-2,1);
+        Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
+        REQUIRE(board.countMarbles(posStart,computeDirection(posStart,posArrival),0,Color::BLACK)==0);
+    }
+
     SECTION("Test count marbles valid, equals 1")
     {
+        Board board=Board();
+        Position posStart=Position(-2,2);
+        Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
+        REQUIRE(board.countMarbles(posStart,computeDirection(posStart,posArrival),0,Color::BLACK)==1);
+    }
 
+    SECTION("Test count marbles valid, equals 2 ")
+    {
+        Board board=Board();
+        Position posStart=Position(-2,3);
+        Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
+        REQUIRE(board.countMarbles(posStart,computeDirection(posStart,posArrival),0,Color::BLACK)==2);
+    }
+    SECTION("Test count marbles valid, equals 3 ")
+    {
+        Board board=Board();
+        Position posStart=Position(-2,4);
+        Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
+        REQUIRE(board.countMarbles(posStart,computeDirection(posStart,posArrival),0,Color::BLACK)==3);
     }
 
     SECTION("Test of the canMove method")

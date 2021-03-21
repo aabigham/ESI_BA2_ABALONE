@@ -64,7 +64,7 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival, Col
         return positions;
     }
     // Counting the current player's marble
-    int nbMarbles = countMarbles(posStart, dirMove, 1, playerColor);
+    int nbMarbles = countMarbles(posStart, dirMove, 0, playerColor);
     if(nbMarbles <= 3) // Max 3 marbles
     {
         // First ennemy marble
@@ -76,7 +76,7 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival, Col
         }
         else
         { // If it's belonging to the ennemy
-            int oppositeMarbleCounter = countMarbles(from, dirMove, 1, oppositeColor);
+            int oppositeMarbleCounter = countMarbles(from, dirMove, 0, oppositeColor);
             if(oppositeMarbleCounter < nbMarbles)
             {
                 positions.push_back(from);
