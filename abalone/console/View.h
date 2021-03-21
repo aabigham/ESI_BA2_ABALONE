@@ -14,14 +14,14 @@ public:
     /*!
     * \brief Constructor of the View class.
     */
-    View();
+    View(){};
 
-    virtual ~View();
+    virtual ~View(){};
 
     /*!
     * \brief This method updates the view (gui or console).
     */
-    virtual void updateView(Board board);
+    virtual void updateView(Board board) = 0;
 };
 
 #endif // VIEW_H

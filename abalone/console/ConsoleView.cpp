@@ -2,14 +2,6 @@
 #include <iomanip>
 #include "ConsoleView.h"
 
-ConsoleView::ConsoleView()
-{
-}
-
-ConsoleView::~ConsoleView()
-{
-}
-
 void ConsoleView::updateView(Board board)
 {
     std::cout << "White marble(s) lost : " << board.getWhiteMarblesLost() << std::endl;

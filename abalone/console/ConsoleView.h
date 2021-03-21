@@ -18,9 +18,9 @@ public:
     /*!
     * \brief Constructor of the ConsoleView class.
     */
-    ConsoleView();
+    ConsoleView(){};
 
-    ~ConsoleView();
+    ~ConsoleView(){};
 
     /*!
     * \brief This method updates the console view.
