@@ -14,9 +14,12 @@ void Controller::startGame()
 
     while (!game_.isGameOver())
     {
-        std::string currPlayer = game_.getCurrentPlayer() == Color::BLACK ? "White" : "Black";
+        std::string currPlayer = game_.getCurrentPlayer() == Color::BLACK ? "Black" : "White";
         view_.displayMessage(currPlayer + " is now playing.");
         auto positions = game_.askAbaPro();
+        for (const auto &pos : positions) {
+            std::cout << pos << std::endl;
+        }
         bool moved = game_.play(positions);
         if(!moved)
         {
@@ -24,7 +27,7 @@ void Controller::startGame()
         }
         else
         {
-            view_.displayMessage("Move successful ! Next player's turn now.");
+            view_.displayMessage("Move successful !\n");
             view_.updateView(game_.getBoard());
         }
     }

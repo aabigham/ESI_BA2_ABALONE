@@ -50,7 +50,7 @@ bool Position::isNextTo(const Position pos) const
 
 const Direction computeDirection(Position posStart, Position posArrival) // throws
 {
-    if (posStart == posArrival || !(posStart.isNextTo(posArrival)))
+    if (posStart == posArrival)
         throw std::invalid_argument("The positions are the same or are not adjacent.");
 
     int x_st = posStart.getX();

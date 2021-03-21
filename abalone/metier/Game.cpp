@@ -2,7 +2,7 @@
 #include "Game.h"
 
 Game::Game()
-    : board_{},
+    : board_{Board()},
       currentPlayer_{Color::BLACK}
 {
 }
