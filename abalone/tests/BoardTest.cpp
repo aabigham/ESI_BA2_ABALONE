@@ -51,6 +51,12 @@ TEST_CASE("Testing methods of the Board class")
         }
         REQUIRE(colorAtRightPlace);
     }
+
+    SECTION("Test count marbles valid, equals 1")
+    {
+
+    }
+
     SECTION("Test of the canMove method")
     {
         Board board=Board();

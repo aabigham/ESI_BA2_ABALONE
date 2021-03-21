@@ -37,7 +37,7 @@ std::optional<Color> Board::colorAt(Position pos) const
 
 int Board::countMarbles(Position posStart, Direction dirCount, int cpt, Color color) const
 {
-    if(!isInside(posStart)||(colorAt(posStart).has_value()&&colorAt(posStart).value()!=color))
+    if(!isInside(posStart)||(colorAt(posStart).has_value()&&colorAt(posStart).value()!=color)||!colorAt(posStart).has_value())
         return cpt;
 
     return countMarbles(Position(posStart.getNext(dirCount)), dirCount, ++cpt, color);
@@ -53,7 +53,7 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival, Col
     Color oppositeColor = (playerColor == Color::BLACK ? Color::WHITE : Color::BLACK);
     Direction dirMove = computeDirection(posStart, posArrival);
 
-    if(!isInside(posStart) || !isInside(posArrival) || colorAt(posArrival) == oppositeColor)
+    if(!isInside(posStart) || !isInside(posArrival) ||(colorAt(posArrival).has_value()&&colorAt(posArrival) == oppositeColor))
     { /* Start or Arrival position are outside the board,
         or the arrival color does not belong to the player.*/
         return positions;
