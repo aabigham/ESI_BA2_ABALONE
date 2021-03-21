@@ -12,11 +12,9 @@ class View
 {
 public:
     /*!
-    * \brief Constructor of the View class.
-    */
-    View(){};
-
-    virtual ~View(){};
+     * \brief displayWelcome Displays the welcome message.
+     */
+    virtual void displayWelcome() = 0;
 
     /*!
     * \brief This method updates the view (gui or console).

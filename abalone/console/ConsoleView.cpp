@@ -2,6 +2,13 @@
 #include <iomanip>
 #include "ConsoleView.h"
 
+void ConsoleView::displayWelcome()
+{
+    std::cout << "==============WELCOME==============\n";
+    std::cout << "================TO=================\n";
+    std::cout << "==============ABALONE==============\n\n";
+}
+
 void ConsoleView::updateView(Board board)
 {
     std::cout << "White marble(s) lost : " << board.getWhiteMarblesLost() << std::endl;

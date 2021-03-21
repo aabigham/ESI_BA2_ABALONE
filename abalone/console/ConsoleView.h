@@ -16,11 +16,9 @@ class ConsoleView : public View
 {
 public:
     /*!
-    * \brief Constructor of the ConsoleView class.
-    */
-    ConsoleView(){};
-
-    ~ConsoleView(){};
+     * \brief displayWelcome Displays the welcome message.
+     */
+    void displayWelcome();
 
     /*!
     * \brief This method updates the console view.
