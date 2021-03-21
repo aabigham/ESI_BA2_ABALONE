@@ -5,15 +5,16 @@
 #include "Game.h"
 #include "View.h"
 #include "ConsoleView.h"
+#include "Controller.h"
 
 int main()
 {
     /* These are "on the fly" tests */
 
-    Board b;
+    Game game;
     ConsoleView cv;
-    cv.displayWelcome();
-    cv.updateView(b);
+    Controller controller(game, cv);
+    controller.startGame();
 
     return 0;
 }

@@ -19,7 +19,7 @@ public:
     * \param game the game.
     * \param view the view of the game.
     */
-    Controller(Game game);
+    Controller(Game game, ConsoleView cv);
 
     /*!
     * \brief Starts the game.

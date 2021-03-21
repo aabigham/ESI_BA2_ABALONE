@@ -28,7 +28,7 @@ public:
     /*!
      * \brief This method plays a round of abalone.
      */
-    void play();
+    bool play(std::vector<Position> positions);
 
     /*!
      * \brief Checks if the game is over.

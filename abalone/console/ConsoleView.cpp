@@ -10,6 +10,11 @@ void ConsoleView::displayWelcome()
     std::cout << "==============ABALONE==============\n\n";
 }
 
+void ConsoleView::displayMessage(std::string message)
+{
+    std::cout << message << std::endl;
+}
+
 void ConsoleView::updateView(Board board)
 {
     std::cout << "White marble(s) lost : " << board.getWhiteMarblesLost() << std::endl;

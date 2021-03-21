@@ -24,6 +24,13 @@ public:
     * \brief This method updates the console view.
     */
     void updateView(Board board);
+
+    /*!
+     * \brief diplayMessage Display a message to the console.
+     *
+     * \param message the message to diplay to the console.
+     */
+    void displayMessage(std::string message);
 };
 
 #endif //_CONSOLEVIEW_H
