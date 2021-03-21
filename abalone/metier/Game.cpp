@@ -7,15 +7,11 @@ Game::Game()
 {
 }
 
-/*void Game::start()
+void Game::play()
 {
-
-}*/
-
-/*void Game::play()
-{
-
-}*/
+    // TODO
+    std::cout << "PLAY\n";
+}
 
 std::vector<Position> Game::askAbaPro() const
 {

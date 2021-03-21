@@ -11,6 +11,6 @@ void Controller::startGame()
     view_.displayWelcome();
     while (!game_.isGameOver())
     {
-        // TODO
+        game_.play();
     }
 }
