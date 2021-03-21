@@ -7,7 +7,17 @@ Game::Game()
 {
 }
 
-std::vector<Position> Game::askAbaPro()
+/*void Game::start()
+{
+
+}*/
+
+/*void Game::play()
+{
+
+}*/
+
+std::vector<Position> Game::askAbaPro() const
 {
     std::string abapro;
     std::cout << "Please enter an ABAPRO notation :\n";

@@ -7,6 +7,7 @@ LIBS += -L../lib -llibcore
 
 SOURCES += \
         ConsoleView.cpp \
+        Controller.cpp \
         main.cpp
 
 HEADERS += \

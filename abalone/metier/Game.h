@@ -42,28 +42,28 @@ public:
      *
      * \return the vector of positions according to the ABA-PRO notation.
      */
-    std::vector<Position> askAbaPro();
+    std::vector<Position> askAbaPro() const;
 
     /*!
      * \brief Getter of the game board.
      *
      * \return the board of the game.
      */
-    inline Board &getBoard(); //done
+    inline Board &getBoard();
 
     /*!
      * \brief Getter of the current Player.
      *
      * \return the current player, as a Color.
      */
-    inline Color getCurrentPlayer() const; //done
+    inline Color getCurrentPlayer() const;
 
     /*!
      * \brief Setter of the game board.
      *
      * \param color the color of the future current player.
      */
-    inline void setCurrentPlayer(Color color); //done
+    inline void setCurrentPlayer(Color color);
 
 private:
     /*!
@@ -98,4 +98,5 @@ void Game::setCurrentPlayer(Color color)
 {
     currentPlayer_ = color;
 }
+
 #endif //_GAME_H

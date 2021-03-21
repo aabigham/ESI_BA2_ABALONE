@@ -19,7 +19,7 @@ public:
     * \param game the game.
     * \param view the view of the game.
     */
-    Controller(Game game, View view);
+    Controller(Game game);
 
     /*!
     * \brief Starts the game.
@@ -35,7 +35,7 @@ private:
     /*!
     * \brief The board of the game.
     */
-    View view_;
+    ConsoleView view_;
 };
 
 #endif //_CONTROLLER_H
