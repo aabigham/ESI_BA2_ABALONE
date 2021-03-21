@@ -43,9 +43,9 @@ TEST_CASE("Testing methods of the Board class")
             int y = position.getY();
             int x = position.getX();
             if (y == 4 || y == 3 || (y == 2 && x == -2) || (y == 2 && x == -1) || (y == 2 && x == 0))
-                colorAtRightPlace = (board.colorAt(position).value() == Color::BLACK);
-            else if (y == -4 || y == -3 || (y == -2 && x == 0) || (y == -2 && x == 1) || (y == -2 && x == 2))
                 colorAtRightPlace = (board.colorAt(position).value() == Color::WHITE);
+            else if (y == -4 || y == -3 || (y == -2 && x == 0) || (y == -2 && x == 1) || (y == -2 && x == 2))
+                colorAtRightPlace = (board.colorAt(position).value() == Color::BLACK);
             else
                 colorAtRightPlace = (!board.colorAt(position).has_value());
         }
@@ -57,7 +57,7 @@ TEST_CASE("Testing methods of the Board class")
         Board board=Board();
         Position posStart=Position(-2,1);
         Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
-        REQUIRE(board.countMarbles(posStart,computeDirection(posStart,posArrival),0,Color::BLACK)==0);
+        REQUIRE(board.countMarbles(posStart,computeDirection(posStart,posArrival),0,Color::WHITE)==0);
     }
 
     SECTION("Test count marbles valid, equals 1")
@@ -65,7 +65,7 @@ TEST_CASE("Testing methods of the Board class")
         Board board=Board();
         Position posStart=Position(-2,2);
         Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
-        REQUIRE(board.countMarbles(posStart,computeDirection(posStart,posArrival),0,Color::BLACK)==1);
+        REQUIRE(board.countMarbles(posStart,computeDirection(posStart,posArrival),0,Color::WHITE)==1);
     }
 
     SECTION("Test count marbles valid, equals 2 ")
@@ -73,38 +73,57 @@ TEST_CASE("Testing methods of the Board class")
         Board board=Board();
         Position posStart=Position(-2,3);
         Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
-        REQUIRE(board.countMarbles(posStart,computeDirection(posStart,posArrival),0,Color::BLACK)==2);
+        REQUIRE(board.countMarbles(posStart,computeDirection(posStart,posArrival),0,Color::WHITE)==2);
     }
     SECTION("Test count marbles valid, equals 3 ")
     {
         Board board=Board();
         Position posStart=Position(-2,4);
         Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
-        REQUIRE(board.countMarbles(posStart,computeDirection(posStart,posArrival),0,Color::BLACK)==3);
+        REQUIRE(board.countMarbles(posStart,computeDirection(posStart,posArrival),0,Color::WHITE)==3);
     }
 
-    SECTION("Test of the canMove method")
+    SECTION("Test of the canMove inline method one moved")
     {
         Board board=Board();
         Position posStart=Position(-2,2);
         Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
-        REQUIRE(board.canMove(posStart,posArrival,Color::BLACK).size()>0);
+        REQUIRE(board.canMove(posStart,posArrival,Color::WHITE).size()==1);
     }
-/*
-    SECTION("Test of the canMove method")
-    {
-        Board board=Board();
-        Position posStart=Position(-2,2);
-        Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
-        REQUIRE(board.canMove(posStart,posArrival,Color::BLACK).size()>0);
-    }
-*/
-    SECTION("Test of the canMove method wrong scenario")
+
+
+
+    SECTION("Test of the canMove inline method two moved")
     {
         Board board=Board();
         Position posStart=Position(-2,3);
         Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
-        REQUIRE(board.canMove(posStart,posArrival,Color::BLACK).size()>0);
+        REQUIRE(board.canMove(posStart,posArrival,Color::WHITE).size() == 1 );
+    }
+
+    SECTION("Test of the canMove inline method two moved")
+    {
+        Board board=Board();
+        Position posStart=Position(-2,4);
+        Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
+        REQUIRE(board.canMove(posStart, posArrival, Color::WHITE).size() == 1 );
+    }
+
+    SECTION("Test of the canMove inline method empty case")
+    {
+        Board board=Board();
+        Position posStart=Position(-2,0);
+        Position posArrival=Position(posStart.getNext(Directions::DOWN_LEFT));
+        REQUIRE(board.canMove(posStart,posArrival,Color::WHITE).size()==0);
+    }
+
+    SECTION("Test of the canMove lateral method threeMoved")
+    {
+        Board board=Board();
+        Position posStart=Position(0,-2);
+        Position posArrival=Position(0,-1);
+        Position posEnd=Position(2,-2);
+        REQUIRE(board.canMove(posStart,posEnd,posArrival,Color::BLACK)==3);
     }
 
 }

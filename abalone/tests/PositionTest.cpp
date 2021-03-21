@@ -241,6 +241,6 @@ TEST_CASE("Testing methods the Position class")
     {
         Position mid(0, 0);
         Position other(-2, 0);
-        REQUIRE_THROWS(computeDirection(mid, other));
+        REQUIRE_NOTHROW(computeDirection(mid, other));
     }
 }
