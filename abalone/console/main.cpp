@@ -9,8 +9,6 @@
 
 int main()
 {
-    /* These are "on the fly" tests */
-
     Controller controller;
     controller.startGame();
 
