@@ -49,9 +49,16 @@ public:
     /*!
      * \brief Getter of the current Player.
      *
-     * \return the current player, as a Color.
+     * \return the current player as a Color.
      */
     inline Color getCurrentPlayer() const;
+
+    /*!
+     * \brief Getter of the current Player.
+     *
+     * \return the current player as a string.
+     */
+    inline std::string get_s_currentPlayer() const;
 
     /*!
      * \brief Setter of the game board.
@@ -87,6 +94,11 @@ Board &Game::getBoard()
 Color Game::getCurrentPlayer() const
 {
     return currentPlayer_;
+}
+
+std::string Game::get_s_currentPlayer() const
+{
+    return currentPlayer_ == Color::BLACK ? "Black" : "White";
 }
 
 void Game::setCurrentPlayer(Color color)

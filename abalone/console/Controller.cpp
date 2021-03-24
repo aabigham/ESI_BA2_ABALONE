@@ -14,11 +14,10 @@ void Controller::startGame()
 
     while (!game_.isGameOver())
     {
-        std::string currPlayer = game_.getCurrentPlayer() == Color::BLACK ? "Black" : "White";
-        view_.displayMessage(currPlayer + " is now playing.");
+        view_.displayMessage(game_.get_s_currentPlayer() + " is now playing.");
         auto positions = game_.askAbaPro();
-        for (const auto &pos : positions) {
-            std::cout << pos << std::endl;
+        for (const auto& p : positions) {
+            std::cout << p << std::endl;
         }
         bool moved = game_.play(positions);
         if(!moved)
