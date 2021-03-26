@@ -18,7 +18,7 @@ public:
     *
     * \param pos the position of the cell on the board.
     */
-    Cell(Position pos); //done
+    Cell(Position pos);
 
     /*!
     * \brief Second constructor of the Cell class.
@@ -26,7 +26,7 @@ public:
     * \param pos the position of the cell on the board.
     * \param marble the color of the marble, NONE if there is no marble on the cell.
     */
-    Cell(Position pos, Color marble); //done
+    Cell(Position pos, Color marble);
 
     /*!
     * \brief The string representation of the object.
@@ -40,21 +40,14 @@ public:
     *
     * \return the color of the cell.
     */
-    inline std::optional<Color> getColor() const; //done
-
-    /*!
-    * \brief Getter of the position of the current cell.
-    *
-    * \return the position of the current cell.
-    */
-    inline Position getPosition() const; //done
+    inline std::optional<Color> getColor() const;
 
     /*!
     * \brief Setter of the cell class.
     *
     * \param the color that will be attributed to the cell.
     */
-    inline void setColor(Color color); //done
+    inline void setColor(Color color);
 
     /*!
     * \brief setColor sets the color value at std::nullopt
@@ -105,11 +98,6 @@ std::optional<Color> Cell::getColor() const
     if (marble_.has_value())
         return marble_.value();
     return std::nullopt;
-}
-
-Position Cell::getPosition() const
-{
-    return position_;
 }
 
 void Cell::setColor(Color color)

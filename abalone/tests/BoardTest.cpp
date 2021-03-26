@@ -144,7 +144,6 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test of the canMove inline 2VS2 method blocked")
     {
-
         Board board = Board();
         Position posStart = Position(4, -4);
         Position posArrival = Position(posStart.getNext(Directions::UP_LEFT));
@@ -159,7 +158,6 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test of the canMove inline 3VS2 method pushing whites")
     {
-
         Board board = Board();
         Position posStart = Position(4, -4);
         Position posArrival = Position(posStart.getNext(Directions::UP_LEFT));
@@ -173,7 +171,6 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test of the canMove inline with positions that are not neighboor")
     {
-
         Board board = Board();
         Position posStart = Position(0, -3);
         Position posArrival = Position(-3,0);
@@ -192,7 +189,6 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test move when 3vs2 but blocked by an other marble")
     {
-
         Board board = Board();
 
         board.move(Position(0,-3),Position(0,-2),Color::BLACK);
@@ -206,6 +202,4 @@ TEST_CASE("Testing methods of the Board class")
         REQUIRE(board.canMove(Position(0,4),Position(0,3), Color::WHITE).size() == 0);
 
     }
-
-
 }
