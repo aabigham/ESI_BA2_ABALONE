@@ -161,7 +161,7 @@ const Direction computeDirection(Position posStart, Position posArrival);
  *
  * \throws std::invalid_argument if the letter is not valid.
  */
-inline bool isLetterValid(const char letter);
+bool isLetterValid(const char letter);
 
 /*!
  * \brief Validates an ABAPRO number.
@@ -170,7 +170,16 @@ inline bool isLetterValid(const char letter);
  *
  * \throws std::invalid_argument if the number is not valid.
  */
-inline bool isNumberValid(const char number);
+bool isNumberValid(const char number);
+
+/*!
+ * \brief isPairValid Checks if a letter - number pair is valid.
+ *
+ * \param pair the letter - number pair.
+ *
+ * \return true if the pair is valid, false otherwise.
+ */
+bool isPairValid(const std::pair<char, char> pair);
 
 /*!
  * \brief Validates an ABAPRO input.
@@ -179,7 +188,7 @@ inline bool isNumberValid(const char number);
  *
  * \throws std::invalid_argument if the input is not valid.
  */
-inline bool isAbaproValid(const std::string abapro);
+bool isAbaproValid(const std::string abapro);
 
 /*!
  * \brief Gets the according Y axis to the letter in parameter.
@@ -269,46 +278,6 @@ Position operator-(const Position &lhs, const Position &rhs)
 std::ostream &operator<<(std::ostream &os, const Position &position)
 {
     return os << position.to_string();
-}
-
-bool isLetterValid(const char letter) // throws
-{
-    for (const auto &[c, i] : Position::letters_y)
-        if (c == letter)
-            return true;
-    return false;
-}
-
-bool isNumberValid(const char number) // throws
-{
-    for (const auto &[c, i] : Position::numbers_z)
-        if (c == number)
-            return true;
-    return false;
-}
-
-bool isAbaproValid(const std::string abapro) // throws
-{
-    int size = abapro.size();
-    if (size != 4 && size != 6)
-        return false;
-
-    // Validation of the abapro input. Example : A1B2 or A1B2C3
-    for (int i = 0; i < size; ++i)
-    {
-        char currChar = abapro.at(i);
-        if (i % 2 == 0) // The char is a letter
-        {
-            if (!isLetterValid(currChar))
-                return false;
-        }
-        else if (i % 2 != 0) // The char is a number
-        {
-            if (!isNumberValid(currChar))
-                return false;
-        }
-    }
-    return true;
 }
 
 std::string Position::to_string() const

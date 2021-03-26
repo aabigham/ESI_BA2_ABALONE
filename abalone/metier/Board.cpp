@@ -127,16 +127,15 @@ int Board::countMarblesUntil(Position posStart, Position posEnd, Direction dirCo
 }
 
 int Board::canMove(Position posStart, Position posEnd, Position posArrival, Color playerColor){
-    std::vector<Position> positions;
-
     if(colorAt(posStart) != playerColor)
         return -1;
 
     Direction dirMove = computeDirection(posStart, posArrival);
     Direction dirCount = computeDirection(posStart, posEnd);
 
-    if(!isInside(posStart) || !isInside(posEnd) || !isInside(posArrival)
-            || colorAt(posArrival).has_value())
+    if(!(isInside(posStart) && isInside(posEnd) && isInside(posArrival)
+         && isInside(posStart.getNext(dirMove)) && isInside(posEnd.getNext(dirMove))
+         && isInside(posArrival.getNext(dirMove)) && !colorAt(posArrival).has_value()))
     { //Start, End or Arrival positions are outside the board,
         // or the arrival position is occupied.
         return -1;

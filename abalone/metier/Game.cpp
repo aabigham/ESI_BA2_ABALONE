@@ -16,10 +16,7 @@ bool Game::play(std::vector<Position> positions)
         flagMove = board_.move(positions.at(0), positions.at(1), positions.at(2), currentPlayer_);
 
     if(flagMove)
-    {
-        Color oppositePlayer = (currentPlayer_ == Color::BLACK ? Color::WHITE : Color::BLACK);
-        setCurrentPlayer(oppositePlayer);
-    }
+        setCurrentPlayer(currentPlayer_ == Color::BLACK ? Color::WHITE : Color::BLACK);
 
     return flagMove;
 }
@@ -31,7 +28,7 @@ std::vector<Position> Game::askAbaPro() const
     std::getline(std::cin, abapro);
     while (!isAbaproValid(abapro))
     {
-        std::cout << "Input is not valid, please enter an valid notation :\n";
+        std::cout << "Input is not valid, please try again :\n";
         std::getline(std::cin, abapro);
     }
     return abaproToPosition(abapro);

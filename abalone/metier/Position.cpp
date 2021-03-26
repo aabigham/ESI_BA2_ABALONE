@@ -80,6 +80,70 @@ int getNumberZAxis(int number)
     throw std::invalid_argument("The number does not exist.");
 }
 
+bool isLetterValid(const char letter)
+{
+    for (const auto &[c, i] : Position::letters_y)
+        if (c == letter)
+            return true;
+    return false;
+}
+
+bool isNumberValid(const char number)
+{
+    for (const auto &[c, i] : Position::numbers_z)
+        if (c == number)
+            return true;
+    return false;
+}
+
+bool isPairValid(const std::pair<char, char> pair)
+{
+    char letter = pair.first;
+    char number = pair.second;
+    if(!(isLetterValid(letter) && isNumberValid(number)))
+        return false;
+
+    int n = number - 48; // Converts the char to int
+    switch (letter) {
+    case 'A':
+        return (n <= 5);
+    case 'B':
+        return (n <= 6);
+    case 'C':
+        return (n <= 7);
+    case 'D':
+        return (n <= 8);
+    case 'E':
+        return (n <= 9);
+    case 'F':
+        return (n >= 2);
+    case 'G':
+        return (n >= 3);
+    case 'H':
+        return (n >= 4);
+    case 'I':
+        return (n >= 5);
+    default :
+        return false;
+    }
+}
+
+bool isAbaproValid(const std::string abapro)
+{
+    int size = abapro.size();
+    if (size != 4 && size != 6)
+        return false;
+    // Checking each pair
+    for (int i = 0; i < size / 2; i += 2)
+    {
+        std::pair<char, char> currPair
+                = std::make_pair(abapro.at(i), abapro.at(i + 1));
+        if(!isPairValid(currPair))
+            return false;
+    }
+    return true;
+}
+
 std::vector<Position> abaproToPosition(const std::string abapro) // throws
 {
     if(!isAbaproValid(abapro))

@@ -30,10 +30,9 @@ void ConsoleView::updateView(Board board)
         if(decalage % 2 != 0)
             std::cout << std::setw(2) << " ";
 
-        for (const auto &[c, y] : Position::letters_y) {
+        for (const auto &[c, y] : Position::letters_y)
             if(i == y)
                 std::cout << c << (i > 0 ? "/" : i == 0 ? "|" : "\\") << std::setw(4) << " ";
-        }
 
         for(int j = -4; j <= 4; ++j)
         {
