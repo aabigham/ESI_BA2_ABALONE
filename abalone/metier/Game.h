@@ -1,9 +1,8 @@
 #ifndef _GAME_H
 #define _GAME_H
 
-#include "Position.h"
-#include "Board.h"
 #include <iostream>
+#include "Board.h"
 
 /*!
  * \brief The Game class

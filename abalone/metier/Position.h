@@ -1,9 +1,7 @@
 #ifndef _POSITION_H
 #define _POSITION_H
 
-#include <string>
 #include <algorithm>
-#include <utility>
 #include <vector>
 #include "Directions.h"
 

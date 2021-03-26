@@ -1,10 +1,6 @@
 #ifndef _COLOR_H
 #define _COLOR_H
 
-#define WHITECOLOR "\033[37m"
-#define BLACKCOLOR "\033[30m"
-#define RESET "\033[0m"
-
 /*!
  * \brief The Color enumeration
  *

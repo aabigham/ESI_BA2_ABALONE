@@ -1,11 +1,9 @@
 #ifndef _CELL_H
 #define _CELL_H
 
-#include <string>
 #include <optional>
 #include "Position.h"
 #include "Color.h"
-#include <stdlib.h>
 
 /*!
  * \brief The Cell class
@@ -120,8 +118,6 @@ inline std::ostream &operator<<(std::ostream &os, const Cell &cell)
 std::string Cell::to_string() const
 {
     std::string str;
-    /*str.append("\n ___ ");
-    str.append("\n/ ");*/
     if (marble_.has_value())
     {
         Color color = marble_.value();
@@ -131,8 +127,6 @@ std::string Cell::to_string() const
     {
         str.append(".");
     }
-    /*str.append(" \\");
-    str.append("\n\\___/");*/
     return str;
 }
 
@@ -140,7 +134,6 @@ std::optional<Color> Cell::getColor() const
 {
     if (marble_.has_value())
         return marble_.value();
-
     return std::nullopt;
 }
 

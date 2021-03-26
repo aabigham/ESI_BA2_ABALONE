@@ -2,7 +2,6 @@
 #define _CONTROLLER_H
 
 #include "Game.h"
-#include "Board.h"
 #include "ConsoleView.h"
 
 /*!

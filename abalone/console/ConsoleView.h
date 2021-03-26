@@ -1,11 +1,8 @@
 #ifndef _CONSOLEVIEW_H
 #define _CONSOLEVIEW_H
 
-#include <array>
 #include <iomanip>
 #include "View.h"
-#include "Game.h"
-#include "Cell.h"
 
 /*!
 * \brief The ConsoleView class

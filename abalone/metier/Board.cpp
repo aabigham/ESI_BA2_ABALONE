@@ -1,5 +1,5 @@
-#include "Board.h"
 #include <algorithm>
+#include "Board.h"
 
 Board::Board()
     : cells_{std::unordered_map<Position, Cell>()},

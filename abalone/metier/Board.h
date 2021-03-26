@@ -1,7 +1,6 @@
 #ifndef _BOARD_H
 #define _BOARD_H
 
-#include <array>
 #include <unordered_map>
 #include "Position.h"
 #include "Color.h"

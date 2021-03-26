@@ -1,5 +1,4 @@
 #include "Cell.h"
-#include "Directions.h"
 
 Cell::Cell(Position position)
     : position_{position},

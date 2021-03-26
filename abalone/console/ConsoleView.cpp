@@ -1,7 +1,6 @@
 #include <iostream>
 #include <iomanip>
 #include "ConsoleView.h"
-#include "Position.h"
 
 void ConsoleView::displayWelcome()
 {

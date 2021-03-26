@@ -2,7 +2,6 @@
 #define _DIRECTIONS_H
 
 #include <tuple>
-#include "Position.h"
 
 using Direction = std::pair<int, int>;
 

@@ -1,5 +1,4 @@
 #include "Controller.h"
-#include "ConsoleView.h"
 
 Controller::Controller()
     : game_{Game()},

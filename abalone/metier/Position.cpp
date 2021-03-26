@@ -1,7 +1,7 @@
+#include <iostream>
 #include "Position.h"
 #include "Directions.h"
-#include <assert.h>
-#include <iostream>
+
 
 Position::Position(int x, int y)
     : x_{x},
