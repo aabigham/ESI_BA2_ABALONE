@@ -20,7 +20,7 @@ Le jeu se présente de cette façon :
 Pour effectuer un mouvement, il vous faut utiliser la **notation ABAPRO**.
 
 Résultat du mouvement `A1B1` (mouvement en ligne): 
-!["screenshot_console"](img/screenshot_console2.png);
+!["screenshot_console_mvmnt_ligne"](img/screenshot_console2.png);
 
 Résultat du mouvement `G5G7F4` (mouvement latéral): 
-!["screenshot_console"](img/screenshot_console3.png);
+!["screenshot_console_mvmnt_lateral"](img/screenshot_console3.png);
