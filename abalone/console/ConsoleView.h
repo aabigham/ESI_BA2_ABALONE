@@ -6,7 +6,6 @@
 
 /*!
 * \brief The ConsoleView class
-*
 * The ConsoleView class displays the game in the console version.
 */
 class ConsoleView : public View
@@ -24,7 +23,6 @@ public:
 
     /*!
      * \brief diplayMessage Display a message to the console.
-     *
      * \param message the message to diplay to the console.
      */
     void displayMessageln(std::string message);

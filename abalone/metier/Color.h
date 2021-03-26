@@ -3,7 +3,6 @@
 
 /*!
  * \brief The Color enumeration
- *
  * This enumeration allows us to define a marble, or a player.
  */
 enum class Color

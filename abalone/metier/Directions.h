@@ -7,7 +7,6 @@ using Direction = std::pair<int, int>;
 
 /*!
  * \brief The Direction class
- *
  * It allows us to define a guidance for the marbles that will be moving.
  */
 class Directions
@@ -47,10 +46,8 @@ public:
 /*!
  * \brief Get the direction according to the x and y in parameter.
  * Used in the computeDirection Method.
- *
  * \param x the x axis.
  * \param y the y axis.
- *
  * \return the direction according to the axis in parameter.
  */
 inline Direction getDirection(const int x, const int y);
