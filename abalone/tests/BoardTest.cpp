@@ -156,7 +156,7 @@ TEST_CASE("Testing methods of the Board class")
         REQUIRE(board.canMove(Position(2, -2), Position(1, -1), Color::BLACK).size() == 0);
     }
 
-    SECTION("Test of the canMove inline 3VS2 method pushing whites")
+    SECTION("Test of the canMove inline 3VS2 method pushing white marbles")
     {
         Board board = Board();
         Position posStart = Position(4, -4);
@@ -166,6 +166,17 @@ TEST_CASE("Testing methods of the Board class")
         board.move(Position(-3, 3), Position(-2, 2), Color::WHITE);
 
         REQUIRE(board.canMove(Position(2, -2), Position(1, -1), Color::BLACK).size() == 2);
+    }
+    SECTION("Test of the canMove inline 3VS3 blocked")
+    {
+        Board board = Board();
+        Position posStart = Position(4, -4);
+        Position posArrival = Position(posStart.getNext(Directions::UP_LEFT));
+        board.move(posStart, posArrival, Color::BLACK);
+        board.move(posArrival, posArrival.getNext(Directions::UP_LEFT), Color::BLACK);
+        board.move(Position(-4, 4), Position(-3, 3), Color::WHITE);
+
+        REQUIRE(board.canMove(Position(2, -2), Position(1, -1), Color::BLACK).size() == 0);
     }
 
 
