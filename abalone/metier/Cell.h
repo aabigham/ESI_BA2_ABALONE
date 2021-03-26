@@ -117,17 +117,10 @@ inline std::ostream &operator<<(std::ostream &os, const Cell &cell)
 // Inline methods
 std::string Cell::to_string() const
 {
-    std::string str;
     if (marble_.has_value())
-    {
-        Color color = marble_.value();
-        str.append(color == Color::WHITE ? "W" : "B");
-    }
+        return marble_.value() == Color::WHITE ? "W" : "B";
     else
-    {
-        str.append(".");
-    }
-    return str;
+        return ".";
 }
 
 std::optional<Color> Cell::getColor() const
