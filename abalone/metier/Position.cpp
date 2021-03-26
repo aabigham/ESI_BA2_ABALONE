@@ -133,13 +133,22 @@ bool isAbaproValid(const std::string abapro)
     if (size != 4 && size != 6)
         return false;
     // Checking each pair
-    for (int i = 0; i < size / 2; i += 2)
+    for (int i = 0; i < size - 1; i += 2)
     {
-        std::pair<char, char> currPair
-                = std::make_pair(abapro.at(i), abapro.at(i + 1));
+        auto currPair{std::make_pair(abapro.at(i), abapro.at(i + 1))};
         if(!isPairValid(currPair))
             return false;
     }
+    // A1B1C1
+    // Tour 1, i = 0
+    // p<0, 1>
+    // Tour 2, i = 2
+    // p<2, 3>
+    // Tour 3, i = 4
+    // p<4, 5>
+    // Tour 4, i = 6
+    // ??
+
     return true;
 }
 
@@ -149,27 +158,13 @@ std::vector<Position> abaproToPosition(const std::string abapro) // throws
         throw std::invalid_argument("The abapro input is not valid.");
 
     std::vector<Position> ret;
-    // p1
-    int y1 = getLetterYAxis(abapro.at(0));
-    int z1 = getNumberZAxis(abapro.at(1));
-    int x1 = 0 - (y1 + z1);
-    Position p1{x1, y1, z1};
-    ret.push_back(p1);
-    // p2
-    int y2 = getLetterYAxis(abapro.at(2));
-    int z2 = getNumberZAxis(abapro.at(3));
-    int x2 = 0 - (y2 + z2);
-    Position p2{x2, y2, z2};
-    ret.push_back(p2);
-    // p3
-    if (abapro.size() == 6)
+    int size = abapro.size();
+    for (int i = 0; i < size - 1; i += 2)
     {
-        int y3 = getLetterYAxis(abapro.at(4));
-        int z3 = getNumberZAxis(abapro.at(5));
-        int x3 = 0 - (y3 + z3);
-        Position p3{x3, y3, z3};
-        ret.push_back(p3);
-        return ret;
+        int y = getLetterYAxis(abapro.at(i));
+        int z = getNumberZAxis(abapro.at(i + 1));
+        int x = 0 - (y + z);
+        ret.push_back(Position(x, y, z));
     }
     return ret;
 }
