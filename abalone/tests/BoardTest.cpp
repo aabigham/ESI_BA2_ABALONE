@@ -129,7 +129,7 @@ TEST_CASE("Testing methods of the Board class")
         Board board = Board();
         Position posStart = Position(4, -4);
         Position posArrival = Position(4, -3);
-        Position posEnd = Position(2, -2);
+        Position posEnd = Position(3, -3);
         REQUIRE(board.canMove(posStart, posEnd, posArrival, Color::BLACK) == -1);
     }
 
@@ -200,6 +200,14 @@ TEST_CASE("Testing methods of the Board class")
         board.move(Position(-1,0),Position(0,-1),Color::WHITE);
 
         REQUIRE(board.canMove(Position(0,4),Position(0,3), Color::WHITE).size() == 0);
+
+    }
+
+    SECTION("Test move lateral on border")
+    {
+            Board board=Board();
+            board.move(Position(-3,3),Position(-2,2),Position(-3,2),Color::WHITE);
+            REQUIRE(board.canMove(Position(-3,2),Position(-2,1),Position(-4,2),Color::WHITE)==2);
 
     }
 }
