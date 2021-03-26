@@ -172,8 +172,7 @@ private:
     int blackMarblesLost_;
 };
 
-// Iinline methods
-
+// Inline methods
 std::unordered_map<Position, Cell> Board::getCells() const
 {
     return cells_;

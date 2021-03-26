@@ -9,9 +9,9 @@ void ConsoleView::displayWelcome()
     std::cout << "==============ABALONE==============\n\n";
 }
 
-void ConsoleView::displayMessage(std::string message)
+void ConsoleView::displayMessageln(std::string message)
 {
-    std::cout << message << std::endl;
+    std::cout << message << "\n";
 }
 
 void ConsoleView::updateView(Board board)
@@ -21,10 +21,9 @@ void ConsoleView::updateView(Board board)
     for(int i = 4; i >= -4; --i)
     {
         std::cout << std::endl << "  ";
-
         int decalage = i < 0 ? -i : i;
         for (int z = 0; z < decalage / 2 ; ++z)
-            std::cout << std::setw(2) << " " << "   ";
+            std::cout << std::setw(5) << " ";
 
         if(decalage % 2 != 0)
             std::cout << std::setw(2) << " ";
@@ -37,7 +36,7 @@ void ConsoleView::updateView(Board board)
         {
             Position pos(j, i);
             if(board.isInside(pos))
-                std::cout << std::setw(2) << board.getCellAt(pos) << "   ";
+                std::cout << std::setw(2) << board.getCellAt(pos) << std::setw(3) << " ";
         }
         if(i < 0)
             std::cout << std::setw(2) << " " << "/" <<i + 10 ;

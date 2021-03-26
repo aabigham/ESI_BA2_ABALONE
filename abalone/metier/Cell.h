@@ -68,7 +68,6 @@ private:
     std::optional<Color> marble_;
 };
 
-
 /*!
  * \brief The output stream operator overloading.
  *

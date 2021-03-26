@@ -13,21 +13,21 @@ class ConsoleView : public View
 {
 public:
     /*!
-     * \brief displayWelcome Displays the welcome message.
-     */
-    void displayWelcome();
-
-    /*!
     * \brief This method updates the console view.
     */
     void updateView(Board board);
+
+    /*!
+     * \brief displayWelcome Displays the welcome message.
+     */
+    void displayWelcome();
 
     /*!
      * \brief diplayMessage Display a message to the console.
      *
      * \param message the message to diplay to the console.
      */
-    void displayMessage(std::string message);
+    void displayMessageln(std::string message);
 };
 
 #endif //_CONSOLEVIEW_H
