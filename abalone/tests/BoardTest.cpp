@@ -60,7 +60,7 @@ TEST_CASE("Testing methods of the Board class")
         REQUIRE(board.countMarbles(posStart, computeDirection(posStart, posArrival), 0, Color::WHITE) == 0);
     }
 
-    SECTION("Test count marbles valid, equssssals 1")
+    SECTION("Test count marbles valid, equals 1")
     {
         Board board = Board();
         Position posStart = Position(-2, 2);
@@ -169,4 +169,43 @@ TEST_CASE("Testing methods of the Board class")
 
         REQUIRE(board.canMove(Position(2, -2), Position(1, -1), Color::BLACK).size() == 2);
     }
+
+
+    SECTION("Test of the canMove inline with positions that are not neighboor")
+    {
+
+        Board board = Board();
+        Position posStart = Position(0, -3);
+        Position posArrival = Position(-3,0);
+
+        REQUIRE(board.canMove(posStart,posArrival, Color::BLACK).size() == 0);
+    }
+
+    SECTION("Test of the canMove inline with positions that are not neighboor and posStart marble surrounded")
+    {
+        Board board = Board();
+        Position posStart = Position(1, -3);
+        Position posArrival = Position(-3,1);
+
+        REQUIRE(board.canMove(posStart,posArrival, Color::BLACK).size() == 0);
+    }
+
+    SECTION("Test move when 3vs2 but blocked by an other marble")
+    {
+
+        Board board = Board();
+
+        board.move(Position(0,-3),Position(0,-2),Color::BLACK);
+        board.move(Position(0,-2),Position(0,-1),Color::BLACK);
+        board.move(Position(0,-1),Position(0,0),Color::BLACK);
+
+        board.move(Position(-1,2),Position(-1,1),Color::WHITE);
+        board.move(Position(-1,1),Position(-1,0),Color::WHITE);
+        board.move(Position(-1,0),Position(0,-1),Color::WHITE);
+
+        REQUIRE(board.canMove(Position(0,4),Position(0,3), Color::WHITE).size() == 0);
+
+    }
+
+
 }

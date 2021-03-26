@@ -29,15 +29,6 @@ public:
     Cell(Position pos, Color marble); //done
 
     /*!
-    * \brief Checks if a cell is adjacent to the current cell.
-    *
-    * \param cell the cell that will be checked.
-    *
-    * \return true if the cell is adjacent to the current cell, false otherwise.
-    */
-    bool isAdjacentTo(Cell &cell); //done
-
-    /*!
     * \brief The string representation of the object.
     *
     * \return a string representation of the object.
@@ -84,15 +75,6 @@ private:
     std::optional<Color> marble_;
 };
 
-/*!
- * \brief hasSameColor Checks if two cells have the same color.
- *
- * \param cell1 the first cell to compare
- * \param cell2 the second cell to compare
- *
- * \return true if the cells have the same color, false otherwise.
- */
-inline bool hasSameColor(Cell cell1, Cell cell2);
 
 /*!
  * \brief The output stream operator overloading.
@@ -103,11 +85,6 @@ inline bool hasSameColor(Cell cell1, Cell cell2);
  * \return the output stream containing the string representation of the cell.
  */
 inline std::ostream &operator<<(std::ostream &os, const Cell &cell);
-
-inline bool hasSameColor(Cell cell1, Cell cell2)
-{
-    return cell1.getColor() == cell2.getColor();
-}
 
 inline std::ostream &operator<<(std::ostream &os, const Cell &cell)
 {
