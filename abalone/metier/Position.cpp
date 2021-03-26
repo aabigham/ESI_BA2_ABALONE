@@ -63,7 +63,7 @@ const Direction computeDirection(Position posStart, Position posArrival) // thro
     return getDirection(x_res, y_res);
 }
 
-int getLetterYAxis(char letter)
+int getLetterYAxis(const char letter)
 {
     for (const auto &[c, i] : Position::letters_y)
         if (c == letter)
@@ -71,7 +71,7 @@ int getLetterYAxis(char letter)
     throw std::invalid_argument("The letter does not exist.");
 }
 
-int getNumberZAxis(int number)
+int getNumberZAxis(const int number)
 {
     for (const auto &[c, i] : Position::numbers_z)
         if (c == number)
@@ -139,16 +139,6 @@ bool isAbaproValid(const std::string abapro)
         if(!isPairValid(currPair))
             return false;
     }
-    // A1B1C1
-    // Tour 1, i = 0
-    // p<0, 1>
-    // Tour 2, i = 2
-    // p<2, 3>
-    // Tour 3, i = 4
-    // p<4, 5>
-    // Tour 4, i = 6
-    // ??
-
     return true;
 }
 
@@ -157,9 +147,9 @@ std::vector<Position> abaproToPosition(const std::string abapro) // throws
     if(!isAbaproValid(abapro))
         throw std::invalid_argument("The abapro input is not valid.");
 
+    // Make a position out of each pair then pushing to the back of the vector
     std::vector<Position> ret;
-    int size = abapro.size();
-    for (int i = 0; i < size - 1; i += 2)
+    for (size_t i = 0; i < abapro.size() - 1; i += 2)
     {
         int y = getLetterYAxis(abapro.at(i));
         int z = getNumberZAxis(abapro.at(i + 1));

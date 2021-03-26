@@ -49,46 +49,55 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival, Col
 {
     std::vector<Position> positions;
 
+    // If the marble does not belong to the player of arrival pos invalid
     if(colorAt(posStart) != playerColor || !posStart.isNextTo(posArrival))
         return positions;
 
     Color oppositeColor = opposite(playerColor);
     Direction dirMove = computeDirection(posStart, posArrival);
 
-    if(!isInside(posStart) || !isInside(posArrival)
-            ||(colorAt(posArrival).has_value() && colorAt(posArrival) == oppositeColor))
-    { /* Start or Arrival position are outside the board,
-        or the arrival color does not belong to the player.*/
+    /* Start or Arrival position are outside the board,
+     * or the arrival color does not belong to the player.*/
+    if(!isInside(posStart)
+            || !isInside(posArrival)
+            || (colorAt(posArrival).has_value() && colorAt(posArrival) == oppositeColor))
+    {
         return positions;
     }
-    else if(!colorAt(posArrival).has_value())
-    { // The arrival pos is empty
+    else if(!colorAt(posArrival).has_value()) // The arrival pos is empty
+    {
         positions.push_back(posArrival);
         return positions;
     }
+
     // Counting the current player's marble
     int nbMarbles = countMarbles(posStart, dirMove, 0, playerColor);
-    if(nbMarbles <= 3) // Max 3 marbles
+
+    // Max 3 marbles able to move
+    if(nbMarbles <= 3)
     {
-        // First ennemy marble
+        // First pos after the player's marbles
         Position from(nbMarbles == 2 ? posArrival.getNext(dirMove)
                                      : posArrival.getNext(dirMove).getNext(dirMove));
+
+        // If it has no color, we can move directly
         if(!colorAt(from).has_value())
-        { // If it has no color
+        {
             positions.push_back(from);
         }
-        else
-        { // If it's belonging to the ennemy
+        else // If it has a marble belonging to the ennemy
+        {
             int oppositeMarbleCounter = countMarbles(from, dirMove, 0, oppositeColor);
+
+            // We should be in numeric superiority
             if(oppositeMarbleCounter < nbMarbles)
             {
+                // Position behind the ennemy marble
                 Position pos(oppositeMarbleCounter == 1 ? from.getNext(dirMove)
                                                         : from.getNext(dirMove).getNext(dirMove));
+                // If it's not outside and not occupied
                 if(!isInside(pos) || !colorAt(pos).has_value())
                 {
-                    // . w w b b b
-                    // x w w b b b
-                    // x b w w b b b
                     positions.push_back(from);
                     positions.push_back(oppositeMarbleCounter == 1 ? from.getNext(dirMove)
                                                                    : from.getNext(dirMove).getNext(dirMove));
@@ -103,20 +112,20 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival, Col
 
 bool Board::move(Position posStart, Position posArrival, Color playerColor)
 {
-    auto positionVector = canMove(posStart, posArrival, playerColor);
+    auto positions = canMove(posStart, posArrival, playerColor);
 
-    if(positionVector.size() == 0 )
+    if(positions.size() == 0)
         return false;
 
     getCellAt(posStart).removeColor();
-    getCellAt(positionVector.at(0)).setColor(playerColor);
+    getCellAt(positions.at(0)).setColor(playerColor);
 
-    if(positionVector.size() == 2)
+    if(positions.size() == 2)
     {
-        if(!isInside(positionVector.at(1)))
+        if(!isInside(positions.at(1)))
             playerColor == Color::BLACK ? addWhiteMarbleLost() : addBlackMarbleLost();
         else
-            getCellAt(positionVector.at(1)).setColor(opposite(playerColor));
+            getCellAt(positions.at(1)).setColor(opposite(playerColor));
     }
 
     return true;
@@ -134,7 +143,8 @@ int Board::countMarblesUntil(Position posStart, Position posEnd, Direction dirCo
     return countMarblesUntil(Position(posStart.getNext(dirCount)), posEnd, dirCount, dirMove, ++cpt, color);
 }
 
-int Board::canMove(Position posStart, Position posEnd, Position posArrival, Color playerColor){
+int Board::canMove(Position posStart, Position posEnd, Position posArrival, Color playerColor)
+{
     if(colorAt(posStart) != playerColor)
         return -1;
 
@@ -143,7 +153,7 @@ int Board::canMove(Position posStart, Position posEnd, Position posArrival, Colo
 
     if(!(isInside(posStart) && isInside(posEnd) && isInside(posArrival)
          && isInside(posStart.getNext(dirMove)) && isInside(posEnd.getNext(dirMove))
-         && isInside(posArrival.getNext(dirMove)) && !colorAt(posArrival).has_value()))
+         && !colorAt(posArrival).has_value()))
     { //Start, End or Arrival positions are outside the board,
         // or the arrival position is occupied.
         return -1;

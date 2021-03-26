@@ -194,7 +194,7 @@ bool isAbaproValid(const std::string abapro);
  *
  * \param letter the letter we want the axis from.
  */
-int getLetterYAxis(char letter);
+int getLetterYAxis(const char letter);
 
 /*!
  * \brief Gets the according Z axis to the number in parameter.
@@ -202,7 +202,7 @@ int getLetterYAxis(char letter);
  *
  * \param number the number we want the axis from.
  */
-int getNumberZAxis(int number);
+int getNumberZAxis(const int number);
 
 /*!
  * \brief Converts an abapro string into a vector of positions.
