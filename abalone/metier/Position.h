@@ -237,17 +237,6 @@ inline bool operator==(const Position &lhs, const Position &rhs);
 inline bool operator!=(const Position &lhs, const Position &rhs);
 
 /*!
- * \brief Substraction of two positions.
- *
- * \param lhs the first position.
- * \param rhs the second position.
- *
- * \return a new Position object, wich is the result
- * of the substraction of both parameters.
- */
-inline Position operator-(const Position &lhs, const Position &rhs);
-
-/*!
  * \brief The output stream operator overloading.
  *
  * \param os the output stream.
@@ -266,11 +255,6 @@ bool operator==(const Position &lhs, const Position &rhs)
 bool operator!=(const Position &lhs, const Position &rhs)
 {
     return !(lhs == rhs);
-}
-
-Position operator-(const Position &lhs, const Position &rhs)
-{
-    return Position(lhs.getX() - rhs.getX(), lhs.getY() - rhs.getY());
 }
 
 std::ostream &operator<<(std::ostream &os, const Position &position)
