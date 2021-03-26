@@ -26,10 +26,12 @@ std::vector<Position> Game::askAbaPro() const
     std::string abapro;
     std::cout << "Please enter an ABAPRO notation :\n";
     std::getline(std::cin, abapro);
+    std::transform(abapro.begin(), abapro.end(),abapro.begin(), ::toupper);
     while (!isAbaproValid(abapro))
     {
         std::cout << "Input is not valid, please try again :\n";
         std::getline(std::cin, abapro);
+        std::transform(abapro.begin(), abapro.end(),abapro.begin(), ::toupper);
     }
     return abaproToPosition(abapro);
 }
