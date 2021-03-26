@@ -37,15 +37,19 @@ std::optional<Color> Board::colorAt(Position pos) const
 
 int Board::countMarbles(Position posStart, Direction dirCount, int cpt, Color color) const
 {
+    /*
+     * If the marble is not inside, or the color does not correspond anymore,
+     * or if there is no color anymore
+     * */
     if(!isInside(posStart)
             || (colorAt(posStart).has_value() && colorAt(posStart).value() != color)
-            ||!colorAt(posStart).has_value())
+            || !colorAt(posStart).has_value())
         return cpt;
 
     return countMarbles(Position(posStart.getNext(dirCount)), dirCount, ++cpt, color);
 }
 
-std::vector<Position> Board::canMove(Position posStart, Position posArrival, Color playerColor)
+std::vector<Position> Board::canMove(Position posStart, Position posArrival, Color playerColor) const
 {
     std::vector<Position> positions;
 
@@ -114,14 +118,22 @@ bool Board::move(Position posStart, Position posArrival, Color playerColor)
 {
     auto positions = canMove(posStart, posArrival, playerColor);
 
+    // If the vector is empty, the move is not possible
     if(positions.size() == 0)
         return false;
 
+    // Removing the start marble
     getCellAt(posStart).removeColor();
+    // The first position in the vector will always be the player's one
     getCellAt(positions.at(0)).setColor(playerColor);
 
+    /*
+     * The second position in the vector is the position where
+     * the pushed marble of the oppisite player will arrive
+     * */
     if(positions.size() == 2)
     {
+        // Checking if we pushed a marble outside of the board
         if(!isInside(positions.at(1)))
             playerColor == Color::BLACK ? addWhiteMarbleLost() : addBlackMarbleLost();
         else
@@ -134,32 +146,35 @@ bool Board::move(Position posStart, Position posArrival, Color playerColor)
 int Board::countMarblesUntil(Position posStart, Position posEnd, Direction dirCount,
                              Direction dirMove, int cpt, Color color) const
 {
+    // Checking the parallel line above (for lateral move)
+    // Also checking if we count above 3, which cancels the move
     if(colorAt(posStart.getNext(dirMove)).has_value() || cpt > 3)
         return -5;
 
+    // If we encounter the wrong color, of if the posStart is the same of posEnd
     if(colorAt(posStart).value() != color || posStart == posEnd)
         return cpt;
 
     return countMarblesUntil(Position(posStart.getNext(dirCount)), posEnd, dirCount, dirMove, ++cpt, color);
 }
 
-int Board::canMove(Position posStart, Position posEnd, Position posArrival, Color playerColor)
+int Board::canMove(Position posStart, Position posEnd, Position posArrival, Color playerColor) const
 {
+    // Pos does not belong to the player
     if(colorAt(posStart) != playerColor)
         return -1;
 
     Direction dirMove = computeDirection(posStart, posArrival);
-    Direction dirCount = computeDirection(posStart, posEnd);
 
+    // All the positions involved in the lateral move must be inside
+    // Also checking if the arrival pos already has a value
     if(!(isInside(posStart) && isInside(posEnd) && isInside(posArrival)
          && isInside(posStart.getNext(dirMove)) && isInside(posEnd.getNext(dirMove))
          && !colorAt(posArrival).has_value()))
-    { //Start, End or Arrival positions are outside the board,
-        // or the arrival position is occupied.
         return -1;
-    }
 
-    // Count lines
+    // Counting lines
+    Direction dirCount = computeDirection(posStart, posEnd);
     int nbMarblesLine = countMarblesUntil(posStart, posEnd, dirCount, dirMove, 1, playerColor);
     if(nbMarblesLine < 0)
         return -1;
@@ -173,10 +188,10 @@ bool Board::move(Position posStart, Position posEnd, Position posArrival, Color 
     if(nbMarbles < 0)
         return false;
 
-    //Direction dirMove = computeDirection(posStart, posArrival);
+    // Changing the corresponding positions
     Direction dirCount = computeDirection(posStart, posEnd);
-
-    switch (nbMarbles) {
+    switch (nbMarbles)
+    {
     case 1:
     {
         getCellAt(posStart).removeColor();

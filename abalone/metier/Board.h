@@ -41,7 +41,7 @@ public:
     * marble of the player will move, and the second one is the position where the
     * pushed marble of the oppisite player will arrive.
     */
-    std::vector<Position>canMove(Position posStart, Position posArrival, Color playerColor);
+    std::vector<Position> canMove(Position posStart, Position posArrival, Color playerColor) const;
 
     /*!
     * \brief The move method for side moves.
@@ -61,10 +61,12 @@ public:
     * \param posStart the position of the first marble in row.
     * \param posEnd the position of the last marble in row.
     * \param posArrival the arrival position of the first marble in row.
+    * \param playerColor the color of the current player.
     *
-    * \return true if the marbles are able to move, false otherwise.
+    * \return the number of marbles to move if the move if possible,
+    * -1 if the move is not possible.
     */
-    int canMove(Position posStart, Position posEnd, Position posArrival, Color playerColor);
+    int canMove(Position posStart, Position posEnd, Position posArrival, Color playerColor) const;
 
     /*!
     * \brief countMarbles counts the number of marbles in a given direction, beginning from the given position.
@@ -80,7 +82,7 @@ public:
 
     /*!
     * \brief countMarblesUntil counts the number of marbles in a given direction,
-    * beginning from the given position and stops at the given end position.
+    * beginning from the given start position and stops at the given end position.
     * Since this method is used in the parallel move context, it also counts
     * the marble above or below the line, according the the dirMove in parameter.
     *
@@ -103,7 +105,7 @@ public:
     * \param pos the position at which we want to find its color
     * \return the color located at the position in parameter.
     */
-    std::optional<Color> colorAt(Position pos) const; //done
+    std::optional<Color> colorAt(Position pos) const;
 
     /*!
     * \brief Checks if a position is inside the board.
@@ -111,14 +113,14 @@ public:
     *
     * \return true if the position is inside, false otherwise.
     */
-    bool isInside(Position pos) const ; //Done
+    bool isInside(Position pos) const ;
 
     /*!
     * \brief Getter of the cells of the board.
     *
     * \return the cells of the board.
     */
-    inline std::unordered_map<Position, Cell> getCells() const; //done
+    inline std::unordered_map<Position, Cell> getCells() const;
 
     /*!
     * \brief Gets the cell at the position in parameter.
@@ -127,31 +129,31 @@ public:
     *
     * \return the cell at the given position.
     */
-    inline Cell &getCellAt(Position pos); //done
+    inline Cell &getCellAt(Position pos);
 
     /*!
     * \brief Getter of the lost white marbles.
     *
     * \return the number of lost white marble.
     */
-    inline int getWhiteMarblesLost() const; //done
+    inline int getWhiteMarblesLost() const;
 
     /*!
     * \brief Getter of the lost black marbles.
     *
     * \return the number of lost black marble.
     */
-    inline int getBlackMarblesLost() const; //done
+    inline int getBlackMarblesLost() const;
 
     /*!
     * \brief Increments the count of lost white marbles.
     */
-    inline void addWhiteMarbleLost(); //done
+    inline void addWhiteMarbleLost();
 
     /*!
     * \brief Increments the count of lost black marbles.
     */
-    inline void addBlackMarbleLost(); //done
+    inline void addBlackMarbleLost();
 
 private:
     /*!
