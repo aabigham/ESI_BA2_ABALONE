@@ -12,4 +12,16 @@ enum class Color
     BLACK
 };
 
+/*!
+ * \brief opposite gets the opposite color of a given color.
+ * \param color a given color.
+ * \return the opposite color of the given color.
+ */
+inline Color opposite(const Color color);
+
+Color opposite(const Color color)
+{
+    return color == Color::BLACK ? Color::WHITE : Color::BLACK;
+}
+
 #endif //_COLOR_H

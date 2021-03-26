@@ -49,10 +49,10 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival, Col
 {
     std::vector<Position> positions;
 
-    if(colorAt(posStart) != playerColor)
+    if(colorAt(posStart) != playerColor || !posStart.isNextTo(posArrival))
         return positions;
 
-    Color oppositeColor = (playerColor == Color::BLACK ? Color::WHITE : Color::BLACK);
+    Color oppositeColor = opposite(playerColor);
     Direction dirMove = computeDirection(posStart, posArrival);
 
     if(!isInside(posStart) || !isInside(posArrival)
@@ -108,7 +108,7 @@ bool Board::move(Position posStart, Position posArrival, Color playerColor)
         if(!isInside(positionVector.at(1)))
             playerColor == Color::BLACK ? addWhiteMarbleLost() : addBlackMarbleLost();
         else
-            getCellAt(positionVector.at(1)).setColor(playerColor == Color::BLACK ? Color::WHITE : Color::BLACK);
+            getCellAt(positionVector.at(1)).setColor(opposite(playerColor));
     }
 
     return true;

@@ -15,9 +15,6 @@ bool Game::play(std::vector<Position> positions)
     else
         flagMove = board_.move(positions.at(0), positions.at(1), positions.at(2), currentPlayer_);
 
-    if(flagMove)
-        setCurrentPlayer(currentPlayer_ == Color::BLACK ? Color::WHITE : Color::BLACK);
-
     return flagMove;
 }
 

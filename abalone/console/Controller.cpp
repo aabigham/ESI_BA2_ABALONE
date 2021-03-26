@@ -15,16 +15,17 @@ void Controller::startGame()
         try
         {
             view_.displayMessage("--> " + game_.get_s_currentPlayer() + " is now playing.");
-            auto positions = game_.askAbaPro();
-            bool moved = game_.play(positions);
-            if(!moved)
+            auto positions{game_.askAbaPro()};
+            bool moved{game_.play(positions)};
+            if(moved)
             {
-                view_.displayMessage("\nCould not move, please try again.");
+                view_.displayMessage("Move successful !\n");
+                game_.setCurrentPlayer(opposite(game_.getCurrentPlayer()));
+                view_.updateView(game_.getBoard());
             }
             else
             {
-                view_.displayMessage("Move successful !\n");
-                view_.updateView(game_.getBoard());
+                view_.displayMessage("\nCould not move, please try again.");
             }
         }
         catch (const std::exception &e)
@@ -32,4 +33,6 @@ void Controller::startGame()
             std::cout << "Unexpected exception : " << e.what() << std::endl;
         }
     }
+    std::string winner{game_.getCurrentPlayer() == Color::BLACK ? "White" : "Black"};
+    view_.displayMessage(winner + " player won, congratulations !");
 }
