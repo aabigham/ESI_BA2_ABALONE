@@ -11,8 +11,3 @@ Cell::Cell(Position position, Color marble)
       marble_{marble}
 {
 }
-
-bool Cell::isAdjacentTo(Cell &cell)
-{
-    return position_.isNextTo(cell.getPosition());
-}
