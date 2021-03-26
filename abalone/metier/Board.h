@@ -3,8 +3,6 @@
 
 #include <unordered_map>
 #include "Position.h"
-#include "Color.h"
-#include "Directions.h"
 #include "Cell.h"
 
 /*!
