@@ -82,9 +82,17 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival, Col
             int oppositeMarbleCounter = countMarbles(from, dirMove, 0, oppositeColor);
             if(oppositeMarbleCounter < nbMarbles)
             {
-                positions.push_back(from);
-                positions.push_back(oppositeMarbleCounter == 1 ? from.getNext(dirMove)
-                                                               : from.getNext(dirMove).getNext(dirMove));
+                Position pos(oppositeMarbleCounter == 1 ? from.getNext(dirMove)
+                                                        : from.getNext(dirMove).getNext(dirMove));
+                if(!isInside(pos) || !colorAt(pos).has_value())
+                {
+                    // . w w b b b
+                    // x w w b b b
+                    // x b w w b b b
+                    positions.push_back(from);
+                    positions.push_back(oppositeMarbleCounter == 1 ? from.getNext(dirMove)
+                                                                   : from.getNext(dirMove).getNext(dirMove));
+                }
             }
         }
     }
