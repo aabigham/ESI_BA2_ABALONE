@@ -23,6 +23,114 @@ TEST_CASE("Testing methods the Position class")
         REQUIRE_FALSE(isLetterValid('0'));
     }
 
+    SECTION("Testing isPairValid#1 True")
+    {
+        std::pair<char, char> pair('A', '1');
+        REQUIRE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#1 False")
+    {
+        std::pair<char, char> pair('A', '6');
+        REQUIRE_FALSE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#2 True")
+    {
+        std::pair<char, char> pair('B', '1');
+        REQUIRE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#2 False")
+    {
+        std::pair<char, char> pair('B', '7');
+        REQUIRE_FALSE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#3 True")
+    {
+        std::pair<char, char> pair('C', '1');
+        REQUIRE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#3 False")
+    {
+        std::pair<char, char> pair('C', '8');
+        REQUIRE_FALSE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#4 True")
+    {
+        std::pair<char, char> pair('D', '1');
+        REQUIRE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#4 False")
+    {
+        std::pair<char, char> pair('D', '9');
+        REQUIRE_FALSE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#5 True")
+    {
+        std::pair<char, char> pair('E', '1');
+        REQUIRE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#5 False")
+    {
+        std::pair<char, char> pair('E', 'X');
+        REQUIRE_FALSE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#6 True")
+    {
+        std::pair<char, char> pair('F', '2');
+        REQUIRE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#6 False")
+    {
+        std::pair<char, char> pair('F', '1');
+        REQUIRE_FALSE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#7 True")
+    {
+        std::pair<char, char> pair('G', '3');
+        REQUIRE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#7 False")
+    {
+        std::pair<char, char> pair('G', '2');
+        REQUIRE_FALSE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#8 True")
+    {
+        std::pair<char, char> pair('H', '4');
+        REQUIRE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#9 False")
+    {
+        std::pair<char, char> pair('H', '3');
+        REQUIRE_FALSE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#10 True")
+    {
+        std::pair<char, char> pair('I', '5');
+        REQUIRE(isPairValid(pair));
+    }
+
+    SECTION("Testing isPairValid#10 False")
+    {
+        std::pair<char, char> pair('I', '4');
+        REQUIRE_FALSE(isPairValid(pair));
+    }
+
     SECTION("Testing isAbaproValid False string Too long")
     {
         REQUIRE_FALSE(isAbaproValid("A1B1BAEAZESZAZE"));
