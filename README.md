@@ -12,3 +12,15 @@ Projet de DEV4.
 - Version Qt : 5.15.2
 - Version QtCreator : 4.14.1 
 - OS : Windows 10 20H2 build 19042
+
+## Version Console
+Le jeu se présente de cette façon : 
+!["screenshot_console"](img/screenshot_console.png);
+
+Pour effectuer un mouvement, il vous faut utiliser la **notation ABAPRO**.
+
+Résultat du mouvement `A1B1` (mouvement en ligne): 
+!["screenshot_console"](img/screenshot_console2.png);
+
+Résultat du mouvement `G5G7F4` (mouvement latéral): 
+!["screenshot_console"](img/screenshot_console3.png);
