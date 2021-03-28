@@ -6,21 +6,21 @@ TEST_CASE("Testing methods of the Board class")
     SECTION("Test of the method isInside")
     {
         Position p1(1, 0);
-        Board board = Board();
+        Board board;
         REQUIRE(board.isInside(p1));
     }
 
     SECTION("Test of the method isInside but false")
     {
         Position p1(5, 0);
-        Board board = Board();
+        Board board;
         REQUIRE_FALSE(board.isInside(p1));
     }
 
     SECTION("Test of the getColorAt method with a color")
     {
         Position p1(1, 0);
-        Board board = Board();
+        Board board;
         board.getCellAt(p1).setColor(Color::BLACK);
         std::optional<Color> result = board.colorAt(p1);
         REQUIRE(result.value() == Color::BLACK);
@@ -29,13 +29,13 @@ TEST_CASE("Testing methods of the Board class")
     SECTION("Test of the getColorAt method with no color")
     {
         Position p1(1, 0);
-        Board board = Board();
+        Board board;
         REQUIRE(board.colorAt(p1) == std::nullopt);
     }
 
     SECTION("Test of the right color initialisation in the Constructor of board ")
     {
-        Board board = Board();
+        Board board;
         bool colorAtRightPlace = true;
         for (const auto &cell : board.getCells())
         {
@@ -54,7 +54,7 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test count marbles valid, equals 0")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(-2, 1);
         Position posArrival = Position(posStart.getNext(Directions::DOWN_LEFT));
         REQUIRE(board.countMarbles(posStart, computeDirection(posStart, posArrival), 0, Color::WHITE) == 0);
@@ -62,7 +62,7 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test count marbles valid, equals 1")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(-2, 2);
         Position posArrival = Position(posStart.getNext(Directions::DOWN_LEFT));
         REQUIRE(board.countMarbles(posStart, computeDirection(posStart, posArrival), 0, Color::WHITE) == 1);
@@ -70,14 +70,14 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test count marbles valid, equals 2 ")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(-2, 3);
         Position posArrival = Position(posStart.getNext(Directions::DOWN_LEFT));
         REQUIRE(board.countMarbles(posStart, computeDirection(posStart, posArrival), 0, Color::WHITE) == 2);
     }
     SECTION("Test count marbles valid, equals 3 ")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(-2, 4);
         Position posArrival = Position(posStart.getNext(Directions::DOWN_LEFT));
         REQUIRE(board.countMarbles(posStart, computeDirection(posStart, posArrival), 0, Color::WHITE) == 3);
@@ -85,7 +85,7 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test of the canMove inline method one moved")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(-2, 2);
         Position posArrival = Position(posStart.getNext(Directions::DOWN_LEFT));
         REQUIRE(board.canMove(posStart, posArrival, Color::WHITE).size() == 1);
@@ -93,7 +93,7 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test of the canMove inline method two moved")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(-2, 3);
         Position posArrival = Position(posStart.getNext(Directions::DOWN_LEFT));
         REQUIRE(board.canMove(posStart, posArrival, Color::WHITE).size() == 1);
@@ -101,7 +101,7 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test of the canMove inline method two moved")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(-2, 4);
         Position posArrival = Position(posStart.getNext(Directions::DOWN_LEFT));
         REQUIRE(board.canMove(posStart, posArrival, Color::WHITE).size() == 1);
@@ -109,7 +109,7 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test of the canMove inline method empty case")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(-2, 0);
         Position posArrival = Position(posStart.getNext(Directions::DOWN_LEFT));
         REQUIRE(board.canMove(posStart, posArrival, Color::WHITE).size() == 0);
@@ -117,7 +117,7 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test of the canMove lateral method threeMoved")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(0, -2);
         Position posArrival = Position(0, -1);
         Position posEnd = Position(2, -2);
@@ -126,7 +126,7 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test of the canMove lateral method blocked")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(4, -4);
         Position posArrival = Position(4, -3);
         Position posEnd = Position(3, -3);
@@ -135,7 +135,7 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test of the canMove lateral method blocked")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(1, -4);
         Position posArrival = Position(0, -3);
         Position posEnd = Position(3, -4);
@@ -144,7 +144,7 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test of the canMove inline 2VS2 method blocked")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(4, -4);
         Position posArrival = Position(posStart.getNext(Directions::UP_LEFT));
         board.move(posStart, posArrival, Color::BLACK);
@@ -158,7 +158,7 @@ TEST_CASE("Testing methods of the Board class")
 
     SECTION("Test of the canMove inline 3VS2 method pushing white marbles")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(4, -4);
         Position posArrival = Position(posStart.getNext(Directions::UP_LEFT));
         board.move(posStart, posArrival, Color::BLACK);
@@ -169,7 +169,7 @@ TEST_CASE("Testing methods of the Board class")
     }
     SECTION("Test of the canMove inline 3VS3 blocked")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(4, -4);
         Position posArrival = Position(posStart.getNext(Directions::UP_LEFT));
         board.move(posStart, posArrival, Color::BLACK);
@@ -179,46 +179,44 @@ TEST_CASE("Testing methods of the Board class")
         REQUIRE(board.canMove(Position(2, -2), Position(1, -1), Color::BLACK).size() == 0);
     }
 
-
     SECTION("Test of the canMove inline with positions that are not neighboor")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(0, -3);
-        Position posArrival = Position(-3,0);
+        Position posArrival = Position(-3, 0);
 
         REQUIRE(board.canMove(posStart,posArrival, Color::BLACK).size() == 0);
     }
 
     SECTION("Test of the canMove inline with positions that are not neighboor and posStart marble surrounded")
     {
-        Board board = Board();
+        Board board;
         Position posStart = Position(1, -3);
-        Position posArrival = Position(-3,1);
+        Position posArrival = Position(-3, 1);
 
         REQUIRE(board.canMove(posStart,posArrival, Color::BLACK).size() == 0);
     }
 
     SECTION("Test move when 3vs2 but blocked by an other marble")
     {
-        Board board = Board();
+        Board board;
 
-        board.move(Position(0,-3),Position(0,-2),Color::BLACK);
-        board.move(Position(0,-2),Position(0,-1),Color::BLACK);
-        board.move(Position(0,-1),Position(0,0),Color::BLACK);
+        board.move(Position(0, -3), Position(0, -2), Color::BLACK);
+        board.move(Position(0, -2), Position(0, -1), Color::BLACK);
+        board.move(Position(0, -1), Position(0, 0), Color::BLACK);
 
-        board.move(Position(-1,2),Position(-1,1),Color::WHITE);
-        board.move(Position(-1,1),Position(-1,0),Color::WHITE);
-        board.move(Position(-1,0),Position(0,-1),Color::WHITE);
+        board.move(Position(-1, 2), Position(-1, 1), Color::WHITE);
+        board.move(Position(-1, 1), Position(-1, 0), Color::WHITE);
+        board.move(Position(-1, 0), Position(0, -1), Color::WHITE);
 
-        REQUIRE(board.canMove(Position(0,4),Position(0,3), Color::WHITE).size() == 0);
+        REQUIRE(board.canMove(Position(0, 4), Position(0, 3), Color::WHITE).size() == 0);
 
     }
 
     SECTION("Test move lateral on border")
     {
-            Board board=Board();
-            board.move(Position(-3,3),Position(-2,2),Position(-3,2),Color::WHITE);
-            REQUIRE(board.canMove(Position(-3,2),Position(-2,1),Position(-4,2),Color::WHITE)==2);
-
+        Board board;
+        board.move(Position(-3, 3), Position(-2, 2), Position(-3, 2), Color::WHITE);
+        REQUIRE(board.canMove(Position(-3, 2), Position(-2, 1), Position(-4, 2), Color::WHITE) == 2);
     }
 }

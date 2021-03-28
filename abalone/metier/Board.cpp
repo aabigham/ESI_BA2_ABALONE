@@ -52,38 +52,34 @@ int Board::countMarbles(Position posStart, Direction dirCount, int cpt, Color co
 std::vector<Position> Board::canMove(Position posStart, Position posArrival, Color playerColor) const
 {
     std::vector<Position> positions;
-
-    // If the marble does not belong to the player of arrival pos invalid
-    if(colorAt(posStart) != playerColor || !posStart.isNextTo(posArrival))
-        return positions;
-
     Color oppositeColor = opposite(playerColor);
     Direction dirMove = computeDirection(posStart, posArrival);
 
-    /* Start or Arrival position are outside the board,
-     * or the arrival color does not belong to the player.*/
-    if(!isInside(posStart)
-            || !isInside(posArrival)
-            || (colorAt(posArrival).has_value() && colorAt(posArrival) == oppositeColor))
-    {
+    // If positions are not inside
+    if(!(isInside(posStart) && isInside(posArrival)))
         return positions;
-    }
-    else if(!colorAt(posArrival).has_value()) // The arrival pos is empty
+    // If arrival pos isn't next to start pos
+    if(!posStart.isNextTo(posArrival))
+        return positions;
+    // Cells not belonging to the player
+    if(colorAt(posStart) != playerColor
+            || (colorAt(posArrival).has_value() && colorAt(posArrival) == oppositeColor))
+        return positions;
+    // The arrival pos is empty so we can move
+    if(!colorAt(posArrival).has_value())
     {
         positions.push_back(posArrival);
         return positions;
     }
 
-    // Counting the current player's marble
+    // Counting the current player's marbles
     int nbMarbles = countMarbles(posStart, dirMove, 0, playerColor);
-
     // Max 3 marbles able to move
     if(nbMarbles <= 3)
     {
         // First pos after the player's marbles
         Position from(nbMarbles == 2 ? posArrival.getNext(dirMove)
                                      : posArrival.getNext(dirMove).getNext(dirMove));
-
         // If it has no color, we can move directly
         if(!colorAt(from).has_value())
         {
@@ -96,15 +92,17 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival, Col
             // We should be in numeric superiority
             if(oppositeMarbleCounter < nbMarbles)
             {
-                // Position behind the ennemy marble
-                Position pos(oppositeMarbleCounter == 1 ? from.getNext(dirMove)
-                                                        : from.getNext(dirMove).getNext(dirMove));
-                // If it's not outside and not occupied
+                // First position after "from"
+                Position pos(oppositeMarbleCounter == 1
+                             ? from.getNext(dirMove)
+                             : from.getNext(dirMove).getNext(dirMove));
+                // If it's not inside, or not occupied
                 if(!isInside(pos) || !colorAt(pos).has_value())
                 {
                     positions.push_back(from);
-                    positions.push_back(oppositeMarbleCounter == 1 ? from.getNext(dirMove)
-                                                                   : from.getNext(dirMove).getNext(dirMove));
+                    positions.push_back(oppositeMarbleCounter == 1
+                                        ? from.getNext(dirMove)
+                                        : from.getNext(dirMove).getNext(dirMove));
                 }
             }
         }
@@ -129,7 +127,7 @@ bool Board::move(Position posStart, Position posArrival, Color playerColor)
 
     /*
      * The second position in the vector is the position where
-     * the pushed marble of the oppisite player will arrive
+     * the pushed marble of the opposite player will arrive
      * */
     if(positions.size() == 2)
     {
@@ -165,12 +163,12 @@ int Board::canMove(Position posStart, Position posEnd, Position posArrival, Colo
         return -1;
 
     Direction dirMove = computeDirection(posStart, posArrival);
-
     // All the positions involved in the lateral move must be inside
-    // Also checking if the arrival pos already has a value
     if(!(isInside(posStart) && isInside(posEnd) && isInside(posArrival)
-         && isInside(posStart.getNext(dirMove)) && isInside(posEnd.getNext(dirMove))
-         && !colorAt(posArrival).has_value()))
+         && isInside(posStart.getNext(dirMove)) && isInside(posEnd.getNext(dirMove))))
+        return -1;
+    // Checking if the arrival pos already has a value
+    if(colorAt(posArrival).has_value())
         return -1;
 
     // Counting lines

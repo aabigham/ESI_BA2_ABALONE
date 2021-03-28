@@ -16,8 +16,7 @@ void Controller::startGame()
         {
             view_.displayMessageln("--> " + game_.get_s_currentPlayer() + " is now playing.");
             auto positions{game_.askAbaPro()};
-            bool moved{game_.play(positions)};
-            if(moved)
+            if(game_.play(positions))
             {
                 view_.displayMessageln("Move successful !\n");
                 game_.setCurrentPlayer(opposite(game_.getCurrentPlayer()));

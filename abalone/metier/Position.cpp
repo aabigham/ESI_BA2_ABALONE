@@ -142,7 +142,7 @@ bool isAbaproValid(const std::string abapro)
     return true;
 }
 
-std::vector<Position> abaproToPosition(const std::string abapro) // throws
+std::vector<Position> abaproToPosition(const std::string abapro)
 {
     if(!isAbaproValid(abapro))
         throw std::invalid_argument("The abapro input is not valid.");

@@ -39,7 +39,7 @@ void ConsoleView::updateView(Board board)
                 std::cout << std::setw(2) << board.getCellAt(pos) << std::setw(3) << " ";
         }
         if(i < 0)
-            std::cout << std::setw(2) << " " << "/" <<i + 10 ;
+            std::cout << std::setw(2) << " " << "/" << i + 10 ;
         std::cout << std::endl;
     }
     std::cout << std::endl << std::setw(21) << " " << "1    2    3    4    5" << std::endl << std::endl;
