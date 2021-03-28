@@ -16,14 +16,14 @@ Projet de DEV4.
 ## Version Console
 Le jeu se présente de cette façon : 
 
-![](https://git.esi-bru.be/54985/abalone-54985-54247/-/blob/master/img/screenshot_console.PNG)
+!["screenshot_console"](img/screenshot_console.PNG)
 
 Pour effectuer un mouvement, il vous faut utiliser la **notation ABAPRO**.
 
 Résultat du mouvement `A1B1` (mouvement en ligne) :
 
-![](https://git.esi-bru.be/54985/abalone-54985-54247/-/blob/master/img/screenshot_console2.PNG)
+!["screenshot_console2"](img/screenshot_console2.PNG)
 
-Résultat du mouvement `G5G7F4` (mouvement latéral) :
+Résultat du mouvement `G5G7F4` (mouvement latéral):
  
-![](https://git.esi-bru.be/54985/abalone-54985-54247/-/blob/master/img/screenshot_console3.PNG)
+!["screenshot_console3"](img/screenshot_console3.PNG)
