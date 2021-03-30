@@ -57,8 +57,8 @@ const Direction computeDirection(Position posStart, Position posArrival) // thro
     int x_ar = posArrival.getX();
     int y_ar = posArrival.getY();
 
-    int x_res = x_st == x_ar  ? 0 : x_st < x_ar ? 1 : -1;
-    int y_res = y_st == y_ar  ? 0 : y_st < y_ar ? 1 : -1;
+    int x_res = x_st == x_ar ? 0 : x_st < x_ar ? 1 : -1;
+    int y_res = y_st == y_ar ? 0 : y_st < y_ar ? 1 : -1;
 
     return getDirection(x_res, y_res);
 }
