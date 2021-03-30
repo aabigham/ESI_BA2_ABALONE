@@ -21,6 +21,7 @@ void ConsoleView::updateView(Board board)
     for(int i = 4; i >= -4; --i)
     {
         std::cout << std::endl << "  ";
+
         int decalage = i < 0 ? -i : i;
         for (int z = 0; z < decalage / 2 ; ++z)
             std::cout << std::setw(5) << " ";
@@ -38,8 +39,10 @@ void ConsoleView::updateView(Board board)
             if(board.isInside(pos))
                 std::cout << std::setw(2) << board.getCellAt(pos) << std::setw(3) << " ";
         }
+
         if(i < 0)
             std::cout << std::setw(2) << " " << "/" << i + 10 ;
+
         std::cout << std::endl;
     }
     std::cout << std::endl << std::setw(21) << " " << "1    2    3    4    5" << std::endl << std::endl;

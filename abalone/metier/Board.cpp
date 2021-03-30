@@ -186,7 +186,7 @@ bool Board::move(Position posStart, Position posEnd, Position posArrival, Color 
     if(nbMarbles < 0)
         return false;
 
-    // Changing the corresponding positions
+    // Changing the corresponding positions, according to nbMarbles
     Direction dirCount = computeDirection(posStart, posEnd);
     switch (nbMarbles)
     {
