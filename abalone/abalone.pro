@@ -1,9 +1,9 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
+    metier \
     console \
     #gui \
-    metier \
     tests
 
 OTHER_FILES += \
