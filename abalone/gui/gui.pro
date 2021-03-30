@@ -1,8 +1,9 @@
 include(../defaults.pri)
 
 TEMPLATE = app
-CONFIG += console
+CONFIG += qt
 
-QT -= gui
+QT += widgets
 
-SOURCES +=
+SOURCES += \
+    main.cpp

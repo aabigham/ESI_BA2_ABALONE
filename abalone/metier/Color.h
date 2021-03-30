@@ -16,9 +16,9 @@ enum class Color
  * \param color a given color.
  * \return the opposite color of the given color.
  */
-inline Color opposite(const Color color);
+inline Color opposite(Color color);
 
-Color opposite(const Color color)
+Color opposite(Color color)
 {
     return color == Color::BLACK ? Color::WHITE : Color::BLACK;
 }

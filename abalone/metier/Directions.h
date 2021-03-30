@@ -50,9 +50,9 @@ public:
  * \param y the y axis.
  * \return the direction according to the axis in parameter.
  */
-inline Direction getDirection(const int x, const int y);
+inline Direction getDirection(int x, int y);
 
-Direction getDirection(const int x, const int y)
+Direction getDirection(int x, int y)
 {
     Direction ret;
     switch (x)

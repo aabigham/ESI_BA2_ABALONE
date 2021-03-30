@@ -46,14 +46,14 @@ public:
      * \param dir the direction that will be used to determine the next case.
      * \return the position next to the current case, based on the  given direction.
      */
-    Position getNext(const Direction dir) const;
+    Position getNext(Direction dir) const;
 
     /*!
      * \brief Checks if the position in parameter is next to the current position.
      * \param pos the position to check
      * \return true is the checked position is adjacent, false otherwise.
      */
-    bool isNextTo(const Position pos) const;
+    bool isNextTo(Position pos) const;
 
     /*!
      * \brief The string representation of the object.
@@ -139,42 +139,42 @@ const Direction computeDirection(Position posStart, Position posArrival);
  * \param letter the letter to validate.
  * \throws std::invalid_argument if the letter is not valid.
  */
-bool isLetterValid(const char letter);
+bool isLetterValid(char letter);
 
 /*!
  * \brief Validates an ABAPRO number.
  * \param letter the number to validate.
  * \throws std::invalid_argument if the number is not valid.
  */
-bool isNumberValid(const char number);
+bool isNumberValid(char number);
 
 /*!
  * \brief isPairValid Checks if a letter - number pair is valid.
  * \param pair the letter - number pair.
  * \return true if the pair is valid, false otherwise.
  */
-bool isPairValid(const std::pair<char, char> pair);
+bool isPairValid(std::pair<char, char> pair);
 
 /*!
  * \brief Validates an ABAPRO input.
  * \param letter the input to validate.
  * \throws std::invalid_argument if the input is not valid.
  */
-bool isAbaproValid(const std::string abapro);
+bool isAbaproValid(std::string abapro);
 
 /*!
  * \brief Gets the according Y axis to the letter in parameter.
  * Useful to convert an abapro character chain into a position.
  * \param letter the letter we want the axis from.
  */
-int getLetterYAxis(const char letter);
+int getLetterYAxis(char letter);
 
 /*!
  * \brief Gets the according Z axis to the number in parameter.
  * Useful to convert an abapro character chain into a position.
  * \param number the number we want the axis from.
  */
-int getNumberZAxis(const int number);
+int getNumberZAxis(int number);
 
 /*!
  * \brief Converts an abapro string into a vector of positions.
@@ -182,7 +182,7 @@ int getNumberZAxis(const int number);
  * \param abapro the ABA-PRO notation as a vector of positions.
  * \return the newly created vector of positions.
  */
-std::vector<Position> abaproToPosition(const std::string abapro);
+std::vector<Position> abaproToPosition(std::string abapro);
 
 // Operator functions
 /*!

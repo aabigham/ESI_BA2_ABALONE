@@ -158,7 +158,7 @@ std::unordered_map<Position, Cell> Board::getCells() const
     return cells_;
 }
 
-Cell &Board::getCellAt(const Position pos)
+Cell &Board::getCellAt(Position pos)
 {
     return cells_.at(pos);
 }

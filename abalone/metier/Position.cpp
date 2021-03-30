@@ -29,12 +29,12 @@ Position::Position(const Position &pos)
         throw std::invalid_argument("The sum of all the axis does not equal 0.");
 }
 
-Position Position::getNext(const Direction dir) const
+Position Position::getNext(Direction dir) const
 {
     return Position(x_ + std::get<0>(dir), y_ + std::get<1>(dir));
 }
 
-bool Position::isNextTo(const Position pos) const
+bool Position::isNextTo(Position pos) const
 {
     if (getNext(Directions::LEFT) == pos
             || getNext(Directions::DOWN_LEFT) == pos
@@ -63,7 +63,7 @@ const Direction computeDirection(Position posStart, Position posArrival) // thro
     return getDirection(x_res, y_res);
 }
 
-int getLetterYAxis(const char letter)
+int getLetterYAxis(char letter)
 {
     for (const auto &[c, i] : Position::letters_y)
         if (c == letter)
@@ -71,7 +71,7 @@ int getLetterYAxis(const char letter)
     throw std::invalid_argument("The letter does not exist.");
 }
 
-int getNumberZAxis(const int number)
+int getNumberZAxis(int number)
 {
     for (const auto &[c, i] : Position::numbers_z)
         if (c == number)
@@ -79,7 +79,7 @@ int getNumberZAxis(const int number)
     throw std::invalid_argument("The number does not exist.");
 }
 
-bool isLetterValid(const char letter)
+bool isLetterValid(char letter)
 {
     for (const auto &[c, i] : Position::letters_y)
         if (c == letter)
@@ -87,7 +87,7 @@ bool isLetterValid(const char letter)
     return false;
 }
 
-bool isNumberValid(const char number)
+bool isNumberValid(char number)
 {
     for (const auto &[c, i] : Position::numbers_z)
         if (c == number)
@@ -95,7 +95,7 @@ bool isNumberValid(const char number)
     return false;
 }
 
-bool isPairValid(const std::pair<char, char> pair)
+bool isPairValid(std::pair<char, char> pair)
 {
     char letter = pair.first;
     char number = pair.second;
@@ -127,7 +127,7 @@ bool isPairValid(const std::pair<char, char> pair)
     }
 }
 
-bool isAbaproValid(const std::string abapro)
+bool isAbaproValid(std::string abapro)
 {
     int size = abapro.size();
     if (size != 4 && size != 6)
@@ -142,7 +142,7 @@ bool isAbaproValid(const std::string abapro)
     return true;
 }
 
-std::vector<Position> abaproToPosition(const std::string abapro)
+std::vector<Position> abaproToPosition(std::string abapro)
 {
     if(!isAbaproValid(abapro))
         throw std::invalid_argument("The abapro input is not valid.");
