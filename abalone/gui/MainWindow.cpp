@@ -10,22 +10,27 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
     game_(game)
 {
     ui->setupUi(this);
+
+    // Black counter
     QPixmap black_marble_pic(":/images/black_marble.png");
     black_marble_pic = black_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelBMCpt->setPixmap(black_marble_pic);
     int black_lost = game.getBoard().getBlackMarblesLost();
     QString sBlackLabel{QString::number(black_lost) + QString::fromStdString("/6")};
     ui->blackLabelCpt->setText(sBlackLabel);
-    //
+
+    // White counter
     QPixmap white_marble_pic(":/images/white_marble.png");
     white_marble_pic = white_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelWMCpt->setPixmap(white_marble_pic);
     int white_lost = game.getBoard().getWhiteMarblesLost();
     QString sWhiteLabel{QString::number(white_lost) + QString::fromStdString("/6")};
     ui->whiteLabelCpt->setText(sWhiteLabel);
-    //
+
+    // Current player pix
     ui->labelCPM->setPixmap(game.getCurrentPlayer() == Color::BLACK ? black_marble_pic : white_marble_pic);
-    //
+
+    // Board TODO : decalage
     Board board{game.getBoard()};
     int row = 0, col = 0;
     for(int i = 4; i >= -4; --i)
