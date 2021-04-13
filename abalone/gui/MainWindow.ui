@@ -75,7 +75,7 @@
      </font>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
    <widget class="QWidget" name="gridLayoutWidget_3">
@@ -112,7 +112,7 @@
      </font>
     </property>
     <property name="text">
-     <string>TextLabel</string>
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="currPlayerLabel">
