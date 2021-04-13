@@ -13,7 +13,7 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    explicit MainWindow(QWidget *parent = nullptr);
+    explicit MainWindow(Game game, QWidget *parent = nullptr);
     ~MainWindow();
 
 private slots:
@@ -21,6 +21,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    Game game_;
 };
 
 #endif // MAINWINDOW_H

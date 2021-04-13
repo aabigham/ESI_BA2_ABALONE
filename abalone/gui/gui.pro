@@ -5,6 +5,8 @@ CONFIG += qt
 
 QT += widgets
 
+LIBS += -L../lib -llibcore
+
 SOURCES += \
     MainWindow.cpp \
     MarbleWidget.cpp \
@@ -17,3 +19,6 @@ FORMS += \
 HEADERS += \
     MainWindow.h \
     MarbleWidget.h
+
+RESOURCES += \
+    resources.qrc

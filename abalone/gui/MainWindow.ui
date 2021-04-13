@@ -32,7 +32,14 @@
       <height>461</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="gridLayout"/>
+    <layout class="QGridLayout" name="boardGrid">
+     <property name="sizeConstraint">
+      <enum>QLayout::SetNoConstraint</enum>
+     </property>
+     <property name="spacing">
+      <number>0</number>
+     </property>
+    </layout>
    </widget>
    <widget class="QWidget" name="gridLayoutWidget_2">
     <property name="geometry">
@@ -43,7 +50,15 @@
       <height>41</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="whiteMarbleCpt"/>
+    <layout class="QGridLayout" name="whiteMarbleCpt">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelWMCpt">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
    <widget class="QLabel" name="whiteLabelCpt">
     <property name="geometry">
@@ -72,7 +87,15 @@
       <height>41</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="blackMarbleCpt_2"/>
+    <layout class="QGridLayout" name="blackMarbleCpt">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelBMCpt">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
    <widget class="QLabel" name="blackLabelCpt">
     <property name="geometry">
@@ -132,13 +155,21 @@
    <widget class="QWidget" name="gridLayoutWidget_4">
     <property name="geometry">
      <rect>
-      <x>480</x>
+      <x>488</x>
       <y>550</y>
       <width>41</width>
       <height>41</height>
      </rect>
     </property>
-    <layout class="QGridLayout" name="currPlayerMarble"/>
+    <layout class="QGridLayout" name="currPlayerMarble">
+     <item row="0" column="0">
+      <widget class="QLabel" name="labelCPM">
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
    <widget class="QLabel" name="errorLabel">
     <property name="geometry">
