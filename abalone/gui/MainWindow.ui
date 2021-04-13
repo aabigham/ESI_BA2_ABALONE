@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>534</width>
-    <height>624</height>
+    <width>537</width>
+    <height>603</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -171,7 +171,7 @@
      </item>
     </layout>
    </widget>
-   <widget class="QLabel" name="errorLabel">
+   <widget class="QLabel" name="feedbackLabel">
     <property name="geometry">
      <rect>
       <x>360</x>
@@ -186,19 +186,35 @@
      </font>
     </property>
     <property name="text">
-     <string>Mouvement invalide !</string>
+     <string>Feedbacks ici </string>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>534</width>
-     <height>21</height>
-    </rect>
-   </property>
+   <widget class="Line" name="line">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>50</y>
+      <width>511</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
+   <widget class="Line" name="line_2">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>530</y>
+      <width>511</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
