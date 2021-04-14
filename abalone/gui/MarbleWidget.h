@@ -14,7 +14,7 @@ class MarbleWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit MarbleWidget(Position pos, Board board, QWidget *parent = nullptr);
+    explicit MarbleWidget(Board board, Position pos, QWidget *parent = nullptr);
     ~MarbleWidget();
 
 private:

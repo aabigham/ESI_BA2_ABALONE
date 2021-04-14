@@ -12,7 +12,7 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
     ui->setupUi(this);
 
     // Black counter
-    QPixmap black_marble_pic(":/images/black_marble.png");
+    QPixmap black_marble_pic{":/images/black_marble.png"};
     black_marble_pic = black_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelBMCpt->setPixmap(black_marble_pic);
     int black_lost = game.getBoard().getBlackMarblesLost();
@@ -20,7 +20,7 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
     ui->blackLabelCpt->setText(sBlackLabel);
 
     // White counter
-    QPixmap white_marble_pic(":/images/white_marble.png");
+    QPixmap white_marble_pic{":/images/white_marble.png"};
     white_marble_pic = white_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelWMCpt->setPixmap(white_marble_pic);
     int white_lost = game.getBoard().getWhiteMarblesLost();
@@ -35,11 +35,12 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
     int row = 0, col = 0;
     for(int i = 4; i >= -4; --i)
     {
+        int decalage = (i < 0 ? -i : i) / 2;
         for(int j = -4; j <= 4; ++j)
         {
             Position pos(j, i);
             if(board.isInside(pos))
-                ui->boardGrid->addWidget(new MarbleWidget(pos, board), row, col);
+                ui->boardGrid->addWidget(new MarbleWidget(board, pos), row, col + decalage);
             ++col;
             if(col > 8) col = 0;
         }

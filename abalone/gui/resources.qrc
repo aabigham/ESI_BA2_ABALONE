@@ -1,6 +1,7 @@
 <RCC>
-    <qresource prefix="/images">
-        <file>white_marble.png</file>
-        <file>black_marble.png</file>
+    <qresource prefix="/">
+        <file>images/black_marble.png</file>
+        <file>images/empty_circle.png</file>
+        <file>images/white_marble.png</file>
     </qresource>
 </RCC>
