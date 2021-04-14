@@ -70,4 +70,5 @@ void MainWindow::updateBoard(Board board)
 
 void MainWindow::on_moveButton_clicked()
 {
+    exit(1);
 }

@@ -7,8 +7,7 @@ MarbleWidget::MarbleWidget(Board board, Position pos, QWidget *parent) :
     pos_(pos)
 {
     ui->setupUi(this);
-    // Hover
-    this->setAttribute(Qt::WA_Hover);
+    //
     // Color
     auto color = board.colorAt(pos);
     if(color.has_value())
