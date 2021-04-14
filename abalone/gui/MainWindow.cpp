@@ -11,7 +11,10 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    // Black counter
+    // Background
+    this->setStyleSheet("background-color: gray;");
+
+    // Black counter label + pix
     QPixmap black_marble_pic{":/images/black_marble.png"};
     black_marble_pic = black_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelBMCpt->setPixmap(black_marble_pic);
@@ -19,7 +22,7 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
     QString sBlackLabel{QString::number(black_lost) + QString::fromStdString("/6")};
     ui->blackLabelCpt->setText(sBlackLabel);
 
-    // White counter
+    // White counter label + pix
     QPixmap white_marble_pic{":/images/white_marble.png"};
     white_marble_pic = white_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelWMCpt->setPixmap(white_marble_pic);
@@ -30,17 +33,21 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
     // Current player pix
     ui->labelCPM->setPixmap(game.getCurrentPlayer() == Color::BLACK ? black_marble_pic : white_marble_pic);
 
-    // Board TODO : decalage
+    // Board TODO : fix decalage
     Board board{game.getBoard()};
     int row = 0, col = 0;
     for(int i = 4; i >= -4; --i)
     {
-        int decalage = (i < 0 ? -i : i) / 2;
+        int decalage = i / 2;
         for(int j = -4; j <= 4; ++j)
         {
             Position pos(j, i);
             if(board.isInside(pos))
-                ui->boardGrid->addWidget(new MarbleWidget(board, pos), row, col + decalage);
+            {
+                MarbleWidget *mw{new MarbleWidget(board, pos)};
+                //if(decalage % 2 == 0)
+                ui->boardGrid->addWidget(mw, row, col + decalage);
+            }
             ++col;
             if(col > 8) col = 0;
         }
