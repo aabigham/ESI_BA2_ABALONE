@@ -16,6 +16,10 @@ public:
     explicit MainWindow(Game game, QWidget *parent = nullptr);
     ~MainWindow();
 
+    void updateBoard(Board board);
+
+    void updateLabels(Game game);
+
 private slots:
     void on_moveButton_clicked();
 

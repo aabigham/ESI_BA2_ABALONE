@@ -7,6 +7,8 @@ MarbleWidget::MarbleWidget(Board board, Position pos, QWidget *parent) :
     pos_(pos)
 {
     ui->setupUi(this);
+    // Hover
+    this->setAttribute(Qt::WA_Hover);
     // Color
     auto color = board.colorAt(pos);
     if(color.has_value())
@@ -17,7 +19,7 @@ MarbleWidget::MarbleWidget(Board board, Position pos, QWidget *parent) :
     }
     else
     {
-        QPixmap qpix{":/images/empty_circle.png"};
+        QPixmap qpix{":/images/grey_marble.png"};
         qpix = qpix.scaled(ui->color->width() / 3, ui->color->height());
         ui->color->setPixmap(qpix);
     }
@@ -26,4 +28,9 @@ MarbleWidget::MarbleWidget(Board board, Position pos, QWidget *parent) :
 MarbleWidget::~MarbleWidget()
 {
     delete ui;
+}
+
+void MarbleWidget::setupDecalage()
+{
+    ui->marble->setContentsMargins(25, 0, 0, 0);
 }

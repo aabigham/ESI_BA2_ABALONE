@@ -17,6 +17,8 @@ public:
     explicit MarbleWidget(Board board, Position pos, QWidget *parent = nullptr);
     ~MarbleWidget();
 
+    void setupDecalage();
+
 private:
     Ui::MarbleWidget *ui;
 
