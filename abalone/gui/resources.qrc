@@ -1,8 +1,10 @@
 <RCC>
     <qresource prefix="/">
         <file>images/black_marble.png</file>
-        <file>images/empty_circle.png</file>
         <file>images/white_marble.png</file>
         <file>images/grey_marble.png</file>
+        <file>images/black_selected.png</file>
+        <file>images/grey_selected.png</file>
+        <file>images/white_selected.png</file>
     </qresource>
 </RCC>

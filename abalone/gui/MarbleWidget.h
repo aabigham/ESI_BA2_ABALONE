@@ -2,6 +2,7 @@
 #define MARBLEWIDGET_H
 
 #include <QWidget>
+#include <QLabel>
 #include "Position.h"
 #include "Board.h"
 
@@ -17,12 +18,31 @@ public:
     explicit MarbleWidget(Board board, Position pos, QWidget *parent = nullptr);
     ~MarbleWidget();
 
-    void setupDecalage();
+    inline Position getPosition() const;
+
+    void setupDecalage() const;
+
+    void setSelected();
+
+signals:
+    void clicked();
+
+protected:
+    void mousePressEvent(QMouseEvent *event) override;
 
 private:
     Ui::MarbleWidget *ui;
 
+    Board board_;
+
     Position pos_;
+
+    bool selected_;
 };
+
+Position MarbleWidget::getPosition() const
+{
+    return pos_;
+}
 
 #endif // MARBLEWIDGET_H

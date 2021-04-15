@@ -7,12 +7,14 @@
 MainWindow::MainWindow(Game game, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
-    game_(game)
+    game_(game),
+    cptSelected_(0)
 {
     ui->setupUi(this);
     this->setStyleSheet("background-color: darkseagreen;"); // Window background
     updateLabels(game); // Cpt and current player labels
     updateBoard(game.getBoard()); // Board view
+    setupConnections();
 }
 
 MainWindow::~MainWindow()
@@ -44,21 +46,18 @@ void MainWindow::updateLabels(Game game)
 void MainWindow::updateBoard(Board board)
 {
     int row = 0, col = 0;
-    for(int i = 4; i >= -4; --i)
+    for(int i{4}; i >= -4; --i)
     {
         int decalage = i / 2;
-        for(int j = -4; j <= 4; ++j)
+        for(int j{-4}; j <= 4; ++j)
         {
             Position pos(j, i);
             if(board.isInside(pos))
             {
                 MarbleWidget *mw{new MarbleWidget(board, pos)};
-                if(i % 2 != 0)
-                    mw->setupDecalage();
-                if(i == -1 || i == -3)
-                    ui->boardGrid->addWidget(mw, row, (col + decalage) - 1);
-                else
-                    ui->boardGrid->addWidget(mw, row, col + decalage);
+                if(i % 2 != 0) mw->setupDecalage();
+                if(i == -1 || i == -3) ui->boardGrid->addWidget(mw, row, (col + decalage) - 1);
+                else ui->boardGrid->addWidget(mw, row, col + decalage);
             }
             ++col;
             if(col > 8) col = 0;
@@ -68,7 +67,25 @@ void MainWindow::updateBoard(Board board)
     }
 }
 
+void MainWindow::setupConnections()
+{
+    for (int i{0}; i < ui->boardGrid->count(); ++i)
+    {
+        QLayoutItem *item = ui->boardGrid->itemAt(i);
+        if (dynamic_cast<QWidgetItem *>(item))
+            connect(item->widget(), SIGNAL(clicked()), this, SLOT(handle_marble_clicked()), Qt::UniqueConnection);
+    }
+}
+
 void MainWindow::on_moveButton_clicked()
 {
     exit(1);
+}
+
+void MainWindow::handle_marble_clicked()
+{
+    QObject *obj = sender();
+    MarbleWidget *mw{dynamic_cast<MarbleWidget *>(obj)};
+    mw->setSelected();
+    //setupConnections();
 }

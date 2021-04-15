@@ -20,13 +20,19 @@ public:
 
     void updateLabels(Game game);
 
+    void setupConnections();
+
 private slots:
     void on_moveButton_clicked();
+
+    void handle_marble_clicked();
 
 private:
     Ui::MainWindow *ui;
 
     Game game_;
+
+    int cptSelected_;
 };
 
 #endif // MAINWINDOW_H

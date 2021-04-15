@@ -1,13 +1,16 @@
 #include "MarbleWidget.h"
 #include "ui_MarbleWidget.h"
+#include <QMouseEvent>
 
 MarbleWidget::MarbleWidget(Board board, Position pos, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::MarbleWidget),
-    pos_(pos)
+    board_(board),
+    pos_(pos),
+    selected_(false)
 {
     ui->setupUi(this);
-    //
+
     // Color
     auto color = board.colorAt(pos);
     if(color.has_value())
@@ -29,7 +32,43 @@ MarbleWidget::~MarbleWidget()
     delete ui;
 }
 
-void MarbleWidget::setupDecalage()
+void MarbleWidget::setupDecalage() const
 {
     ui->marble->setContentsMargins(25, 0, 0, 0);
+}
+
+void MarbleWidget::setSelected()
+{
+    static int cptSelected = 0;
+    auto color = board_.colorAt(pos_);
+    if(cptSelected < 4)
+    {
+        QPixmap qpix;
+        if(!selected_)
+        {
+            selected_ = true;
+            ++cptSelected;
+            if(color.has_value())
+                qpix = QPixmap{color == Color::BLACK ? ":/images/black_selected.png" : ":/images/white_selected.png"};
+            else
+                qpix = QPixmap{":/images/grey_selected.png"};
+        }
+        else
+        {
+            selected_ = false;
+            --cptSelected;
+            if(color.has_value())
+                qpix = QPixmap{color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
+            else
+                qpix = QPixmap{":/images/grey_marble.png"};
+        }
+        qpix = qpix.scaled(ui->color->width() / 2, ui->color->height() / 2);
+        ui->color->setPixmap(qpix);
+    }
+}
+
+void MarbleWidget::mousePressEvent(QMouseEvent *event)
+{
+    if (event->button() == Qt::LeftButton)
+        emit clicked();
 }
