@@ -13,6 +13,9 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
 {
     ui->setupUi(this);
     this->setStyleSheet("background-color: darkseagreen;"); // Window background
+    QPixmap qpix{game.getCurrentPlayer() == Color::BLACK ? QPixmap{":/images/black_marble.png"}: QPixmap{":/images/white_marble.png"}};
+    qpix = qpix.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
+    ui->labelCPM->setPixmap(qpix);
     updateLabels(game); // Cpt and current player labels
     updateBoard(game.getBoard()); // Board view
     setupConnections();
@@ -23,7 +26,7 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::updateLabels(Game game)
+void MainWindow::updateLabels(Game game) const
 {
     Board board{game.getBoard()};
     // Black counter label + pix
@@ -40,11 +43,11 @@ void MainWindow::updateLabels(Game game)
     int white_lost = board.getWhiteMarblesLost();
     QString sWhiteLabel{QString::number(white_lost) + QString::fromStdString("/6")};
     ui->whiteLabelCpt->setText(sWhiteLabel);
-    // Current player pix
-    ui->labelCPM->setPixmap(game.getCurrentPlayer() == Color::BLACK ? black_marble_pic : white_marble_pic);
+    // Curr player
+    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK ? black_marble_pic : white_marble_pic);
 }
 
-void MainWindow::updateBoard(Board board)
+void MainWindow::updateBoard(Board board) const
 {
     int row = 0, col = 0;
     for(int i{4}; i >= -4; --i)
@@ -68,7 +71,7 @@ void MainWindow::updateBoard(Board board)
     }
 }
 
-void MainWindow::setupConnections()
+void MainWindow::setupConnections() const
 {
     for (int i{0}; i < ui->boardGrid->count(); ++i)
     {
@@ -80,19 +83,24 @@ void MainWindow::setupConnections()
 
 void MainWindow::on_moveButton_clicked()
 {
-    Board board{game_.getBoard()};
-    Color currPlayer{game_.getCurrentPlayer()};
-    bool flagMove;
-    if(positions_.size() == 2)
-        flagMove = board.move(*positions_.at(0), *positions_.at(1), currPlayer);
-    else
-        flagMove = board.move(*positions_.at(0), *positions_.at(1), *positions_.at(2), currPlayer);
-
+    std::vector<Position> positions;
+    for (const auto &p : positions_) { positions.push_back(*p); };
+    bool flagMove{game_.play(positions)};
     if(flagMove)
-        updateBoard(board);
-    else
-        ui->feedbackLabel->setText("Could not move !");
-    setupConnections();
+    {
+        updateBoard(game_.getBoard());
+        // Remake the connections cause new wigdets are added after the update
+        setupConnections();
+        // Reset counter of selecteds
+        cptSelected_ = 0;
+        // change
+        game_.setCurrentPlayer(opposite(game_.getCurrentPlayer()));
+        updateLabels(game_);
+        // clearing the positions
+        positions_.clear();
+        // curr
+    }
+    else { ui->feedbackLabel->setText("Could not move !"); }
 }
 
 void MainWindow::handle_marble_clicked()
@@ -100,19 +108,22 @@ void MainWindow::handle_marble_clicked()
     QObject *obj = sender();
     MarbleWidget *widget{dynamic_cast<MarbleWidget *>(obj)};
     Position pos{widget->getPosition()};
-    int flagSelect{widget->setSelected()};
+    int flagSelect{widget->setSelected(cptSelected_)};
     if(flagSelect == 0)
     {
         auto pit = std::find(positions_.begin(), positions_.end(),
                              std::make_unique<Position>(pos));
         positions_.erase(pit);
-        /*int i{0};
-        for (auto it{positions_.begin()}; it != positions_.end() ; ++it, ++i)
-            if(*positions_.at(i) == pos) positions_.erase(it);*/
+        --cptSelected_;
     }
     else if (flagSelect == 1)
+    {
         positions_.push_back(std::make_unique<Position>(pos));
+        ++cptSelected_;
+    }
     else
+    {
         ui->feedbackLabel->setText("Could not select !");
+    }
     //setupConnections();
 }

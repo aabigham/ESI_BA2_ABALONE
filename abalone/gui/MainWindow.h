@@ -16,11 +16,11 @@ public:
     explicit MainWindow(Game game, QWidget *parent = nullptr);
     ~MainWindow();
 
-    void updateBoard(Board board);
+    void updateBoard(Board board) const;
 
-    void updateLabels(Game game);
+    void updateLabels(Game game) const;
 
-    void setupConnections();
+    void setupConnections() const;
 
 private slots:
     void on_moveButton_clicked();

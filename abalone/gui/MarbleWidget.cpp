@@ -37,9 +37,8 @@ void MarbleWidget::setupDecalage() const
     ui->marble->setContentsMargins(25, 0, 0, 0);
 }
 
-int MarbleWidget::setSelected()
+int MarbleWidget::setSelected(int cptSelected)
 {
-    static int cptSelected = 0;
     int ret;
     auto color = board_.colorAt(pos_);
     QPixmap qpix;
@@ -48,24 +47,21 @@ int MarbleWidget::setSelected()
         if(cptSelected < 3)
         {
             selected_ = true;
-            ++cptSelected;
             if(color.has_value()) qpix = QPixmap{color == Color::BLACK ? ":/images/black_selected.png" : ":/images/white_selected.png"};
             else qpix = QPixmap{":/images/grey_selected.png"};
             ret = 1;
         }
-        else{ ret = -1; }
+        else{ return -1; }
     }
     else
     {
         selected_ = false;
-        --cptSelected;
         if(color.has_value()) qpix = QPixmap{color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
         else qpix = QPixmap{":/images/grey_marble.png"};
         ret = 0;
     }
     qpix = qpix.scaled(ui->color->width() / 2, ui->color->height() / 2);
     ui->color->setPixmap(qpix);
-
     return ret;
 }
 
