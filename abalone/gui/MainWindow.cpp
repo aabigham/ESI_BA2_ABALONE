@@ -69,6 +69,7 @@ void MainWindow::updateBoard()
             if(board.isInside(pos))
             {
                 MarbleWidget *widget{new MarbleWidget(board, pos)};
+                // Connecting the clicked signal
                 connect(widget, SIGNAL(clicked()), this, SLOT(handle_marble_clicked()), Qt::UniqueConnection);
                 if(i % 2 != 0) widget->setupDecalage();
                 if(i == -1 || i == -3) ui->boardGrid->addWidget(widget, row, (col + decalage) - 1);

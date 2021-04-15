@@ -32,7 +32,7 @@ MarbleWidget::~MarbleWidget()
     delete ui;
 }
 
-void MarbleWidget::setupDecalage() const
+void MarbleWidget::setDecalage() const
 {
     ui->marble->setContentsMargins(25, 0, 0, 0);
 }
