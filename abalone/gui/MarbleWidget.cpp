@@ -47,8 +47,10 @@ int MarbleWidget::setSelected(int cptSelected)
         if(cptSelected < 3)
         {
             selected_ = true;
-            if(color.has_value()) qpix = QPixmap{color == Color::BLACK ? ":/images/black_selected.png" : ":/images/white_selected.png"};
-            else qpix = QPixmap{":/images/grey_selected.png"};
+            if(color.has_value())
+                qpix = QPixmap{color == Color::BLACK ? ":/images/black_selected.png" : ":/images/white_selected.png"};
+            else
+                qpix = QPixmap{":/images/grey_selected.png"};
             ret = 1;
         }
         else{ return -1; }
@@ -56,8 +58,10 @@ int MarbleWidget::setSelected(int cptSelected)
     else
     {
         selected_ = false;
-        if(color.has_value()) qpix = QPixmap{color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
-        else qpix = QPixmap{":/images/grey_marble.png"};
+        if(color.has_value())
+            qpix = QPixmap{color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
+        else
+            qpix = QPixmap{":/images/grey_marble.png"};
         ret = 0;
     }
     qpix = qpix.scaled(ui->color->width() / 2, ui->color->height() / 2);

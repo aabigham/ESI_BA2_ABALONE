@@ -12,12 +12,25 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
     positions_()
 {
     ui->setupUi(this);
+    // Background color
     this->setStyleSheet("background-color: darkseagreen;"); // Window background
+    // Black counter pix
+    QPixmap black_marble_pic{":/images/black_marble.png"};
+    black_marble_pic = black_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
+    ui->labelBMCpt->setPixmap(black_marble_pic);
+    // White counter pix
+    QPixmap white_marble_pic{":/images/white_marble.png"};
+    white_marble_pic = white_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
+    ui->labelWMCpt->setPixmap(white_marble_pic);
+    // Current player pix
     QPixmap qpix{game.getCurrentPlayer() == Color::BLACK ? QPixmap{":/images/black_marble.png"}: QPixmap{":/images/white_marble.png"}};
     qpix = qpix.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelCPM->setPixmap(qpix);
-    updateLabels(game); // Cpt and current player labels
+    // Labels
+    updateLabels(game); // Cpt labels and pix
+    // Board
     updateBoard(game.getBoard()); // Board view
+    // Widget connections
     setupConnections();
 }
 
@@ -29,22 +42,18 @@ MainWindow::~MainWindow()
 void MainWindow::updateLabels(Game game) const
 {
     Board board{game.getBoard()};
-    // Black counter label + pix
-    QPixmap black_marble_pic{":/images/black_marble.png"};
-    black_marble_pic = black_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
-    ui->labelBMCpt->setPixmap(black_marble_pic);
+    // Black counter label
     int black_lost = board.getBlackMarblesLost();
     QString sBlackLabel{QString::number(black_lost) + QString::fromStdString("/6")};
     ui->blackLabelCpt->setText(sBlackLabel);
-    // White counter label + pix
-    QPixmap white_marble_pic{":/images/white_marble.png"};
-    white_marble_pic = white_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
-    ui->labelWMCpt->setPixmap(white_marble_pic);
+    // White counter label
     int white_lost = board.getWhiteMarblesLost();
     QString sWhiteLabel{QString::number(white_lost) + QString::fromStdString("/6")};
     ui->whiteLabelCpt->setText(sWhiteLabel);
     // Curr player
-    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK ? black_marble_pic : white_marble_pic);
+    ui->labelCPM->setPixmap(game.getCurrentPlayer() == Color::BLACK
+                            ? QPixmap{":/images/black_marble.png"}
+                            : QPixmap{":/images/white_marble.png"});
 }
 
 void MainWindow::updateBoard(Board board) const
@@ -85,20 +94,14 @@ void MainWindow::on_moveButton_clicked()
 {
     std::vector<Position> positions;
     for (const auto &p : positions_) { positions.push_back(*p); };
-    bool flagMove{game_.play(positions)};
-    if(flagMove)
+    if(game_.play(positions))
     {
-        updateBoard(game_.getBoard());
-        // Remake the connections cause new wigdets are added after the update
-        setupConnections();
-        // Reset counter of selecteds
-        cptSelected_ = 0;
-        // change
-        game_.setCurrentPlayer(opposite(game_.getCurrentPlayer()));
+        game_.setCurrentPlayer(opposite(game_.getCurrentPlayer())); // change current player
         updateLabels(game_);
-        // clearing the positions
-        positions_.clear();
-        // curr
+        updateBoard(game_.getBoard());
+        setupConnections(); // Remake the connections cause new wigdets are added after the update
+        positions_.clear(); // Clearing the selected positions
+        cptSelected_ = 0; // Reset counter of selecteds
     }
     else { ui->feedbackLabel->setText("Could not move !"); }
 }
@@ -111,8 +114,7 @@ void MainWindow::handle_marble_clicked()
     int flagSelect{widget->setSelected(cptSelected_)};
     if(flagSelect == 0)
     {
-        auto pit = std::find(positions_.begin(), positions_.end(),
-                             std::make_unique<Position>(pos));
+        auto pit = std::find(positions_.begin(), positions_.end(), std::make_unique<Position>(pos));
         positions_.erase(pit);
         --cptSelected_;
     }
@@ -121,9 +123,6 @@ void MainWindow::handle_marble_clicked()
         positions_.push_back(std::make_unique<Position>(pos));
         ++cptSelected_;
     }
-    else
-    {
-        ui->feedbackLabel->setText("Could not select !");
-    }
+    else{ ui->feedbackLabel->setText("Could not select !"); }
     //setupConnections();
 }
