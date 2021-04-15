@@ -8,7 +8,8 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
     game_(game),
-    cptSelected_(0)
+    cptSelected_(0),
+    positions_()
 {
     ui->setupUi(this);
     this->setStyleSheet("background-color: darkseagreen;"); // Window background
@@ -54,10 +55,10 @@ void MainWindow::updateBoard(Board board)
             Position pos(j, i);
             if(board.isInside(pos))
             {
-                MarbleWidget *mw{new MarbleWidget(board, pos)};
-                if(i % 2 != 0) mw->setupDecalage();
-                if(i == -1 || i == -3) ui->boardGrid->addWidget(mw, row, (col + decalage) - 1);
-                else ui->boardGrid->addWidget(mw, row, col + decalage);
+                MarbleWidget *widget{new MarbleWidget(board, pos)};
+                if(i % 2 != 0) widget->setupDecalage();
+                if(i == -1 || i == -3) ui->boardGrid->addWidget(widget, row, (col + decalage) - 1);
+                else ui->boardGrid->addWidget(widget, row, col + decalage);
             }
             ++col;
             if(col > 8) col = 0;
@@ -79,13 +80,39 @@ void MainWindow::setupConnections()
 
 void MainWindow::on_moveButton_clicked()
 {
-    exit(1);
+    Board board{game_.getBoard()};
+    Color currPlayer{game_.getCurrentPlayer()};
+    bool flagMove;
+    if(positions_.size() == 2)
+        flagMove = board.move(*positions_.at(0), *positions_.at(1), currPlayer);
+    else
+        flagMove = board.move(*positions_.at(0), *positions_.at(1), *positions_.at(2), currPlayer);
+
+    if(flagMove)
+        updateBoard(board);
+    else
+        ui->feedbackLabel->setText("Could not move !");
+    setupConnections();
 }
 
 void MainWindow::handle_marble_clicked()
 {
     QObject *obj = sender();
-    MarbleWidget *mw{dynamic_cast<MarbleWidget *>(obj)};
-    mw->setSelected();
+    MarbleWidget *widget{dynamic_cast<MarbleWidget *>(obj)};
+    Position pos{widget->getPosition()};
+    int flagSelect{widget->setSelected()};
+    if(flagSelect == 0)
+    {
+        auto pit = std::find(positions_.begin(), positions_.end(),
+                             std::make_unique<Position>(pos));
+        positions_.erase(pit);
+        /*int i{0};
+        for (auto it{positions_.begin()}; it != positions_.end() ; ++it, ++i)
+            if(*positions_.at(i) == pos) positions_.erase(it);*/
+    }
+    else if (flagSelect == 1)
+        positions_.push_back(std::make_unique<Position>(pos));
+    else
+        ui->feedbackLabel->setText("Could not select !");
     //setupConnections();
 }

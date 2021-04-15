@@ -37,34 +37,36 @@ void MarbleWidget::setupDecalage() const
     ui->marble->setContentsMargins(25, 0, 0, 0);
 }
 
-void MarbleWidget::setSelected()
+int MarbleWidget::setSelected()
 {
     static int cptSelected = 0;
+    int ret;
     auto color = board_.colorAt(pos_);
-    if(cptSelected < 4)
+    QPixmap qpix;
+    if(!selected_)
     {
-        QPixmap qpix;
-        if(!selected_)
+        if(cptSelected < 3)
         {
             selected_ = true;
             ++cptSelected;
-            if(color.has_value())
-                qpix = QPixmap{color == Color::BLACK ? ":/images/black_selected.png" : ":/images/white_selected.png"};
-            else
-                qpix = QPixmap{":/images/grey_selected.png"};
+            if(color.has_value()) qpix = QPixmap{color == Color::BLACK ? ":/images/black_selected.png" : ":/images/white_selected.png"};
+            else qpix = QPixmap{":/images/grey_selected.png"};
+            ret = 1;
         }
-        else
-        {
-            selected_ = false;
-            --cptSelected;
-            if(color.has_value())
-                qpix = QPixmap{color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
-            else
-                qpix = QPixmap{":/images/grey_marble.png"};
-        }
-        qpix = qpix.scaled(ui->color->width() / 2, ui->color->height() / 2);
-        ui->color->setPixmap(qpix);
+        else{ ret = -1; }
     }
+    else
+    {
+        selected_ = false;
+        --cptSelected;
+        if(color.has_value()) qpix = QPixmap{color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
+        else qpix = QPixmap{":/images/grey_marble.png"};
+        ret = 0;
+    }
+    qpix = qpix.scaled(ui->color->width() / 2, ui->color->height() / 2);
+    ui->color->setPixmap(qpix);
+
+    return ret;
 }
 
 void MarbleWidget::mousePressEvent(QMouseEvent *event)

@@ -33,6 +33,8 @@ private:
     Game game_;
 
     int cptSelected_;
+
+    std::vector<std::unique_ptr<Position>> positions_;
 };
 
 #endif // MAINWINDOW_H

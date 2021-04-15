@@ -22,7 +22,8 @@ public:
 
     void setupDecalage() const;
 
-    void setSelected();
+    // 1 slect 0 unselect -1 error
+    int setSelected();
 
 signals:
     void clicked();
