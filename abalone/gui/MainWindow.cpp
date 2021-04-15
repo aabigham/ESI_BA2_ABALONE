@@ -12,8 +12,20 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
     positions_()
 {
     ui->setupUi(this);
-    // Background color
     this->setStyleSheet("background-color: darkseagreen;"); // Window background
+    setupPixes(); // pixes
+    updateLabels(); // Cpt labels
+    updateBoard(); // Board view
+    setupConnections(); // Widget connections
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+}
+
+void MainWindow::setupPixes()
+{
     // Black counter pix
     QPixmap black_marble_pic{":/images/black_marble.png"};
     black_marble_pic = black_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
@@ -23,25 +35,14 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
     white_marble_pic = white_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelWMCpt->setPixmap(white_marble_pic);
     // Current player pix
-    QPixmap qpix{game.getCurrentPlayer() == Color::BLACK ? QPixmap{":/images/black_marble.png"}: QPixmap{":/images/white_marble.png"}};
+    QPixmap qpix{game_.getCurrentPlayer() == Color::BLACK ? QPixmap{":/images/black_marble.png"}: QPixmap{":/images/white_marble.png"}};
     qpix = qpix.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelCPM->setPixmap(qpix);
-    // Labels
-    updateLabels(game); // Cpt labels and pix
-    // Board
-    updateBoard(game.getBoard()); // Board view
-    // Widget connections
-    setupConnections();
 }
 
-MainWindow::~MainWindow()
+void MainWindow::updateLabels()
 {
-    delete ui;
-}
-
-void MainWindow::updateLabels(Game game) const
-{
-    Board board{game.getBoard()};
+    Board board{game_.getBoard()};
     // Black counter label
     int black_lost = board.getBlackMarblesLost();
     QString sBlackLabel{QString::number(black_lost) + QString::fromStdString("/6")};
@@ -51,13 +52,14 @@ void MainWindow::updateLabels(Game game) const
     QString sWhiteLabel{QString::number(white_lost) + QString::fromStdString("/6")};
     ui->whiteLabelCpt->setText(sWhiteLabel);
     // Curr player
-    ui->labelCPM->setPixmap(game.getCurrentPlayer() == Color::BLACK
+    /*ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK
                             ? QPixmap{":/images/black_marble.png"}
-                            : QPixmap{":/images/white_marble.png"});
+                            : QPixmap{":/images/white_marble.png"});*/
 }
 
-void MainWindow::updateBoard(Board board) const
+void MainWindow::updateBoard()
 {
+    Board board{game_.getBoard()};
     int row = 0, col = 0;
     for(int i{4}; i >= -4; --i)
     {
@@ -68,6 +70,7 @@ void MainWindow::updateBoard(Board board) const
             if(board.isInside(pos))
             {
                 MarbleWidget *widget{new MarbleWidget(board, pos)};
+                //connect(widget, SIGNAL(clicked()), this, SLOT(handle_marble_clicked()), Qt::UniqueConnection);
                 if(i % 2 != 0) widget->setupDecalage();
                 if(i == -1 || i == -3) ui->boardGrid->addWidget(widget, row, (col + decalage) - 1);
                 else ui->boardGrid->addWidget(widget, row, col + decalage);
@@ -97,11 +100,11 @@ void MainWindow::on_moveButton_clicked()
     if(game_.play(positions))
     {
         game_.setCurrentPlayer(opposite(game_.getCurrentPlayer())); // change current player
-        updateLabels(game_);
-        updateBoard(game_.getBoard());
+        updateLabels();
+        updateBoard();
         setupConnections(); // Remake the connections cause new wigdets are added after the update
-        positions_.clear(); // Clearing the selected positions
-        cptSelected_ = 0; // Reset counter of selecteds
+        positions_.clear(); // Clearing the previously selected positions
+        cptSelected_ = 0; // Reset counter of selected positions
     }
     else { ui->feedbackLabel->setText("Could not move !"); }
 }

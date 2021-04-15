@@ -16,9 +16,11 @@ public:
     explicit MainWindow(Game game, QWidget *parent = nullptr);
     ~MainWindow();
 
-    void updateBoard(Board board) const;
+    void setupPixes();
 
-    void updateLabels(Game game) const;
+    void updateLabels();
+
+    void updateBoard();
 
     void setupConnections() const;
 
