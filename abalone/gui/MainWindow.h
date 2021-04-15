@@ -22,8 +22,6 @@ public:
 
     void updateBoard();
 
-    void setupConnections() const;
-
 private slots:
     void on_moveButton_clicked();
 

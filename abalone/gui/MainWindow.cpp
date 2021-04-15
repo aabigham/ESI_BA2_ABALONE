@@ -16,7 +16,6 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
     setupPixes(); // pixes
     updateLabels(); // Cpt labels
     updateBoard(); // Board view
-    setupConnections(); // Widget connections
 }
 
 MainWindow::~MainWindow()
@@ -70,7 +69,7 @@ void MainWindow::updateBoard()
             if(board.isInside(pos))
             {
                 MarbleWidget *widget{new MarbleWidget(board, pos)};
-                //connect(widget, SIGNAL(clicked()), this, SLOT(handle_marble_clicked()), Qt::UniqueConnection);
+                connect(widget, SIGNAL(clicked()), this, SLOT(handle_marble_clicked()), Qt::UniqueConnection);
                 if(i % 2 != 0) widget->setupDecalage();
                 if(i == -1 || i == -3) ui->boardGrid->addWidget(widget, row, (col + decalage) - 1);
                 else ui->boardGrid->addWidget(widget, row, col + decalage);
@@ -83,16 +82,6 @@ void MainWindow::updateBoard()
     }
 }
 
-void MainWindow::setupConnections() const
-{
-    for (int i{0}; i < ui->boardGrid->count(); ++i)
-    {
-        QLayoutItem *item = ui->boardGrid->itemAt(i);
-        if (dynamic_cast<QWidgetItem *>(item))
-            connect(item->widget(), SIGNAL(clicked()), this, SLOT(handle_marble_clicked()), Qt::UniqueConnection);
-    }
-}
-
 void MainWindow::on_moveButton_clicked()
 {
     std::vector<Position> positions;
@@ -102,7 +91,6 @@ void MainWindow::on_moveButton_clicked()
         game_.setCurrentPlayer(opposite(game_.getCurrentPlayer())); // change current player
         updateLabels();
         updateBoard();
-        setupConnections(); // Remake the connections cause new wigdets are added after the update
         positions_.clear(); // Clearing the previously selected positions
         cptSelected_ = 0; // Reset counter of selected positions
     }
@@ -127,5 +115,4 @@ void MainWindow::handle_marble_clicked()
         ++cptSelected_;
     }
     else{ ui->feedbackLabel->setText("Could not select !"); }
-    //setupConnections();
 }
