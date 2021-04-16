@@ -99,9 +99,10 @@ void MainWindow::on_moveButton_clicked()
     for (const auto &p : positions_)
     {
         positions.push_back(*p);
-    };
+    }
     if (positions.size() > 1 && game_.play(positions))
     {
+        ui->feedbackLabel->clear();
         updateBoard();
         game_.setCurrentPlayer(opposite(game_.getCurrentPlayer()));
         updateLabels();
