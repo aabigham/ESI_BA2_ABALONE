@@ -1,5 +1,5 @@
-#include <iostream>
 #include <QApplication>
+
 #include "Game.h"
 #include "MainWindow.h"
 

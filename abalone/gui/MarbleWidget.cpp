@@ -1,13 +1,14 @@
-#include "MarbleWidget.h"
-#include "ui_MarbleWidget.h"
 #include <QMouseEvent>
 
+#include "MarbleWidget.h"
+#include "ui_MarbleWidget.h"
+
 MarbleWidget::MarbleWidget(Board board, Position pos, QWidget *parent)
-    : QWidget(parent),
-      ui(new Ui::MarbleWidget),
-      board_(board),
-      pos_(pos),
-      selected_(false)
+    : QWidget{parent},
+      ui{new Ui::MarbleWidget},
+      board_{board},
+      pos_{pos},
+      selected_{false}
 {
     ui->setupUi(this);
     // Color of the marble widget

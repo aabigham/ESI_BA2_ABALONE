@@ -24,7 +24,7 @@ public:
     /*!
      * \brief setupPixes sets up the pixes on the wain Window
      */
-    void setupPixes();
+    void initPixes() const;
 
     /*!
      * \brief updateLabels updates the labels ont the main window.
@@ -36,6 +36,11 @@ public:
      * also adds the connect feature to each one of them.
      */
     void updateBoard();
+
+    /*!
+     * \brief updateView updates the view of the main window.
+     */
+    void updateView();
 
 private slots:
     /*!
