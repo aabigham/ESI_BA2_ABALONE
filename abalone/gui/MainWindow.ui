@@ -186,7 +186,7 @@
      </font>
     </property>
     <property name="text">
-     <string>Feedbacks ici </string>
+     <string/>
     </property>
    </widget>
    <widget class="Line" name="line">

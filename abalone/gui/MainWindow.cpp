@@ -1,7 +1,9 @@
+#include <QPixmap>
+#include <QMessageBox>
+
 #include "MainWindow.h"
 #include "ui_MainWindow.h"
 #include "Game.h"
-#include <QPixmap>
 #include "MarbleWidget.h"
 
 MainWindow::MainWindow(Game game, QWidget *parent) :
@@ -92,11 +94,21 @@ void MainWindow::on_moveButton_clicked()
     for (const auto &p : positions_) { positions.push_back(*p); };
     if(positions.size() > 1 && game_.play(positions))
     {
+        updateBoard();
         game_.setCurrentPlayer(opposite(game_.getCurrentPlayer())); // changes current player
         updateLabels();
-        updateBoard();
         positions_.clear(); // Clearing the previously selected positions
         cptSelected_ = 0; // Reset counter of selected positions
+        if(game_.isGameOver())
+        {
+            std::string message{"Congratulations to the "
+                                + std::string{game_.getCurrentPlayer() == Color::BLACK ? "White" : "Black"}
+                                + " player."};
+            int answer{QMessageBox::information(this, "Game over !",
+                                                QString::fromStdString(message),
+                                                QString{"Quit"})};
+            if(answer == 0) QApplication::quit();
+        }
     }
     else { ui->feedbackLabel->setText("Could not move !"); }
 }
