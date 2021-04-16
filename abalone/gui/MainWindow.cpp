@@ -12,6 +12,7 @@ MainWindow::MainWindow(Game game, QWidget *parent) :
     positions_()
 {
     ui->setupUi(this);
+    this->setFixedSize(this->size());
     this->setStyleSheet("background-color: darkseagreen;"); // Window background
     setupPixes(); // pixes
     updateLabels(); // Cpt labels
@@ -34,7 +35,9 @@ void MainWindow::setupPixes()
     white_marble_pic = white_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelWMCpt->setPixmap(white_marble_pic);
     // Current player pix
-    QPixmap qpix{game_.getCurrentPlayer() == Color::BLACK ? QPixmap{":/images/black_marble.png"}: QPixmap{":/images/white_marble.png"}};
+    QPixmap qpix{game_.getCurrentPlayer() == Color::BLACK
+                ? QPixmap{":/images/black_marble.png"}
+                : QPixmap{":/images/white_marble.png"}};
     qpix = qpix.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelCPM->setPixmap(qpix);
 }
@@ -71,7 +74,7 @@ void MainWindow::updateBoard()
                 MarbleWidget *widget{new MarbleWidget(board, pos)};
                 // Connecting the clicked signal
                 connect(widget, SIGNAL(clicked()), this, SLOT(handle_marble_clicked()), Qt::UniqueConnection);
-                if(i % 2 != 0) widget->setupDecalage();
+                if(i % 2 != 0) widget->setOffset();
                 if(i == -1 || i == -3) ui->boardGrid->addWidget(widget, row, (col + decalage) - 1);
                 else ui->boardGrid->addWidget(widget, row, col + decalage);
             }
@@ -89,7 +92,7 @@ void MainWindow::on_moveButton_clicked()
     for (const auto &p : positions_) { positions.push_back(*p); };
     if(game_.play(positions))
     {
-        game_.setCurrentPlayer(opposite(game_.getCurrentPlayer())); // change current player
+        game_.setCurrentPlayer(opposite(game_.getCurrentPlayer())); // changes current player
         updateLabels();
         updateBoard();
         positions_.clear(); // Clearing the previously selected positions
@@ -106,8 +109,8 @@ void MainWindow::handle_marble_clicked()
     int flagSelect{widget->setSelected(cptSelected_)};
     if(flagSelect == 0)
     {
-        auto pit = std::find(positions_.begin(), positions_.end(), std::make_unique<Position>(pos));
-        positions_.erase(pit);
+        auto it = std::find(positions_.begin(), positions_.end(), std::make_unique<Position>(pos));
+        positions_.erase(it);
         --cptSelected_;
     }
     else if (flagSelect == 1)

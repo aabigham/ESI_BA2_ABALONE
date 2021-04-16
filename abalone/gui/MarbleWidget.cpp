@@ -10,12 +10,11 @@ MarbleWidget::MarbleWidget(Board board, Position pos, QWidget *parent) :
     selected_(false)
 {
     ui->setupUi(this);
-
     // Color
-    auto color = board.colorAt(pos);
-    if(color.has_value())
+    auto marble_color = board.colorAt(pos);
+    if(marble_color.has_value())
     {
-        QPixmap qpix{color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
+        QPixmap qpix{marble_color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
         qpix = qpix.scaled(ui->color->width() / 3, ui->color->height());
         ui->color->setPixmap(qpix);
     }
@@ -32,7 +31,7 @@ MarbleWidget::~MarbleWidget()
     delete ui;
 }
 
-void MarbleWidget::setDecalage() const
+void MarbleWidget::setOffset() const
 {
     ui->marble->setContentsMargins(25, 0, 0, 0);
 }
