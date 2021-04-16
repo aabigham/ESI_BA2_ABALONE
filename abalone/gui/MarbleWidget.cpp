@@ -2,17 +2,17 @@
 #include "ui_MarbleWidget.h"
 #include <QMouseEvent>
 
-MarbleWidget::MarbleWidget(Board board, Position pos, QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::MarbleWidget),
-    board_(board),
-    pos_(pos),
-    selected_(false)
+MarbleWidget::MarbleWidget(Board board, Position pos, QWidget *parent)
+    : QWidget(parent),
+      ui(new Ui::MarbleWidget),
+      board_(board),
+      pos_(pos),
+      selected_(false)
 {
     ui->setupUi(this);
-    // Color
+    // Color of the marble widget
     auto marble_color = board.colorAt(pos);
-    if(marble_color.has_value())
+    if (marble_color.has_value())
     {
         QPixmap qpix{marble_color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
         qpix = qpix.scaled(ui->color->width() / 3, ui->color->height());
@@ -41,23 +41,26 @@ int MarbleWidget::setSelected(int cptSelected)
     int ret;
     auto color = board_.colorAt(pos_);
     QPixmap qpix;
-    if(!selected_)
+    if (!selected_) // Marble is not selected
     {
-        if(cptSelected < 3)
+        if (cptSelected < 3) // Max 3 marbles can be selected
         {
             selected_ = true;
-            if(color.has_value())
+            if (color.has_value())
                 qpix = QPixmap{color == Color::BLACK ? ":/images/black_selected.png" : ":/images/white_selected.png"};
             else
                 qpix = QPixmap{":/images/grey_selected.png"};
             ret = 1;
         }
-        else{ return -1; }
+        else
+        {
+            return -1;
+        }
     }
-    else
+    else // Marble is selected
     {
         selected_ = false;
-        if(color.has_value())
+        if (color.has_value())
             qpix = QPixmap{color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
         else
             qpix = QPixmap{":/images/grey_marble.png"};

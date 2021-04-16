@@ -15,7 +15,6 @@ class MarbleWidget : public QWidget
     Q_OBJECT
 
 public:
-
     /*!
      * \brief MarbleWidget the marble widget for each marble on the board.
      * \param board the game board.
@@ -37,7 +36,7 @@ public:
     void setOffset() const;
 
     /*!
-     * \brief setSelected selects or unselect a marble on the board.
+     * \brief setSelected selects or unselect a marble on the board, and loads the according QPixMap.
      * \param cptSelected the number of currently selected marbles.
      * \return 1 is the selection was succesful, 0 if the unselection was succesful and
      * -1 if the player was not able to select or unselect.
@@ -45,14 +44,12 @@ public:
     int setSelected(int cptSelected);
 
 signals:
-
     /*!
      * \brief clicked the clicked signal of the marble widget.
      */
     void clicked();
 
 protected:
-
     /*!
      * \brief mousePressEvent the mouse press event handler of the marble widget.
      * \param event the mouse event.
@@ -60,7 +57,6 @@ protected:
     void mousePressEvent(QMouseEvent *event) override;
 
 private:
-
     Ui::MarbleWidget *ui;
 
     /*!

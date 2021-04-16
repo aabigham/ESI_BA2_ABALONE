@@ -13,7 +13,6 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-
     /*!
      * \brief MainWindow constructor of the main window.
      * \param game the model class of Abalone.
@@ -39,7 +38,6 @@ public:
     void updateBoard();
 
 private slots:
-
     /*!
      * \brief on_moveButton_clicked slot for the move button.
      */
@@ -51,7 +49,6 @@ private slots:
     void handle_marble_clicked();
 
 private:
-
     Ui::MainWindow *ui;
 
     /*!
