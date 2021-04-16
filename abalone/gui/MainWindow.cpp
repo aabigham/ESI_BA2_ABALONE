@@ -54,9 +54,9 @@ void MainWindow::updateLabels()
     QString sWhiteLabel{QString::number(white_lost) + QString::fromStdString("/6")};
     ui->whiteLabelCpt->setText(sWhiteLabel);
     // Curr player
-    /*ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK
+    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK
                             ? QPixmap{":/images/black_marble.png"}
-                            : QPixmap{":/images/white_marble.png"});*/
+                            : QPixmap{":/images/white_marble.png"});
 }
 
 void MainWindow::updateBoard()
@@ -90,7 +90,7 @@ void MainWindow::on_moveButton_clicked()
 {
     std::vector<Position> positions;
     for (const auto &p : positions_) { positions.push_back(*p); };
-    if(game_.play(positions))
+    if(positions.size() > 1 && game_.play(positions))
     {
         game_.setCurrentPlayer(opposite(game_.getCurrentPlayer())); // changes current player
         updateLabels();
