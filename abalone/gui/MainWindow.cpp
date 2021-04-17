@@ -16,6 +16,7 @@ MainWindow::MainWindow(Game game, QWidget *parent)
     this->setFixedSize(this->size());
     this->setStyleSheet("background-color: darkseagreen;");
     this->setWindowTitle("Abalone - 54985 - 54247");
+    this->setWindowIcon(QIcon{":/images/favicon.png"});
     initPixes();  // Pixes on the main window
     updateView(); // Updating view (labels of lost marbles + board)
 }

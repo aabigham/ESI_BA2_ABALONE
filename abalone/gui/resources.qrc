@@ -6,5 +6,6 @@
         <file>images/black_selected.png</file>
         <file>images/grey_selected.png</file>
         <file>images/white_selected.png</file>
+        <file>images/favicon.png</file>
     </qresource>
 </RCC>
