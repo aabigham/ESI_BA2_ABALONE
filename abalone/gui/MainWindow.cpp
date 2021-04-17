@@ -66,9 +66,9 @@ void MainWindow::updateBoard()
             if (game_.isInside(pos))
             {
                 MarbleWidget *widget{new MarbleWidget(game_, pos)}; // Widget to add
-                // Connecting the clicked signal to the handle method
-                connect(widget, SIGNAL(clicked()), this, SLOT(handle_marble_clicked()),
-                        Qt::UniqueConnection);
+                // Connecting the clicked signal to the handle method :
+                QObject::connect(widget, SIGNAL(clicked()), this,
+                                 SLOT(handle_marble_clicked()), Qt::UniqueConnection);
                 if (i % 2 != 0) // Offset management
                     widget->setOffset();
                 if (i == -1 || i == -3) // Another offset management + Adding to grid
@@ -105,10 +105,10 @@ void MainWindow::on_moveButton_clicked()
         game_.setCurrentPlayer(opposite(game_.getCurrentPlayer()));
         updateView();
         positions_.clear(); // Clearing the previously selected positions
-        cptSelected_ = 0;   // Reset counter of selected positions
+        cptSelected_ = 0;   // Resets counter of selected positions
         if (game_.isGameOver())
         {
-            this->setEnabled(false);
+            this->setEnabled(false); // Disabling ui
             // Displaying the winner in an information dialog
             std::string winner{game_.getCurrentPlayer() == Color::BLACK ? "White" : "Black"};
             std::string message{"Congratulations to the " + winner + " player."};
@@ -124,8 +124,7 @@ void MainWindow::on_moveButton_clicked()
 
 void MainWindow::handle_marble_clicked()
 {
-    QObject *obj = sender();                                 // Signal's sender
-    MarbleWidget *widget{dynamic_cast<MarbleWidget *>(obj)}; // Casting to a MarbleWidget
+    MarbleWidget *widget{qobject_cast<MarbleWidget*>(QObject::sender())}; // Signal's sender
     Position pos{widget->getPosition()};
     int flagSelect{widget->setSelected(cptSelected_)}; // Checks if the marble got selected or unselected
     if (flagSelect == 0)                               // Unselected
