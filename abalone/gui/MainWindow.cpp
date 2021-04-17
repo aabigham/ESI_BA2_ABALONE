@@ -1,4 +1,3 @@
-#include <QPixmap>
 #include <QMessageBox>
 
 #include "MainWindow.h"
@@ -25,22 +24,18 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::initPixes() const
+void MainWindow::initPixes()
 {
     // Black counter pix
-    QPixmap black_marble_pic{":/images/black_marble.png"};
-    black_marble_pic = black_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
-    ui->labelBMCpt->setPixmap(black_marble_pic);
+    black_marble_pic_ = black_marble_pic_.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
+    ui->labelBMCpt->setPixmap(black_marble_pic_);
     // White counter pix
-    QPixmap white_marble_pic{":/images/white_marble.png"};
-    white_marble_pic = white_marble_pic.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
-    ui->labelWMCpt->setPixmap(white_marble_pic);
+    white_marble_pic_ = white_marble_pic_.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
+    ui->labelWMCpt->setPixmap(white_marble_pic_);
     // Current player pix
-    QPixmap qpix{game_.getCurrentPlayer() == Color::BLACK
-                     ? QPixmap{":/images/black_marble.png"}
-                     : QPixmap{":/images/white_marble.png"}};
-    qpix = qpix.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
-    ui->labelCPM->setPixmap(qpix);
+    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK
+                            ? black_marble_pic_
+                            : white_marble_pic_);
 }
 
 void MainWindow::updateLabels()
@@ -56,8 +51,8 @@ void MainWindow::updateLabels()
     ui->whiteLabelCpt->setText(sWhiteLabel);
     // Curr player
     ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK
-                                ? QPixmap{":/images/black_marble.png"}
-                                : QPixmap{":/images/white_marble.png"});
+                            ? black_marble_pic_
+                            : white_marble_pic_);
 }
 
 void MainWindow::updateBoard()

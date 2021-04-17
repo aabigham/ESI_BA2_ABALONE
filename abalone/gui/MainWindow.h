@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QPixmap>
+
 #include "Game.h"
 
 namespace Ui {
@@ -24,7 +26,7 @@ public:
     /*!
      * \brief setupPixes sets up the pixes on the wain Window
      */
-    void initPixes() const;
+    void initPixes();
 
     /*!
      * \brief updateLabels updates the labels ont the main window.
@@ -55,6 +57,16 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    /*!
+     * \brief black_marble_pic_ the black marble qpix.
+     */
+    QPixmap black_marble_pic_{":/images/black_marble.png"};
+
+    /*!
+     * \brief white_marble_pic_ the white marble qpix.
+     */
+    QPixmap white_marble_pic_{":/images/white_marble.png"};
 
     /*!
      * \brief game_ the model class of Abalone.
