@@ -32,3 +32,13 @@ std::vector<Position> Game::askAbaPro() const
     }
     return abaproToPosition(abapro);
 }
+
+bool Game::isInside(Position pos) const
+{
+    return board_.isInside(pos);
+}
+
+std::optional<Color> Game::colorAt(Position pos) const
+{
+    return board_.colorAt(pos);
+}

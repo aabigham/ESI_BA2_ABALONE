@@ -39,7 +39,7 @@ public:
      * \brief Getter of the game board.
      * \return the board of the game.
      */
-    inline Board &getBoard();
+    inline Board& getBoard();
 
     /*!
      * \brief Getter of the current Player.
@@ -58,6 +58,32 @@ public:
      * \param color the color of the future current player.
      */
     inline void setCurrentPlayer(Color color);
+
+    /*!
+    * \brief Getter of the lost white marbles.
+    * \return the number of lost white marble.
+    */
+    inline int getWhiteMarblesLost() const;
+
+    /*!
+    * \brief Getter of the lost black marbles.
+    * \return the number of lost black marble.
+    */
+    inline int getBlackMarblesLost() const;
+
+    /*!
+    * \brief Checks if a position is inside the game board.
+    * \param pos the position we want to be checking.
+    * \return true if the position is inside, false otherwise.
+    */
+    bool isInside(Position pos) const;
+
+    /*!
+    * \brief Gets the color located at the position in parameter.
+    * \param pos the position at which we want to find its color
+    * \return the color located at the position in parameter.
+    */
+    std::optional<Color> colorAt(Position pos) const;
 
 private:
     /*!
@@ -95,6 +121,16 @@ std::string Game::get_s_currentPlayer() const
 void Game::setCurrentPlayer(Color color)
 {
     currentPlayer_ = color;
+}
+
+int Game::getWhiteMarblesLost() const
+{
+    return board_.getWhiteMarblesLost();
+}
+
+int Game::getBlackMarblesLost() const
+{
+    return board_.getBlackMarblesLost();
 }
 
 #endif //_GAME_H

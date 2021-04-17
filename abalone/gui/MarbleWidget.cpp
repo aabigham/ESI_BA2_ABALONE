@@ -3,16 +3,16 @@
 #include "MarbleWidget.h"
 #include "ui_MarbleWidget.h"
 
-MarbleWidget::MarbleWidget(Board board, Position pos, QWidget *parent)
+MarbleWidget::MarbleWidget(Game game, Position pos, QWidget *parent)
     : QWidget{parent},
       ui{new Ui::MarbleWidget},
-      board_{board},
+      game_{game},
       pos_{pos},
       selected_{false}
 {
     ui->setupUi(this);
     // Color of the marble widget
-    auto marble_color = board.colorAt(pos);
+    auto marble_color = game_.colorAt(pos);
     if (marble_color.has_value())
     {
         QPixmap qpix{marble_color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
@@ -40,7 +40,7 @@ void MarbleWidget::setOffset() const
 int MarbleWidget::setSelected(int cptSelected)
 {
     int ret;
-    auto color = board_.colorAt(pos_);
+    auto color = game_.colorAt(pos_);
     QPixmap qpix;
     if (!selected_) // Marble is not selected
     {
@@ -51,11 +51,11 @@ int MarbleWidget::setSelected(int cptSelected)
                 qpix = QPixmap{color == Color::BLACK ? ":/images/black_selected.png" : ":/images/white_selected.png"};
             else
                 qpix = QPixmap{":/images/grey_selected.png"};
-            ret = 1;
+            ret = 1; // Sucess on selection
         }
         else
         {
-            return -1;
+            return -1; // No Sucess on selection
         }
     }
     else // Marble is selected
@@ -65,7 +65,7 @@ int MarbleWidget::setSelected(int cptSelected)
             qpix = QPixmap{color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
         else
             qpix = QPixmap{":/images/grey_marble.png"};
-        ret = 0;
+        ret = 0; // Sucess on unselection
     }
     qpix = qpix.scaled(ui->color->width() / 2, ui->color->height() / 2);
     ui->color->setPixmap(qpix);

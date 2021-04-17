@@ -3,8 +3,8 @@
 
 #include <QWidget>
 #include <QLabel>
-#include "Position.h"
-#include "Board.h"
+
+#include "Game.h"
 
 namespace Ui {
 class MarbleWidget;
@@ -17,11 +17,11 @@ class MarbleWidget : public QWidget
 public:
     /*!
      * \brief MarbleWidget the marble widget for each marble on the board.
-     * \param board the game board.
+     * \param game the model class of the game.
      * \param pos the position of the marble on the board.
      * \param parent the parent of this widget.
      */
-    explicit MarbleWidget(Board board, Position pos, QWidget *parent = nullptr);
+    explicit MarbleWidget(Game game, Position pos, QWidget *parent = nullptr);
     ~MarbleWidget();
 
     /*!
@@ -62,7 +62,7 @@ private:
     /*!
      * \brief board_ the game board.
      */
-    Board board_;
+    Game game_;
 
     /*!
      * \brief pos_ the position of the marble widget on the board.
