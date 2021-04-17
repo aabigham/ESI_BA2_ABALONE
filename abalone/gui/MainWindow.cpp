@@ -130,8 +130,7 @@ void MainWindow::handle_marble_clicked()
     int flagSelect{widget->setSelected(cptSelected_)}; // Checks if the marble got selected or unselected
     if (flagSelect == 0)                               // Unselected
     {
-        auto it = std::find(positions_.begin(), positions_.end(),
-                            std::make_unique<Position>(pos));
+        auto it = std::find(positions_.begin(), positions_.end(), std::make_unique<Position>(pos));
         positions_.erase(it);
         --cptSelected_;
     }

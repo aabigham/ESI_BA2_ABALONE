@@ -2,7 +2,6 @@
 #define MARBLEWIDGET_H
 
 #include <QWidget>
-#include <QLabel>
 
 #include "Game.h"
 
@@ -60,7 +59,7 @@ private:
     Ui::MarbleWidget *ui;
 
     /*!
-     * \brief board_ the game board.
+     * \brief game_ the model class of the game.
      */
     Game game_;
 
