@@ -3,28 +3,23 @@
 #include "MarbleWidget.h"
 #include "ui_MarbleWidget.h"
 
-MarbleWidget::MarbleWidget(Game game, Position pos, QWidget *parent)
+MarbleWidget::MarbleWidget(std::optional<Color> color, Position pos, QWidget *parent)
     : QWidget{parent},
       ui{new Ui::MarbleWidget},
-      game_{game},
+      color_{color},
       pos_{pos},
       selected_{false}
 {
     ui->setupUi(this);
     // Color of the marble widget
-    auto marble_color = game_.colorAt(pos);
-    if (marble_color.has_value())
-    {
-        QPixmap qpix{marble_color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
-        qpix = qpix.scaled(ui->color->width() / 3, ui->color->height());
-        ui->color->setPixmap(qpix);
-    }
+    QPixmap qpix;
+    if (color.has_value())
+        qpix = QPixmap{color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
     else
-    {
-        QPixmap qpix{":/images/grey_marble.png"};
-        qpix = qpix.scaled(ui->color->width() / 3, ui->color->height());
-        ui->color->setPixmap(qpix);
-    }
+        qpix = QPixmap{":/images/grey_marble.png"};
+
+    qpix = qpix.scaled(ui->color->width() / 3, ui->color->height());
+    ui->color->setPixmap(qpix);
 }
 
 MarbleWidget::~MarbleWidget()
@@ -39,37 +34,36 @@ void MarbleWidget::setOffset() const
 
 int MarbleWidget::setSelected(int cptSelected)
 {
-    int ret;
-    auto color = game_.colorAt(pos_);
-    QPixmap qpix;
-    if (!selected_) // Marble is not selected
-    {
-        if (cptSelected < 3) // Max 3 marbles can be selected
-        {
-            selected_ = true;
-            if (color.has_value())
-                qpix = QPixmap{color == Color::BLACK ? ":/images/black_selected.png" : ":/images/white_selected.png"};
-            else
-                qpix = QPixmap{":/images/grey_selected.png"};
-            ret = 1; // Sucess on selection
-        }
-        else
-        {
-            return -1; // No Sucess on selection
-        }
-    }
-    else // Marble is selected
+    // If trying to select but there's too many that already are selected
+    if (!selected_ && cptSelected >= 3)
+        return -1;
+
+    if (selected_) // Marble is currently selected
     {
         selected_ = false;
-        if (color.has_value())
-            qpix = QPixmap{color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
+        QPixmap qpix;
+        if (color_.has_value())
+            qpix = QPixmap{color_ == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
         else
             qpix = QPixmap{":/images/grey_marble.png"};
-        ret = 0; // Sucess on unselection
+
+        qpix = qpix.scaled(ui->color->width() / 2, ui->color->height() / 2);
+        ui->color->setPixmap(qpix);
+        return 0; // Success on unselection
     }
-    qpix = qpix.scaled(ui->color->width() / 2, ui->color->height() / 2);
-    ui->color->setPixmap(qpix);
-    return ret;
+    else // Marble is not currently selected
+    {
+        selected_ = true;
+        QPixmap qpix;
+        if (color_.has_value())
+            qpix = QPixmap{color_ == Color::BLACK ? ":/images/black_selected.png" : ":/images/white_selected.png"};
+        else
+            qpix = QPixmap{":/images/grey_selected.png"};
+
+        qpix = qpix.scaled(ui->color->width() / 2, ui->color->height() / 2);
+        ui->color->setPixmap(qpix);
+        return 1; // Success on selection
+    }
 }
 
 void MarbleWidget::mousePressEvent(QMouseEvent *event)

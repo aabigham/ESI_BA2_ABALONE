@@ -15,8 +15,9 @@ MainWindow::MainWindow(Game game, QWidget *parent)
     ui->setupUi(this);
     this->setFixedSize(this->size());
     this->setStyleSheet("background-color: darkseagreen;");
-    initPixes();   // Pixes on the main window
-    updateView();  // Updating view (labels of lost marbles + board)
+    this->setWindowTitle("Abalone - 54985 - 54247");
+    initPixes();  // Pixes on the main window
+    updateView(); // Updating view (labels of lost marbles + board)
 }
 
 MainWindow::~MainWindow()
@@ -33,9 +34,7 @@ void MainWindow::initPixes()
     white_marble_pic_ = white_marble_pic_.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelWMCpt->setPixmap(white_marble_pic_);
     // Current player pix
-    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK
-                            ? black_marble_pic_
-                            : white_marble_pic_);
+    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK ? black_marble_pic_ : white_marble_pic_);
 }
 
 void MainWindow::updateLabels()
@@ -49,9 +48,7 @@ void MainWindow::updateLabels()
     QString sWhiteLabel{QString::number(white_lost) + QString::fromStdString("/6")};
     ui->whiteLabelCpt->setText(sWhiteLabel);
     // Curr player
-    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK
-                            ? black_marble_pic_
-                            : white_marble_pic_);
+    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK ? black_marble_pic_ : white_marble_pic_);
 }
 
 void MainWindow::updateBoard()
@@ -65,7 +62,7 @@ void MainWindow::updateBoard()
             Position pos(j, i);
             if (game_.isInside(pos))
             {
-                MarbleWidget *widget{new MarbleWidget(game_, pos)}; // Widget to add
+                MarbleWidget *widget{new MarbleWidget(game_.colorAt(pos), pos)}; // Widget to add
                 // Connecting the clicked signal to the handle method :
                 QObject::connect(widget, SIGNAL(clicked()), this,
                                  SLOT(handle_marble_clicked()), Qt::UniqueConnection);
@@ -76,12 +73,10 @@ void MainWindow::updateBoard()
                 else // Adding to grid
                     ui->boardGrid->addWidget(widget, row, col + decalage);
             }
-            ++col;
-            if (col > 8)
+            if (++col > 8)
                 col = 0; // Reseting col count
         }
-        ++row;
-        if (row > 8)
+        if (++row > 8)
             row = 0; // Reseting row count
     }
 }
@@ -110,8 +105,9 @@ void MainWindow::on_moveButton_clicked()
         {
             this->setEnabled(false); // Disabling ui
             // Displaying the winner in an information dialog
-            std::string winner{game_.getCurrentPlayer() == Color::BLACK ? "White" : "Black"};
-            std::string message{"Congratulations to the " + winner + " player."};
+            std::string message{"Congratulations to the "
+                                + std::string{game_.getCurrentPlayer() == Color::BLACK ? "White" : "Black"}
+                                + " player."};
             QMessageBox::information(this, "Game over !", QString::fromStdString(message), QString{"Quit"});
             QApplication::quit(); // Quitting after the dialog has closed
         }
@@ -124,21 +120,21 @@ void MainWindow::on_moveButton_clicked()
 
 void MainWindow::handle_marble_clicked()
 {
-    MarbleWidget *widget{qobject_cast<MarbleWidget*>(QObject::sender())}; // Signal's sender
+    MarbleWidget *widget{qobject_cast<MarbleWidget *>(QObject::sender())}; // Signal's sender
     Position pos{widget->getPosition()};
     int flagSelect{widget->setSelected(cptSelected_)}; // Checks if the marble got selected or unselected
-    if (flagSelect == 0)                               // Unselected
+    if (flagSelect == 0) // Marble is not selected
     {
         auto it = std::find(positions_.begin(), positions_.end(), std::make_unique<Position>(pos));
         positions_.erase(it);
         --cptSelected_;
     }
-    else if (flagSelect == 1) // Selected
+    else if (flagSelect == 1) // Marble is selected
     {
         positions_.push_back(std::make_unique<Position>(pos));
         ++cptSelected_;
     }
-    else
+    else // Not able to select
     {
         ui->feedbackLabel->setText("Could not select !");
     }

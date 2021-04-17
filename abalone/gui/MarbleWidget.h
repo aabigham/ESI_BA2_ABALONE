@@ -20,7 +20,7 @@ public:
      * \param pos the position of the marble on the board.
      * \param parent the parent of this widget.
      */
-    explicit MarbleWidget(Game game, Position pos, QWidget *parent = nullptr);
+    explicit MarbleWidget(std::optional<Color> color, Position pos, QWidget *parent = nullptr);
     ~MarbleWidget();
 
     /*!
@@ -61,7 +61,7 @@ private:
     /*!
      * \brief game_ the model class of the game.
      */
-    Game game_;
+    std::optional<Color> color_;
 
     /*!
      * \brief pos_ the position of the marble widget on the board.
