@@ -2,6 +2,7 @@
 #define _CONSOLEVIEW_H
 
 #include <iomanip>
+
 #include "View.h"
 
 /*!

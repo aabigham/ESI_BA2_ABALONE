@@ -2,6 +2,7 @@
 #define _CELL_H
 
 #include <optional>
+
 #include "Position.h"
 #include "Color.h"
 

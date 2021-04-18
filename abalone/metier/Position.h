@@ -3,6 +3,8 @@
 
 #include <algorithm>
 #include <vector>
+#include <memory>
+
 #include "Directions.h"
 
 using Direction = std::pair<int, int>;
