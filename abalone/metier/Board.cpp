@@ -79,31 +79,31 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival, Col
     if(nbMarbles <= 3)
     {
         // First pos after the player's marbles
-        Position from(nbMarbles == 2 ? posArrival.getNext(dirMove)
-                                     : posArrival.getNext(dirMove).getNext(dirMove));
+        Position firstOther(nbMarbles == 2 ? posArrival.getNext(dirMove)
+                                           : posArrival.getNext(dirMove).getNext(dirMove));
         // If it has no color, we can move directly
-        if(!colorAt(from).has_value())
+        if(!colorAt(firstOther).has_value())
         {
-            positions.push_back(from);
+            positions.push_back(firstOther);
         }
         else // If it has a marble belonging to the ennemy
         {
-            int oppositeMarbleCounter = countMarbles(from, dirMove, 0, oppositeColor);
+            int oppositeMarbleCounter = countMarbles(firstOther, dirMove, 0, oppositeColor);
 
             // We should be in numeric superiority
             if(oppositeMarbleCounter < nbMarbles)
             {
-                // First position after "from"
-                Position pos(oppositeMarbleCounter == 1
-                             ? from.getNext(dirMove)
-                             : from.getNext(dirMove).getNext(dirMove));
+                // First position after "firstOther"
+                Position afterOther(oppositeMarbleCounter == 1
+                             ? firstOther.getNext(dirMove)
+                             : firstOther.getNext(dirMove).getNext(dirMove));
                 // If it's not inside, or not occupied
-                if(!isInside(pos) || !colorAt(pos).has_value())
+                if(!isInside(afterOther) || !colorAt(afterOther).has_value())
                 {
-                    positions.push_back(from);
+                    positions.push_back(firstOther);
                     positions.push_back(oppositeMarbleCounter == 1
-                                        ? from.getNext(dirMove)
-                                        : from.getNext(dirMove).getNext(dirMove));
+                                        ? firstOther.getNext(dirMove)
+                                        : firstOther.getNext(dirMove).getNext(dirMove));
                 }
             }
         }
