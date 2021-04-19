@@ -86,7 +86,7 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival, Col
         {
             positions.push_back(firstOther);
         }
-        else // If it has a marble belonging to the ennemy
+        else // It has a marble belonging to the ennemy
         {
             int oppositeMarbleCounter = countMarbles(firstOther, dirMove, 0, oppositeColor);
 
@@ -147,11 +147,12 @@ int Board::countMarblesUntil(Position posStart, Position posEnd, Direction dirCo
 {
     // Checking the parallel line above (for lateral move)
     // Also checking if we count above 3, which cancels the move
-    if(colorAt(posStart.getNext(dirMove)).has_value() || cpt > 3)
+    // and checks if there is a foreign marble in the way
+    if(colorAt(posStart.getNext(dirMove)).has_value() || cpt > 3 || colorAt(posStart).value() != color)
         return -5;
 
-    // If we encounter the wrong color, of if the posStart is the same of posEnd
-    if(colorAt(posStart).value() != color || posStart == posEnd)
+    // If the posStart is the same of posEnd
+    if(posStart == posEnd)
         return cpt;
 
     return countMarblesUntil(Position(posStart.getNext(dirCount)), posEnd, dirCount, dirMove, ++cpt, color);
