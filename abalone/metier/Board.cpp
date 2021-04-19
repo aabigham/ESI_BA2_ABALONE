@@ -162,11 +162,13 @@ int Board::canMove(Position posStart, Position posEnd, Position posArrival, Colo
     // Pos does not belong to the player
     if(colorAt(posStart) != playerColor)
         return -1;
-
     Direction dirMove = computeDirection(posStart, posArrival);
     // All the positions involved in the lateral move must be inside
     if(!(isInside(posStart) && isInside(posEnd) && isInside(posArrival)
          && isInside(posStart.getNext(dirMove)) && isInside(posEnd.getNext(dirMove))))
+        return -1;
+    // If the arrival position is not ajdacent to the starting position.
+    if(!posStart.isNextTo(posArrival))
         return -1;
     // Checking if the arrival pos already has a value
     if(colorAt(posArrival).has_value())
