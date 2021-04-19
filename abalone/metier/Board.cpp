@@ -177,11 +177,7 @@ int Board::canMove(Position posStart, Position posEnd, Position posArrival, Colo
 
     // Counting lines
     Direction dirCount = computeDirection(posStart, posEnd);
-    int nbMarblesLine = countMarblesUntil(posStart, posEnd, dirCount, dirMove, 1, playerColor);
-    if(nbMarblesLine < 0)
-        return -1;
-    else
-        return nbMarblesLine;
+    return countMarblesUntil(posStart, posEnd, dirCount, dirMove, 1, playerColor);
 }
 
 bool Board::move(Position posStart, Position posEnd, Position posArrival, Color playerColor)

@@ -154,7 +154,7 @@ std::vector<Position> abaproToPosition(std::string abapro)
     {
         int y = getLetterYAxis(abapro.at(i));
         int z = getNumberZAxis(abapro.at(i + 1));
-        int x = 0 - (y + z);
+        int x = - (y + z);
         ret.push_back(Position(x, y, z));
     }
     return ret;
