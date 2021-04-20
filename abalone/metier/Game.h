@@ -31,16 +31,10 @@ public:
     inline bool isGameOver() const; //done
 
     /*!
-     * \brief Asks an ABA-PRO notation to the player.
-     * \return the vector of positions according to the ABA-PRO notation.
-     */
-    std::vector<Position> askAbaPro() const;
-
-    /*!
      * \brief Getter of the game board.
      * \return the board of the game.
      */
-    inline Board& getBoard();
+    inline Board getBoard();
 
     /*!
      * \brief Getter of the current Player.
@@ -104,7 +98,7 @@ bool Game::isGameOver() const
     return board_.getBlackMarblesLost() == 6 || board_.getWhiteMarblesLost() == 6;
 }
 
-Board &Game::getBoard()
+Board Game::getBoard()
 {
     return board_;
 }

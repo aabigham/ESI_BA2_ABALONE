@@ -113,10 +113,10 @@ std::vector<Position> Board::canMove(Position posStart, Position posArrival, Col
 }
 
 
-bool Board::move(Position posStart, Position posArrival, Color playerColor)
+bool Board::move(Position posStart, Position posArrival)
 {
+    Color playerColor{colorAt(posStart).value()};
     auto positions = canMove(posStart, posArrival, playerColor);
-
     // If the vector is empty, the move is not possible
     if(positions.size() == 0)
         return false;
@@ -180,8 +180,9 @@ int Board::canMove(Position posStart, Position posEnd, Position posArrival, Colo
     return countMarblesUntil(posStart, posEnd, dirCount, dirMove, 1, playerColor);
 }
 
-bool Board::move(Position posStart, Position posEnd, Position posArrival, Color playerColor)
+bool Board::move(Position posStart, Position posEnd, Position posArrival)
 {
+    Color playerColor{colorAt(posStart).value()};
     int nbMarbles = canMove(posStart, posEnd, posArrival, playerColor);
     if(nbMarbles < 0)
         return false;

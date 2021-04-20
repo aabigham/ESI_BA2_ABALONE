@@ -19,6 +19,12 @@ public:
     Controller();
 
     /*!
+     * \brief Asks an ABA-PRO notation to the player.
+     * \return the vector of positions according to the ABA-PRO notation.
+     */
+    std::vector<Position> askAbaPro() const;
+
+    /*!
     * \brief Starts the game.
     */
     void startGame();

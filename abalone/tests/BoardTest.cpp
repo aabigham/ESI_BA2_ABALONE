@@ -147,11 +147,10 @@ TEST_CASE("Testing methods of the Board class")
         Board board;
         Position posStart = Position(4, -4);
         Position posArrival = Position(posStart.getNext(Directions::UP_LEFT));
-        board.move(posStart, posArrival, Color::BLACK);
+        board.move(posStart, posArrival);
         board.move(posArrival.getNext(Directions::UP_LEFT),
-                   posArrival.getNext(Directions::UP_LEFT).getNext(Directions::UP_LEFT),
-                   Color::BLACK);
-        board.move(Position(-3, 3), Position(-2, 2), Color::WHITE);
+                   posArrival.getNext(Directions::UP_LEFT).getNext(Directions::UP_LEFT));
+        board.move(Position(-3, 3), Position(-2, 2));
 
         REQUIRE(board.canMove(Position(2, -2), Position(1, -1), Color::BLACK).size() == 0);
     }
@@ -161,9 +160,9 @@ TEST_CASE("Testing methods of the Board class")
         Board board;
         Position posStart = Position(4, -4);
         Position posArrival = Position(posStart.getNext(Directions::UP_LEFT));
-        board.move(posStart, posArrival, Color::BLACK);
-        board.move(posArrival, posArrival.getNext(Directions::UP_LEFT), Color::BLACK);
-        board.move(Position(-3, 3), Position(-2, 2), Color::WHITE);
+        board.move(posStart, posArrival);
+        board.move(posArrival, posArrival.getNext(Directions::UP_LEFT));
+        board.move(Position(-3, 3), Position(-2, 2));
 
         REQUIRE(board.canMove(Position(2, -2), Position(1, -1), Color::BLACK).size() == 2);
     }
@@ -172,9 +171,9 @@ TEST_CASE("Testing methods of the Board class")
         Board board;
         Position posStart = Position(4, -4);
         Position posArrival = Position(posStart.getNext(Directions::UP_LEFT));
-        board.move(posStart, posArrival, Color::BLACK);
-        board.move(posArrival, posArrival.getNext(Directions::UP_LEFT), Color::BLACK);
-        board.move(Position(-4, 4), Position(-3, 3), Color::WHITE);
+        board.move(posStart, posArrival);
+        board.move(posArrival, posArrival.getNext(Directions::UP_LEFT));
+        board.move(Position(-4, 4), Position(-3, 3));
 
         REQUIRE(board.canMove(Position(2, -2), Position(1, -1), Color::BLACK).size() == 0);
     }
@@ -201,13 +200,13 @@ TEST_CASE("Testing methods of the Board class")
     {
         Board board;
 
-        board.move(Position(0, -3), Position(0, -2), Color::BLACK);
-        board.move(Position(0, -2), Position(0, -1), Color::BLACK);
-        board.move(Position(0, -1), Position(0, 0), Color::BLACK);
+        board.move(Position(0, -3), Position(0, -2));
+        board.move(Position(0, -2), Position(0, -1));
+        board.move(Position(0, -1), Position(0, 0));
 
-        board.move(Position(-1, 2), Position(-1, 1), Color::WHITE);
-        board.move(Position(-1, 1), Position(-1, 0), Color::WHITE);
-        board.move(Position(-1, 0), Position(0, -1), Color::WHITE);
+        board.move(Position(-1, 2), Position(-1, 1));
+        board.move(Position(-1, 1), Position(-1, 0));
+        board.move(Position(-1, 0), Position(0, -1));
 
         REQUIRE(board.canMove(Position(0, 4), Position(0, 3), Color::WHITE).size() == 0);
 
@@ -216,7 +215,7 @@ TEST_CASE("Testing methods of the Board class")
     SECTION("Test move lateral on border")
     {
         Board board;
-        board.move(Position(-3, 3), Position(-2, 2), Position(-3, 2), Color::WHITE);
+        board.move(Position(-3, 3), Position(-2, 2), Position(-3, 2));
         REQUIRE(board.canMove(Position(-3, 2), Position(-2, 1), Position(-4, 2), Color::WHITE) == 2);
     }
 }

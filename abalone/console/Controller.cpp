@@ -6,6 +6,21 @@ Controller::Controller()
 {
 }
 
+std::vector<Position> Controller::askAbaPro() const
+{
+    std::string abapro;
+    std::cout << "Please enter an ABAPRO notation :\n";
+    std::getline(std::cin, abapro);
+    std::transform(abapro.begin(), abapro.end(),abapro.begin(), ::toupper);
+    while (!isAbaproValid(abapro))
+    {
+        std::cout << "Input is not valid, please try again :\n";
+        std::getline(std::cin, abapro);
+        std::transform(abapro.begin(), abapro.end(),abapro.begin(), ::toupper);
+    }
+    return abaproToPosition(abapro);
+}
+
 void Controller::startGame()
 {
     view_.displayWelcome();
@@ -15,11 +30,10 @@ void Controller::startGame()
         try
         {
             view_.displayMessageln("--> " + game_.get_s_currentPlayer() + " is now playing.");
-            auto positions{game_.askAbaPro()};
+            auto positions{askAbaPro()};
             if(game_.play(positions))
             {
                 view_.displayMessageln("Move successful !\n");
-                game_.setCurrentPlayer(opposite(game_.getCurrentPlayer()));
                 view_.updateView(game_.getBoard());
             }
             else

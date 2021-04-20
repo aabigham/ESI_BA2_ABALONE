@@ -19,13 +19,14 @@ public:
     Board();
 
     /*!
-    * \brief The move method for inline moves.
-    * \param posStart the position of the first marble in row.
-    * \param posArrival the arrival position of the first marble in row.
-    * \param playerColor the color of the current player.
-    * \return true if the move was succesful, false otherwise.
+    * \brief countMarbles counts the number of marbles in a given direction, beginning from the given position.
+    * \param posStart the position of the first marble.
+    * \param dirCount the direction in which the counting is heading towards to.
+    * \param cpt the number of the counted marbles.
+    * \param color the color that the counted marbles must have.
+    * \return the number of counted marbles.
     */
-    bool move(Position posStart, Position posArrival, Color playerColor);
+    int countMarbles(Position posStart, Direction dirCount, int cpt, Color color) const;
 
     /*!
     * \brief The can move method for inline moves.
@@ -40,35 +41,13 @@ public:
     std::vector<Position> canMove(Position posStart, Position posArrival, Color playerColor) const;
 
     /*!
-    * \brief The move method for side moves.
+    * \brief The move method for inline moves.
     * \param posStart the position of the first marble in row.
-    * \param posEnd the position of the last marble in row.
     * \param posArrival the arrival position of the first marble in row.
     * \param playerColor the color of the current player.
     * \return true if the move was succesful, false otherwise.
     */
-    bool move(Position posStart, Position posEnd, Position posArrival, Color playerColor);
-
-    /*!
-    * \brief The can move method for side moves.
-    * \param posStart the position of the first marble in row.
-    * \param posEnd the position of the last marble in row.
-    * \param posArrival the arrival position of the first marble in row.
-    * \param playerColor the color of the current player.
-    * \return the number of marbles to move if the move if possible,
-    * -1 if the move is not possible.
-    */
-    int canMove(Position posStart, Position posEnd, Position posArrival, Color playerColor) const;
-
-    /*!
-    * \brief countMarbles counts the number of marbles in a given direction, beginning from the given position.
-    * \param posStart the position of the first marble.
-    * \param dirCount the direction in which the counting is heading towards to.
-    * \param cpt the number of the counted marbles.
-    * \param color the color that the counted marbles must have.
-    * \return the number of counted marbles.
-    */
-    int countMarbles(Position posStart, Direction dirCount, int cpt, Color color) const;
+    bool move(Position posStart, Position posArrival);
 
     /*!
     * \brief countMarblesUntil counts the number of marbles in a given direction,
@@ -86,6 +65,26 @@ public:
     int countMarblesUntil(Position posStart, Position posEnd, Direction dirCount,
                           Direction dirMove, int cpt, Color color) const;
 
+    /*!
+    * \brief The can move method for side moves.
+    * \param posStart the position of the first marble in row.
+    * \param posEnd the position of the last marble in row.
+    * \param posArrival the arrival position of the first marble in row.
+    * \param playerColor the color of the current player.
+    * \return the number of marbles to move if the move if possible,
+    * -1 if the move is not possible.
+    */
+    int canMove(Position posStart, Position posEnd, Position posArrival, Color playerColor) const;
+
+    /*!
+    * \brief The move method for side moves.
+    * \param posStart the position of the first marble in row.
+    * \param posEnd the position of the last marble in row.
+    * \param posArrival the arrival position of the first marble in row.
+    * \param playerColor the color of the current player.
+    * \return true if the move was succesful, false otherwise.
+    */
+    bool move(Position posStart, Position posEnd, Position posArrival);
 
     /*!
     * \brief Gets the color located at the position in parameter.

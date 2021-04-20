@@ -98,7 +98,6 @@ void MainWindow::on_moveButton_clicked()
     if (positions.size() > 1 && game_.play(positions))
     {
         ui->feedbackLabel->clear();
-        game_.setCurrentPlayer(opposite(game_.getCurrentPlayer()));
         updateView();
         positions_.clear(); // Clearing the previously selected positions
         cptSelected_ = 0;   // Resets counter of selected positions
