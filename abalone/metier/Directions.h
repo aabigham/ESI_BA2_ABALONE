@@ -6,12 +6,11 @@
 using Direction = std::pair<int, int>;
 
 /*!
- * \brief The Direction class
+ * \brief The Direction namespace
  * It allows us to define a guidance for the marbles that will be moving.
  */
-class Directions
+namespace Directions
 {
-public:
     /*!
     * \brief The UP_RIGHT direction.
     */
@@ -41,15 +40,15 @@ public:
     * \brief The DOWN_RIGHT direction.
     */
     constexpr static const Direction DOWN_RIGHT{1, -1};
-};
 
-/*!
- * \brief Get the direction according to the x and y in parameter.
- * Used in the computeDirection Method.
- * \param x the x axis.
- * \param y the y axis.
- * \return the direction according to the axis in parameter.
- */
-Direction getDirection(int x, int y);
+    /*!
+    * \brief Get the direction according to the x and y in parameter.
+    * Used in the computeDirection Method.
+    * \param x the x axis.
+    * \param y the y axis.
+    * \return the direction according to the axis in parameter.
+    */
+    Direction getDirection(int x, int y);
+}
 
 #endif //_DIRECTIONS_H
