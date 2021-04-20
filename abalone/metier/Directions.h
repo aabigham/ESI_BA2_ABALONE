@@ -14,32 +14,32 @@ namespace Directions
     /*!
     * \brief The UP_RIGHT direction.
     */
-    constexpr static const Direction UP_RIGHT{0, 1};
+    constexpr static Direction UP_RIGHT{0, 1};
 
     /*!
     * \brief The UP_LEFT direction.
     */
-    constexpr static const Direction UP_LEFT{-1, 1};
+    constexpr static Direction UP_LEFT{-1, 1};
 
     /*!
     * \brief The UP direction.
     */
-    constexpr static const Direction LEFT{-1, 0};
+    constexpr static Direction LEFT{-1, 0};
 
     /*!
     * \brief The DOWN direction.
     */
-    constexpr static const Direction RIGHT{1, 0};
+    constexpr static Direction RIGHT{1, 0};
 
     /*!
     * \brief The DOWN_LEFT direction.
     */
-    constexpr static const Direction DOWN_LEFT{0, -1};
+    constexpr static Direction DOWN_LEFT{0, -1};
 
     /*!
     * \brief The DOWN_RIGHT direction.
     */
-    constexpr static const Direction DOWN_RIGHT{1, -1};
+    constexpr static Direction DOWN_RIGHT{1, -1};
 
     /*!
     * \brief Get the direction according to the x and y in parameter.
