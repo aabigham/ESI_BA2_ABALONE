@@ -28,28 +28,33 @@ MainWindow::~MainWindow()
 
 void MainWindow::initPixes()
 {
-    // Black counter pix
-    black_marble_pic_ = black_marble_pic_.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
+    // Scaling pixes
+    black_marble_pic_ = black_marble_pic_.scaled(ui->labelBMCpt->width() / 3,
+                                                 ui->labelBMCpt->height());
+    white_marble_pic_ = white_marble_pic_.scaled(ui->labelBMCpt->width() / 3,
+                                                 ui->labelBMCpt->height());
+    // Setting
     ui->labelBMCpt->setPixmap(black_marble_pic_);
-    // White counter pix
-    white_marble_pic_ = white_marble_pic_.scaled(ui->labelBMCpt->width() / 3, ui->labelBMCpt->height());
     ui->labelWMCpt->setPixmap(white_marble_pic_);
-    // Current player pix
-    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK ? black_marble_pic_ : white_marble_pic_);
+    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK
+                                ? black_marble_pic_
+                                : white_marble_pic_);
 }
 
 void MainWindow::updateLabels()
 {
     // Black counter label
     int black_lost = game_.getBlackMarblesLost();
-    QString sBlackLabel{QString::number(black_lost) + QString::fromStdString("/6")};
+    QString sBlackLabel{QStringLiteral("%1/6").arg(black_lost)};
     ui->blackLabelCpt->setText(sBlackLabel);
     // White counter label
     int white_lost = game_.getWhiteMarblesLost();
-    QString sWhiteLabel{QString::number(white_lost) + QString::fromStdString("/6")};
+    QString sWhiteLabel{QStringLiteral("%1/6").arg(white_lost)};
     ui->whiteLabelCpt->setText(sWhiteLabel);
     // Curr player
-    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK ? black_marble_pic_ : white_marble_pic_);
+    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK
+                                ? black_marble_pic_
+                                : white_marble_pic_);
 }
 
 void MainWindow::updateBoard()
@@ -63,15 +68,17 @@ void MainWindow::updateBoard()
             Position pos(j, i);
             if (game_.isInside(pos))
             {
-                MarbleWidget *widget{new MarbleWidget(game_.colorAt(pos), pos)}; // Widget to add
-                // Connecting the clicked signal to the handle method :
+                // Widget to add
+                MarbleWidget *widget{new MarbleWidget(game_.colorAt(pos), pos)};
+                // And connecting the widget's clicked signal to the handle method
                 QObject::connect(widget, SIGNAL(clicked()), this,
                                  SLOT(handle_marble_clicked()), Qt::UniqueConnection);
+
                 if (i % 2 != 0) // Offset management
                     widget->setOffset();
                 if (i == -1 || i == -3) // Another offset management + Adding to grid
                     ui->boardGrid->addWidget(widget, row, (col + decalage) - 1);
-                else // Adding to grid
+                else // Adding to grid if no offset needed
                     ui->boardGrid->addWidget(widget, row, col + decalage);
             }
             if (++col > 8)
@@ -103,13 +110,12 @@ void MainWindow::on_moveButton_clicked()
         cptSelected_ = 0;   // Resets counter of selected positions
         if (game_.isGameOver())
         {
-            this->setEnabled(false); // Disabling ui
-            // Displaying the winner in an information dialog
-            std::string message{"Congratulations to the "
-                                + std::string{game_.getCurrentPlayer() == Color::BLACK ? "White" : "Black"}
-                                + " player."};
-            QMessageBox::information(this, "Game over !", QString::fromStdString(message), QString{"Quit"});
-            QApplication::quit(); // Quitting after the dialog has closed
+            // Displaying winner in information dialog
+            this->setEnabled(false);
+            QString message{QStringLiteral("Congratulations to the %1 player.\n\nQuitting...")
+                                .arg(game_.getCurrentPlayer() == Color::BLACK ? "White" : "Black")};
+            QMessageBox::information(this, "Game over !", message);
+            QApplication::quit(); // Quitting
         }
     }
     else
@@ -120,16 +126,19 @@ void MainWindow::on_moveButton_clicked()
 
 void MainWindow::handle_marble_clicked()
 {
-    MarbleWidget *widget{qobject_cast<MarbleWidget *>(QObject::sender())}; // Signal's sender
+    // Signal's sender
+    MarbleWidget *widget{qobject_cast<MarbleWidget *>(QObject::sender())};
     Position pos{widget->getPosition()};
-    int flagSelect{widget->setSelected(cptSelected_)}; // Checks if the marble got selected or unselected
-    if (flagSelect == 0) // Marble is not selected
+
+    int flagSelect{widget->setSelected(cptSelected_)}; // Checks if clicked marble got selected or unselected
+    if (flagSelect == 0) // Marble got unselected
     {
-        auto it = std::find(positions_.begin(), positions_.end(), std::make_unique<Position>(pos));
+        auto it = std::find(positions_.begin(), positions_.end(),
+                            std::make_unique<Position>(pos));
         positions_.erase(it);
         --cptSelected_;
     }
-    else if (flagSelect == 1) // Marble is selected
+    else if (flagSelect == 1) // Marble got selected
     {
         positions_.push_back(std::make_unique<Position>(pos));
         ++cptSelected_;

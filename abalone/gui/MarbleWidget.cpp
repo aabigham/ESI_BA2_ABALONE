@@ -11,13 +11,17 @@ MarbleWidget::MarbleWidget(std::optional<Color> color, Position pos, QWidget *pa
       selected_{false}
 {
     ui->setupUi(this);
-    // Color of the marble widget
+
+    // Color of the marble widget :
     QPixmap qpix;
     if (color.has_value())
-        qpix = QPixmap{color == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
+        qpix = QPixmap{color == Color::BLACK
+                           ? ":/images/black_marble.png"
+                           : ":/images/white_marble.png"};
     else
         qpix = QPixmap{":/images/grey_marble.png"};
 
+    // Scaling and setting :
     qpix = qpix.scaled(ui->color->width() / 3, ui->color->height());
     ui->color->setPixmap(qpix);
 }
@@ -34,16 +38,19 @@ void MarbleWidget::setOffset() const
 
 int MarbleWidget::setSelected(int cptSelected)
 {
-    // If trying to select but there's too many that already are selected
+    // If trying to select but there's too many that already are
     if (!selected_ && cptSelected >= 3)
         return -1;
 
-    if (selected_) // Marble is currently selected
+    if (selected_) // Clicked marble is already selected
     {
         selected_ = false;
+
         QPixmap qpix;
         if (color_.has_value())
-            qpix = QPixmap{color_ == Color::BLACK ? ":/images/black_marble.png" : ":/images/white_marble.png"};
+            qpix = QPixmap{color_ == Color::BLACK
+                               ? ":/images/black_marble.png"
+                               : ":/images/white_marble.png"};
         else
             qpix = QPixmap{":/images/grey_marble.png"};
 
@@ -51,12 +58,15 @@ int MarbleWidget::setSelected(int cptSelected)
         ui->color->setPixmap(qpix);
         return 0; // Success on unselection
     }
-    else // Marble is not currently selected
+    else // Clicked marble is not currently selected
     {
         selected_ = true;
+
         QPixmap qpix;
         if (color_.has_value())
-            qpix = QPixmap{color_ == Color::BLACK ? ":/images/black_selected.png" : ":/images/white_selected.png"};
+            qpix = QPixmap{color_ == Color::BLACK
+                               ? ":/images/black_selected.png"
+                               : ":/images/white_selected.png"};
         else
             qpix = QPixmap{":/images/grey_selected.png"};
 
