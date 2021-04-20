@@ -14,7 +14,7 @@ bool Game::play(std::vector<Position> positions)
         return false;
     else if(colorAt(positions.at(0)).value() != currentPlayer_)
         return false;
-    else if(positions.size() == 3 && colorAt(positions.at(2)) != currentPlayer_)
+    else if(positions.size() == 3 && colorAt(positions.at(1)) != currentPlayer_)
         return false;
 
     bool flagMove;

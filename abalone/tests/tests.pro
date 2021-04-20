@@ -6,6 +6,7 @@ CONFIG += console
 LIBS += -L../lib -llibcore
 
 SOURCES += \
+    AbaproTest.cpp \
     BoardTest.cpp \
     CellTest.cpp \
     DirectionsTest.cpp \

@@ -3,6 +3,7 @@
 
 #include "Game.h"
 #include "ConsoleView.h"
+#include "Abapro.h"
 
 /*!
 * \brief The Controller class

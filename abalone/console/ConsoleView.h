@@ -4,6 +4,7 @@
 #include <iomanip>
 
 #include "View.h"
+#include "Abapro.h"
 
 /*!
 * \brief The ConsoleView class

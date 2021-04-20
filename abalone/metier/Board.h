@@ -4,6 +4,7 @@
 #include <unordered_map>
 
 #include "Position.h"
+#include "Abapro.h"
 #include "Cell.h"
 
 /*!
