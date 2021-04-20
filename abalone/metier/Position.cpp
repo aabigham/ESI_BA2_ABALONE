@@ -64,20 +64,3 @@ const Direction computeDirection(Position posStart, Position posArrival) // thro
 
     return Directions::getDirection(x_res, y_res);
 }
-
-std::vector<Position> abaproToPosition(std::string abapro)
-{
-    if(!abapro::isAbaproValid(abapro))
-        throw std::invalid_argument("The abapro input is not valid.");
-
-    // Make a position out of each pair then pushing to the back of the vector
-    std::vector<Position> ret;
-    for (size_t i = 0; i < abapro.size() - 1; i += 2)
-    {
-        int y = abapro::getLetterYAxis(abapro.at(i));
-        int z = abapro::getNumberZAxis(abapro.at(i + 1));
-        int x = - (y + z);
-        ret.push_back(Position(x, y, z));
-    }
-    return ret;
-}
