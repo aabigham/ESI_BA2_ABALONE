@@ -43,6 +43,8 @@ void MainWindow::initPixes()
 
 void MainWindow::updateLabels()
 {
+    // Resets feedback label
+    ui->feedbackLabel->clear();
     // Black counter label
     int black_lost = game_.getBlackMarblesLost();
     QString sBlackLabel{QStringLiteral("%1/6").arg(black_lost)};
@@ -89,6 +91,13 @@ void MainWindow::updateBoard()
     }
 }
 
+void MainWindow::destroyBoardWidgets()
+{
+    QLayoutItem *child{nullptr};
+    while ((child = ui->boardGrid->takeAt(0)) != 0)
+        delete child->widget();
+}
+
 void MainWindow::updateView()
 {
     updateLabels();
@@ -99,15 +108,15 @@ void MainWindow::on_moveButton_clicked()
 {
     std::vector<Position> positions;
     for (const auto &p : positions_)
-    {
         positions.push_back(*p);
-    }
+
     if (positions.size() > 1 && game_.play(positions))
     {
-        ui->feedbackLabel->clear();
+        destroyBoardWidgets(); // Avoiding memory leak
         updateView();
         positions_.clear(); // Clearing the previously selected positions
         cptSelected_ = 0;   // Resets counter of selected positions
+
         if (game_.isGameOver())
         {
             // Displaying winner in information dialog

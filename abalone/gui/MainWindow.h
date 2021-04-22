@@ -40,6 +40,11 @@ public:
     void updateBoard();
 
     /*!
+     * \brief destroyBoard deletes the widgets that are newly created at every board update.
+     */
+    void destroyBoardWidgets();
+
+    /*!
      * \brief updateView updates the view of the main window.
      */
     void updateView();
