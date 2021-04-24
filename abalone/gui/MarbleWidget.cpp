@@ -15,9 +15,8 @@ MarbleWidget::MarbleWidget(std::optional<Color> color, Position pos, QWidget *pa
     // Color of the marble widget :
     QPixmap qpix;
     if (color.has_value())
-        qpix = QPixmap{color == Color::BLACK
-                           ? ":/images/black_marble.png"
-                           : ":/images/white_marble.png"};
+        qpix = QPixmap{color == Color::BLACK ? ":/images/black_marble.png"
+                                             : ":/images/white_marble.png"};
     else
         qpix = QPixmap{":/images/grey_marble.png"};
 
@@ -42,38 +41,36 @@ int MarbleWidget::setSelected(int cptSelected)
     if (!selected_ && cptSelected >= 3)
         return -1;
 
+    int ret;
+    QPixmap qpix;
     if (selected_) // Clicked marble is already selected
     {
         selected_ = false;
 
-        QPixmap qpix;
         if (color_.has_value())
-            qpix = QPixmap{color_ == Color::BLACK
-                               ? ":/images/black_marble.png"
-                               : ":/images/white_marble.png"};
+            qpix = QPixmap{color_ == Color::BLACK ? ":/images/black_marble.png"
+                                                  : ":/images/white_marble.png"};
         else
             qpix = QPixmap{":/images/grey_marble.png"};
 
-        qpix = qpix.scaled(ui->color->width() / 2, ui->color->height() / 2);
-        ui->color->setPixmap(qpix);
-        return 0; // Success on unselection
+        ret = 0; // Success on unselection
     }
     else // Clicked marble is not currently selected
     {
         selected_ = true;
 
-        QPixmap qpix;
         if (color_.has_value())
-            qpix = QPixmap{color_ == Color::BLACK
-                               ? ":/images/black_selected.png"
-                               : ":/images/white_selected.png"};
+            qpix = QPixmap{color_ == Color::BLACK ? ":/images/black_selected.png"
+                                                  : ":/images/white_selected.png"};
         else
             qpix = QPixmap{":/images/grey_selected.png"};
 
-        qpix = qpix.scaled(ui->color->width() / 2, ui->color->height() / 2);
-        ui->color->setPixmap(qpix);
-        return 1; // Success on selection
+        ret = 1; // Success on selection
     }
+
+    qpix = qpix.scaled(ui->color->width() / 2, ui->color->height() / 2);
+    ui->color->setPixmap(qpix);
+    return ret;
 }
 
 void MarbleWidget::mousePressEvent(QMouseEvent *event)

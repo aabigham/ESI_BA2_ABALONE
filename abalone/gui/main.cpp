@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
     Game game;
     MainWindow mw(game);
+    mw.initialize();
     mw.show();
     return app.exec();
 }

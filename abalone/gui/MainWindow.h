@@ -24,6 +24,12 @@ public:
     ~MainWindow();
 
     /*!
+     * \brief initialize initializes the main window.
+     */
+    void initialize();
+
+private:
+    /*!
      * \brief setupPixes sets up the pixes on the wain Window
      */
     void initPixes();
@@ -40,14 +46,19 @@ public:
     void updateBoard();
 
     /*!
-     * \brief destroyBoard deletes the widgets that are newly created at every board update.
+     * \brief deleteBoardWidgets deletes the widgets that are newly created at every board update.
      */
-    void destroyBoardWidgets();
+    void deleteBoardWidgets();
 
     /*!
      * \brief updateView updates the view of the main window.
      */
     void updateView();
+
+    /*!
+     * \brief showGameOver shows the game over dialog.
+     */
+    void showGameOver();
 
 private slots:
     /*!

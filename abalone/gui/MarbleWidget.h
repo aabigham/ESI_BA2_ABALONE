@@ -24,6 +24,14 @@ public:
     ~MarbleWidget();
 
     /*!
+     * \brief setSelected selects or unselect a marble on the board, and loads the according QPixMap.
+     * \param cptSelected the number of currently selected marbles.
+     * \return 1 is the selection was succesful, 0 if the unselection was succesful and
+     * -1 if the player was not able to select or unselect.
+     */
+    int setSelected(int cptSelected);
+
+    /*!
      * \brief getPosition gets the positons of the marble.
      * \return the position of the marble.
      */
@@ -33,14 +41,6 @@ public:
      * \brief setDecalage sets the offset of the marble to reach an hexagon shape.
      */
     void setOffset() const;
-
-    /*!
-     * \brief setSelected selects or unselect a marble on the board, and loads the according QPixMap.
-     * \param cptSelected the number of currently selected marbles.
-     * \return 1 is the selection was succesful, 0 if the unselection was succesful and
-     * -1 if the player was not able to select or unselect.
-     */
-    int setSelected(int cptSelected);
 
 signals:
     /*!

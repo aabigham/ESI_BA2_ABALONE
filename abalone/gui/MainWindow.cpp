@@ -13,17 +13,20 @@ MainWindow::MainWindow(Game game, QWidget *parent)
       positions_{}
 {
     ui->setupUi(this);
-    this->setFixedSize(this->size());
-    this->setStyleSheet("background-color: darkseagreen;");
-    this->setWindowTitle("Abalone - 54985 - 54247");
-    this->setWindowIcon(QIcon{":/images/favicon.png"});
-    initPixes();  // Pixes on the main window
-    updateView(); // Updating view (labels of lost marbles + board)
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+void MainWindow::initialize()
+{
+    this->setStyleSheet("background-color: darkseagreen;");
+    this->setWindowTitle("Abalone - 54985 - 54247");
+    this->setWindowIcon(QIcon{":/images/favicon.png"});
+    initPixes();
+    updateView();
 }
 
 void MainWindow::initPixes()
@@ -43,16 +46,13 @@ void MainWindow::initPixes()
 
 void MainWindow::updateLabels()
 {
-    // Resets feedback label
     ui->feedbackLabel->clear();
-    // Black counter label
+
     int black_lost = game_.getBlackMarblesLost();
-    QString sBlackLabel{QStringLiteral("%1/6").arg(black_lost)};
-    ui->blackLabelCpt->setText(sBlackLabel);
-    // White counter label
+    ui->blackLabelCpt->setText(QStringLiteral("%1/6").arg(black_lost));
     int white_lost = game_.getWhiteMarblesLost();
-    QString sWhiteLabel{QStringLiteral("%1/6").arg(white_lost)};
-    ui->whiteLabelCpt->setText(sWhiteLabel);
+    ui->whiteLabelCpt->setText(QStringLiteral("%1/6").arg(white_lost));
+
     // Curr player
     ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK
                                 ? black_marble_pic_
@@ -67,7 +67,7 @@ void MainWindow::updateBoard()
         int decalage = i / 2;
         for (int j{-4}; j <= 4; ++j)
         {
-            Position pos(j, i);
+            Position pos{j, i};
             if (game_.isInside(pos))
             {
                 // Widget to add
@@ -78,7 +78,7 @@ void MainWindow::updateBoard()
 
                 if (i % 2 != 0) // Offset management
                     widget->setOffset();
-                if (i == -1 || i == -3) // Another offset management + Adding to grid
+                if (i == -1 || i == -3) // Another offset management
                     ui->boardGrid->addWidget(widget, row, (col + decalage) - 1);
                 else // Adding to grid if no offset needed
                     ui->boardGrid->addWidget(widget, row, col + decalage);
@@ -91,7 +91,7 @@ void MainWindow::updateBoard()
     }
 }
 
-void MainWindow::destroyBoardWidgets()
+void MainWindow::deleteBoardWidgets()
 {
     QLayoutItem *child{nullptr};
     while ((child = ui->boardGrid->takeAt(0)) != 0)
@@ -104,33 +104,40 @@ void MainWindow::updateView()
     updateBoard();
 }
 
+void MainWindow::showGameOver()
+{
+    // Displaying winner in information dialog
+    this->setEnabled(false);
+    QString winner{game_.getCurrentPlayer() == Color::BLACK ? "White" : "Black"};
+    QString message{QStringLiteral("Congratulations to the %1 player.\n\nQuitting...")
+                        .arg(winner)};
+    QMessageBox::information(this, "Game over !", message);
+    QApplication::quit(); // Quitting
+}
+
+// Slots :
 void MainWindow::on_moveButton_clicked()
 {
+    ui->moveButton->setDisabled(true);
     std::vector<Position> positions;
     for (const auto &p : positions_)
         positions.push_back(*p);
 
     if (positions.size() > 1 && game_.play(positions))
     {
-        destroyBoardWidgets(); // Avoiding memory leak
+        positions_.clear();   // Clearing the previously selected positions
+        cptSelected_ = 0;     // Resets counter of selected positions
+        deleteBoardWidgets(); // Deletes the previous board widgets
         updateView();
-        positions_.clear(); // Clearing the previously selected positions
-        cptSelected_ = 0;   // Resets counter of selected positions
 
         if (game_.isGameOver())
-        {
-            // Displaying winner in information dialog
-            this->setEnabled(false);
-            QString message{QStringLiteral("Congratulations to the %1 player.\n\nQuitting...")
-                                .arg(game_.getCurrentPlayer() == Color::BLACK ? "White" : "Black")};
-            QMessageBox::information(this, "Game over !", message);
-            QApplication::quit(); // Quitting
-        }
+            showGameOver();
     }
     else
     {
         ui->feedbackLabel->setText("Could not move !");
     }
+    ui->moveButton->setDisabled(false);
 }
 
 void MainWindow::handle_marble_clicked()
@@ -139,16 +146,19 @@ void MainWindow::handle_marble_clicked()
     MarbleWidget *widget{qobject_cast<MarbleWidget *>(QObject::sender())};
     Position pos{widget->getPosition()};
 
-    int flagSelect{widget->setSelected(cptSelected_)}; // Checks if clicked marble got selected or unselected
-    if (flagSelect == 0) // Marble got unselected
+    // Checks if marble got selected / unselected
+    int flagSelect{widget->setSelected(cptSelected_)};
+    if (flagSelect == 0)
     {
+        // Marble got unselected
         auto it = std::find(positions_.begin(), positions_.end(),
                             std::make_unique<Position>(pos));
         positions_.erase(it);
         --cptSelected_;
     }
-    else if (flagSelect == 1) // Marble got selected
+    else if (flagSelect == 1)
     {
+        // Marble got selected
         positions_.push_back(std::make_unique<Position>(pos));
         ++cptSelected_;
     }
