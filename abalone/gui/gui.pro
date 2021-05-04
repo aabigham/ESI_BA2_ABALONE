@@ -8,6 +8,7 @@ QT += widgets
 LIBS += -L../lib -llibcore
 
 SOURCES += \
+    GuiController.cpp \
     MainWindow.cpp \
     MarbleWidget.cpp \
     main.cpp
@@ -17,6 +18,7 @@ FORMS += \
     MarbleWidget.ui
 
 HEADERS += \
+    GuiController.h \
     MainWindow.h \
     MarbleWidget.h
 

@@ -5,14 +5,14 @@
 #include "Game.h"
 #include "MarbleWidget.h"
 
-MainWindow::MainWindow(Game game, QWidget *parent)
+MainWindow::MainWindow(QWidget *parent)
     : QMainWindow{parent},
-      ui{new Ui::MainWindow},
-      game_{game},
-      cptSelected_{0},
-      positions_{}
+      ui{new Ui::MainWindow}
 {
     ui->setupUi(this);
+    this->setStyleSheet("background-color: darkseagreen;");
+    this->setWindowTitle("Abalone - 54985 - 54247");
+    this->setWindowIcon(QIcon{":/images/favicon.png"});
 }
 
 MainWindow::~MainWindow()
@@ -20,16 +20,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::initialize()
+void MainWindow::initialize(Color currentPlayer, Board board)
 {
-    this->setStyleSheet("background-color: darkseagreen;");
-    this->setWindowTitle("Abalone - 54985 - 54247");
-    this->setWindowIcon(QIcon{":/images/favicon.png"});
-    initPixes();
-    updateView();
+    initPixes(currentPlayer);
+    updateView(currentPlayer, board);
 }
 
-void MainWindow::initPixes()
+void MainWindow::initPixes(Color currentPlayer)
 {
     // Scaling pixes
     black_marble_pic_ = black_marble_pic_.scaled(ui->labelBMCpt->width() / 3,
@@ -39,27 +36,26 @@ void MainWindow::initPixes()
     // Setting
     ui->labelBMCpt->setPixmap(black_marble_pic_);
     ui->labelWMCpt->setPixmap(white_marble_pic_);
-    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK
+    ui->labelCPM->setPixmap(currentPlayer == Color::BLACK
                                 ? black_marble_pic_
                                 : white_marble_pic_);
 }
 
-void MainWindow::updateLabels()
+void MainWindow::updateLabels(int blackMarbleLost, int whiteMarbleLost,
+                              Color currentPlayer)
 {
     ui->feedbackLabel->clear();
 
-    int black_lost = game_.getBlackMarblesLost();
-    ui->blackLabelCpt->setText(QStringLiteral("%1/6").arg(black_lost));
-    int white_lost = game_.getWhiteMarblesLost();
-    ui->whiteLabelCpt->setText(QStringLiteral("%1/6").arg(white_lost));
+    ui->blackLabelCpt->setText(QStringLiteral("%1/6").arg(blackMarbleLost));
+    ui->whiteLabelCpt->setText(QStringLiteral("%1/6").arg(whiteMarbleLost));
 
     // Curr player
-    ui->labelCPM->setPixmap(game_.getCurrentPlayer() == Color::BLACK
+    ui->labelCPM->setPixmap(currentPlayer == Color::BLACK
                                 ? black_marble_pic_
                                 : white_marble_pic_);
 }
 
-void MainWindow::updateBoard()
+void MainWindow::updateBoard(Board board)
 {
     int row = 0, col = 0;
     for (int i{4}; i >= -4; --i)
@@ -68,13 +64,10 @@ void MainWindow::updateBoard()
         for (int j{-4}; j <= 4; ++j)
         {
             Position pos{j, i};
-            if (game_.isInside(pos))
+            if (board.isInside(pos))
             {
                 // Widget to add
-                MarbleWidget *widget{new MarbleWidget(game_.colorAt(pos), pos)};
-                // And connecting the widget's clicked signal to the handle method
-                QObject::connect(widget, SIGNAL(clicked()), this,
-                                 SLOT(handle_marble_clicked()), Qt::UniqueConnection);
+                MarbleWidget *widget{new MarbleWidget(board.colorAt(pos), pos)};
 
                 if (i % 2 != 0) // Offset management
                     widget->setOffset();
@@ -98,72 +91,46 @@ void MainWindow::deleteBoardWidgets()
         delete child->widget();
 }
 
-void MainWindow::updateView()
+void MainWindow::updateView(Color currentPlayer, Board board)
 {
-    updateLabels();
-    updateBoard();
+    updateLabels(board.getBlackMarblesLost(), board.getWhiteMarblesLost(),
+                 currentPlayer);
+    deleteBoardWidgets();
+    updateBoard(board);
 }
 
-void MainWindow::showGameOver()
+void MainWindow::showGameOver(Color currentPlayer)
 {
     // Displaying winner in information dialog
     this->setEnabled(false);
-    QString winner{game_.getCurrentPlayer() == Color::BLACK ? "White" : "Black"};
+    QString winner{currentPlayer == Color::BLACK ? "White" : "Black"};
     QString message{QStringLiteral("Congratulations to the %1 player.\n\nQuitting...")
                         .arg(winner)};
     QMessageBox::information(this, "Game over !", message);
     QApplication::quit(); // Quitting
 }
 
-// Slots :
-void MainWindow::on_moveButton_clicked()
+void MainWindow::disableButtons()
 {
     ui->moveButton->setDisabled(true);
-    std::vector<Position> positions;
-    for (const auto &p : positions_)
-        positions.push_back(*p);
+}
 
-    if (positions.size() > 1 && game_.play(positions))
-    {
-        positions_.clear();   // Clearing the previously selected positions
-        cptSelected_ = 0;     // Resets counter of selected positions
-        deleteBoardWidgets(); // Deletes the previous board widgets
-        updateView();
-
-        if (game_.isGameOver())
-            showGameOver();
-    }
-    else
-    {
-        ui->feedbackLabel->setText("Could not move !");
-    }
+void MainWindow::enableButtons()
+{
     ui->moveButton->setDisabled(false);
 }
 
-void MainWindow::handle_marble_clicked()
+void MainWindow::setFeedbackLabel(QString text)
 {
-    // Signal's sender
-    MarbleWidget *widget{qobject_cast<MarbleWidget *>(QObject::sender())};
-    Position pos{widget->getPosition()};
+    ui->feedbackLabel->setText(text);
+}
 
-    // Checks if marble got selected / unselected
-    int flagSelect{widget->setSelected(cptSelected_)};
-    if (flagSelect == 0)
-    {
-        // Marble got unselected
-        auto it = std::find(positions_.begin(), positions_.end(),
-                            std::make_unique<Position>(pos));
-        positions_.erase(it);
-        --cptSelected_;
-    }
-    else if (flagSelect == 1)
-    {
-        // Marble got selected
-        positions_.push_back(std::make_unique<Position>(pos));
-        ++cptSelected_;
-    }
-    else // Not able to select
-    {
-        ui->feedbackLabel->setText("Could not select !");
-    }
+QGridLayout *MainWindow::getBoardGrid()
+{
+    return ui->boardGrid;
+}
+
+QPushButton *MainWindow::getMoveButton()
+{
+    return ui->moveButton;
 }
