@@ -5,8 +5,9 @@
 
 #include "Game.h"
 
-namespace Ui {
-class MarbleWidget;
+namespace Ui
+{
+    class MarbleWidget;
 }
 
 class MarbleWidget : public QWidget
