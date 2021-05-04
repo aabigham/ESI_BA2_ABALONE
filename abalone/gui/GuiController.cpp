@@ -52,11 +52,10 @@ void GuiController::on_moveButton_clicked()
 
     if (positions.size() > 1 && game_.play(positions))
     {
-        positions_.clear();               // Clearing the previously selected positions
-        cptSelected_ = 0;                 // Resets counter of selected positions
-        mainwindow_.deleteBoardWidgets(); // Deletes the previous board widgets
+        positions_.clear(); // Clearing the previously selected positions
+        cptSelected_ = 0;   // Resets counter of selected positions
         mainwindow_.updateView(game_.getCurrentPlayer(), game_.getBoard());
-        setupMarbleConnections(); // setup connections again cause deleted widgets
+        setupMarbleConnections(); // Setup connections again because of deleted widgets
 
         if (game_.isGameOver())
             mainwindow_.showGameOver(game_.getCurrentPlayer());

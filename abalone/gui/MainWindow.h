@@ -29,16 +29,22 @@ public:
 
     /*!
      * \brief initialize initializes the main window.
+     * \param currentPlayer the current player.
+     * \param board the game board.
      */
     void initialize(Color currentPlayer, Board board);
 
     /*!
      * \brief setupPixes sets up the pixes on the wain Window
+     * \param currentPlayer the current player.
      */
     void initPixes(Color currentPlayer);
 
     /*!
      * \brief updateLabels updates the labels ont the main window.
+     * \param blackMarbleLost the count of lost black marble.
+     * \param whiteMarbleLost the count of white black marble.
+     * \param currentPlayer the current player.
      */
     void updateLabels(int blackMarbleLost, int whiteMarbleLost,
                       Color currentPlayer);
@@ -46,6 +52,7 @@ public:
     /*!
      * \brief updateBoard updates the board view with new MarbleWidgets,
      * also adds the connect feature to each one of them.
+     * \param board the game board.
      */
     void updateBoard(Board board);
 
@@ -56,22 +63,43 @@ public:
 
     /*!
      * \brief updateView updates the view of the main window.
+     * \param currentPlayer the current player of the game.
+     * \param board the game board.
      */
     void updateView(Color currentPlayer, Board board);
 
     /*!
      * \brief showGameOver shows the game over dialog.
+     * \param currentPlayer the current player of the game.
      */
     void showGameOver(Color currentPlayer);
 
+    /*!
+     * \brief disableButtons disables the button on the view.
+     */
     void disableButtons();
 
+    /*!
+     * \brief enableButtons enables the button.
+     */
     void enableButtons();
 
+    /*!
+     * \brief setFeedbackLabel sets the feedback label.
+     * \param text the new feedback.
+     */
     void setFeedbackLabel(QString text);
 
+    /*!
+     * \brief getBoardGrid gets a pointer to the grid layout containing the marble widgets.
+     * \return a pointer to the grid layout containing the marble widgets.
+     */
     QGridLayout *getBoardGrid();
 
+    /*!
+     * \brief getMoveButton gets a pointer to the move button element.
+     * \return a pointer to the move button element.
+     */
     QPushButton *getMoveButton();
 
 private:

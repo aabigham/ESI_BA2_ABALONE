@@ -12,16 +12,37 @@ class GuiController : public QObject
     Q_OBJECT
 
 public:
+    /*!
+     * \brief GuiController constructor of the guicontroller.
+     * \param game the model.
+     */
     GuiController(Game game);
 
+    /*!
+     * \brief ~GuiController destructor of the guicontroller.
+     */
     virtual ~GuiController();
 
+    /*!
+     * \brief initialize initializes the game.
+     */
     void initialize();
 
+    /*!
+     * \brief startGame starts the game.
+     */
     void startGame();
 
+    /*!
+     * \brief setupMarbleConnections setup the slot connections
+     *  between the clicked marbles and the clontroller.
+     */
     void setupMarbleConnections();
 
+    /*!
+     * \brief setupMoveConnection setup the slot connection
+     *  between the clicked move button and the controller.
+     */
     void setupMoveConnection();
 
 private slots:

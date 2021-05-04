@@ -23,7 +23,9 @@ MainWindow::~MainWindow()
 void MainWindow::initialize(Color currentPlayer, Board board)
 {
     initPixes(currentPlayer);
-    updateView(currentPlayer, board);
+    updateLabels(board.getBlackMarblesLost(), board.getWhiteMarblesLost(),
+                 currentPlayer);
+    updateBoard(board);
 }
 
 void MainWindow::initPixes(Color currentPlayer)
@@ -95,7 +97,7 @@ void MainWindow::updateView(Color currentPlayer, Board board)
 {
     updateLabels(board.getBlackMarblesLost(), board.getWhiteMarblesLost(),
                  currentPlayer);
-    deleteBoardWidgets();
+    deleteBoardWidgets(); // Deletes the previous board widgets to release memory
     updateBoard(board);
 }
 
