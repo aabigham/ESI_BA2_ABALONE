@@ -88,18 +88,6 @@ void GuiController::handle_marble_clicked()
         // Marble got selected
         positions_.push_back(std::make_unique<Position>(pos));
         ++cptSelected_;
-        /*
-
-        if(cptSelected_ == 2 && (*positions_[0]).isNextTo(*positions_[1]))
-        {
-            // Move
-            on_moveButton_clicked();
-        }
-        else if(cptSelected_ == 3)
-        {
-            // Move
-            on_moveButton_clicked();
-        }*/
     }
     else // Not able to select
     {
