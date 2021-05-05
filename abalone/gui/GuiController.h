@@ -33,6 +33,7 @@ public:
      */
     void startGame();
 
+private:
     /*!
      * \brief setupMarbleConnections setup the slot connections
      *  between the clicked marbles and the clontroller.

@@ -35,33 +35,6 @@ public:
     void initialize(Color currentPlayer, Board board);
 
     /*!
-     * \brief setupPixes sets up the pixes on the wain Window
-     * \param currentPlayer the current player.
-     */
-    void initPixes(Color currentPlayer);
-
-    /*!
-     * \brief updateLabels updates the labels ont the main window.
-     * \param blackMarbleLost the count of lost black marble.
-     * \param whiteMarbleLost the count of white black marble.
-     * \param currentPlayer the current player.
-     */
-    void updateLabels(int blackMarbleLost, int whiteMarbleLost,
-                      Color currentPlayer);
-
-    /*!
-     * \brief updateBoard updates the board view with new MarbleWidgets,
-     * also adds the connect feature to each one of them.
-     * \param board the game board.
-     */
-    void updateBoard(Board board);
-
-    /*!
-     * \brief deleteBoardWidgets deletes the widgets that are newly created at every board update.
-     */
-    void deleteBoardWidgets();
-
-    /*!
      * \brief updateView updates the view of the main window.
      * \param currentPlayer the current player of the game.
      * \param board the game board.
@@ -101,6 +74,34 @@ public:
      * \return a pointer to the move button element.
      */
     QPushButton *getMoveButton();
+
+private:
+    /*!
+     * \brief setupPixes sets up the pixes on the wain Window
+     * \param currentPlayer the current player.
+     */
+    void initPixes(Color currentPlayer);
+
+    /*!
+     * \brief updateLabels updates the labels ont the main window.
+     * \param blackMarbleLost the count of lost black marble.
+     * \param whiteMarbleLost the count of white black marble.
+     * \param currentPlayer the current player.
+     */
+    void updateLabels(int blackMarbleLost, int whiteMarbleLost,
+                      Color currentPlayer);
+
+    /*!
+     * \brief updateBoard updates the board view with new MarbleWidgets,
+     * also adds the connect feature to each one of them.
+     * \param board the game board.
+     */
+    void updateBoard(Board board);
+
+    /*!
+     * \brief deleteBoardWidgets deletes the widgets that are newly created at every board update.
+     */
+    void deleteBoardWidgets();
 
 private:
     Ui::MainWindow *ui;
