@@ -1,13 +1,16 @@
 # Abalone 54985 - 54247
 
-Projet de DEV4.
+School Project (Course: DEV4).
 
-## Infos
+## Authors
 
 - Amine-Ayoub Bigham 54985
 - Zakaria Bendaimi 54247
-- Structure : Qtcreator (subdirs)
-- Version C++ : 17
+
+## Infos
+ 
+- C++ Version: 17
+- Structure: Qtcreator (subdirs)
 
 ## Screenshots
 
@@ -15,5 +18,5 @@ Projet de DEV4.
 | --------------------------------------------------- | ----------------------------------------------- |
 | !["screenshot_console"](img/screenshot_console.PNG) | !["screenshot_console"](img/screenshot_gui.PNG) |
 
-- Pour effectuer un mouvement sur la version console, il vous faut utiliser la notation ABA-PRO au clavier.
-- Pour le gui, sélectionnez les billes avec la souris tout en respectant l'ordre et les positions de la notation ABA-PRO.
+- To make a movement on the console version, you must use the ABA-PRO notation when typing on the keyboard.
+- For the GUI, select the balls with the mouse while respecting the order and positions of the ABA-PRO notation.
